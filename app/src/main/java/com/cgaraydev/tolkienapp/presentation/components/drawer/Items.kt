@@ -19,6 +19,17 @@ data class ItemSection(
 object Items {
     val sections = listOf(
         ItemSection(
+            "", listOf(
+                Item(
+                    label = "Inicio",
+                    selected = false,
+                    icon = R.drawable.ic_home,
+                    contentDescription = "Inicio",
+                    route = Routes.Home.route
+                )
+            )
+        ),
+        ItemSection(
             "Tierra Media", listOf(
                 Item(
                     "Personajes",

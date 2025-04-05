@@ -53,9 +53,20 @@ fun DrawerItem(
         selected = selected,
         onClick = {
             coroutineScope.launch { drawerState.close() }
-            navController.navigate(route) {
-                popUpTo(0)
+
+            if(route != currentRoute){
+                navController.navigate(route){
+                    popUpTo(navController.graph.startDestinationId) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                    restoreState = true
+                }
             }
+
+//            navController.navigate(route) {
+//                popUpTo(0)
+//            }
         },
         colors = NavigationDrawerItemDefaults.colors(
             selectedContainerColor = GoldenLight,

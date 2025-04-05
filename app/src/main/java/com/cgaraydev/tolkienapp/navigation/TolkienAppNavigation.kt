@@ -26,7 +26,7 @@ fun TolkienAppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.Home.route
+        startDestination = Routes.Home.route,
     ) {
         composable(Routes.Home.route) {
             HomeScreen()
