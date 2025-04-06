@@ -11,19 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun CharactersScreen(
-    onBack: () -> Unit
-) {
+fun CharactersScreen() {
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Yellow),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "Characters",
-            modifier = Modifier
-                .clickable { onBack() })
-    }
+
 }

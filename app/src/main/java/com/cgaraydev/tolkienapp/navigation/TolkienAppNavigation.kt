@@ -29,10 +29,10 @@ fun TolkienAppNavigation(
         startDestination = Routes.Home.route,
     ) {
         composable(Routes.Home.route) {
-            HomeScreen()
+            HomeScreen(navController)
         }
         composable(Routes.Characters.route) {
-            CharactersScreen { navController.popBackStack() }
+            CharactersScreen()
         }
         composable(Routes.Locations.route) {
             LocationsScreen { navController.popBackStack() }

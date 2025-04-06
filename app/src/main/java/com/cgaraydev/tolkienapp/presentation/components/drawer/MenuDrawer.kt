@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.cgaraydev.tolkienapp.R
+import com.cgaraydev.tolkienapp.data.drawer.Items
 import com.cgaraydev.tolkienapp.navigation.TolkienAppNavigation
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import kotlinx.coroutines.launch

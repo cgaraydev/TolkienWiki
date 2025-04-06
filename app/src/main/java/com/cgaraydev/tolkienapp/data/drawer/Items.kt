@@ -1,4 +1,4 @@
-package com.cgaraydev.tolkienapp.presentation.components.drawer
+package com.cgaraydev.tolkienapp.data.drawer
 
 import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.navigation.Routes

@@ -1,4 +1,4 @@
-package com.cgaraydev.tolkienapp.presentation.components.quotes
+package com.cgaraydev.tolkienapp.data.quotes
 
 data class Quote(
     val text: String,

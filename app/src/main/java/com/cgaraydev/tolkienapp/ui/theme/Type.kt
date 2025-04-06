@@ -49,10 +49,10 @@ val RingBearer = Typography(
 val Aniron = Typography(
     bodyMedium = TextStyle(
         fontFamily = FontFamily(Font(R.font.aniron)),
-        fontSize = 18.sp
+        fontSize = 16.sp
     ),
     bodySmall = TextStyle(
         fontFamily = FontFamily(Font(R.font.aniron)),
-        fontSize = 12.sp
+        fontSize = 10.sp
     )
 )
