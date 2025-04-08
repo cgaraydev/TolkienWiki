@@ -30,14 +30,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -51,6 +48,7 @@ import com.cgaraydev.tolkienapp.data.grid.GridItem
 import com.cgaraydev.tolkienapp.data.grid.gridItems
 import com.cgaraydev.tolkienapp.data.quotes.Quote
 import com.cgaraydev.tolkienapp.data.quotes.tolkienQuotes
+import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
 import com.cgaraydev.tolkienapp.ui.theme.Aniron
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.ui.theme.Gray
@@ -68,11 +66,10 @@ fun HomeScreen(navController: NavController) {
     ) {
         HeaderSection()
         QuotesSection(tolkienQuotes)
-        Spacer(modifier = Modifier.height(80.dp))
+        CustomSpacer(80)
         ExploreText()
-        Spacer(modifier = Modifier.height(16.dp))
+        CustomSpacer(16)
         GridSection(gridItems, navController)
-
     }
 }
 

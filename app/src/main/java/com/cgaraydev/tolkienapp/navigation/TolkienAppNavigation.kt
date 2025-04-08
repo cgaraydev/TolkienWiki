@@ -3,9 +3,12 @@ package com.cgaraydev.tolkienapp.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.cgaraydev.tolkienapp.presentation.books.BooksScreen
+import com.cgaraydev.tolkienapp.presentation.characters.CharacterDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.characters.CharactersScreen
 import com.cgaraydev.tolkienapp.presentation.events.EventsScreen
 import com.cgaraydev.tolkienapp.presentation.games.GamesScreen
@@ -26,13 +29,21 @@ fun TolkienAppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.Home.route,
+        startDestination = Routes.Characters.route,
     ) {
         composable(Routes.Home.route) {
             HomeScreen(navController)
         }
         composable(Routes.Characters.route) {
-            CharactersScreen()
+            CharactersScreen(navController = navController)
+        }
+        composable(
+            route = Routes.CharacterDetails.route,
+            arguments = listOf(navArgument("characterId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val characterId =
+                backStackEntry.arguments?.getString("characterId") ?: return@composable
+            CharacterDetailsScreen(characterId = characterId)
         }
         composable(Routes.Locations.route) {
             LocationsScreen { navController.popBackStack() }

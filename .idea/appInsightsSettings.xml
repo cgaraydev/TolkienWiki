@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.cgaraydev.tolkienapp" />
+                  <option name="mobileSdkAppId" value="1:989899784702:android:a7ba59d81c0c07569840af" />
+                  <option name="projectId" value="tolkienwiki-5686f" />
+                  <option name="projectNumber" value="989899784702" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

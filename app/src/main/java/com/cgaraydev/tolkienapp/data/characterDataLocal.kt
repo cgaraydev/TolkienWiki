@@ -6,7 +6,7 @@ data class CharacterData(
     val tags: List<String>? = emptyList()
 )
 
-val characters = listOf(
+val charactersTags = listOf(
     CharacterData(
         id = "0",
         name = "Aegnor",
@@ -2946,1130 +2946,2601 @@ val characters = listOf(
     ),
     CharacterData(
         id = "200",
-        name = "",
+        name = "Halbarad",
         tags = listOf(
-
+            "halbarad",
+            "grey_company",
+            "men",
+            "dunedain",
+            "third_age",
+            "lord_of_the_rings",
+            "rangers",
+            "dunedain_of_the_north",
+            "rangers_of_the_north",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "201",
+        name = "Haldad",
         tags = listOf(
-
+            "men",
+            "edain",
+            "haldad",
+            "silmarillion",
+            "first_age",
+            "house_of_haleth",
+            "rulers_in_beleriand",
+            "chieftain_of_the_haladin"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "202",
+        name = "Haldan",
         tags = listOf(
-
+            "men",
+            "edain",
+            "haldan",
+            "silmarillion",
+            "first_age",
+            "house_of_haleth",
+            "chieftain_of_the_haladin",
+            "lords_of_brethil"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "203",
+        name = "Haldar",
         tags = listOf(
-
+            "men",
+            "edain",
+            "silmarillion",
+            "first_age",
+            "haldar",
+            "house_of_haleth",
+            "twins"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "204",
+        name = "Haldir (Jefe de los Haladin)",
         tags = listOf(
-
+            "men",
+            "edain",
+            "house_of_haleth",
+            "haldir",
+            "first_age",
+            "silmarillion",
+            "chieftain_of_brethil",
+            "lords_of_brethil",
+            "unfinished_tales",
+            "children_of_hurin"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "205",
+        name = "Haldir",
         tags = listOf(
-
+            "elves",
+            "silvan",
+            "haldir",
+            "third_age",
+            "lord_of_the_rings",
+            "galadhrim",
+            "nandor",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "206",
+        name = "Haleth",
         tags = listOf(
-
+            "silmarillion",
+            "edain",
+            "men",
+            "house_of_haleth",
+            "haleth",
+            "first_age",
+            "chieftain_of_the_haladin",
+            "twins",
+            "lords_of_brethil"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "207",
+        name = "Halmir",
         tags = listOf(
-
+            "men",
+            "edain",
+            "halmir",
+            "silmarillion",
+            "first_age",
+            "house_of_haleth",
+            "chieftain_of_brethil",
+            "lords_of_brethil",
+            "chieftain_of_the_haladin"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "208",
+        name = "Háma",
         tags = listOf(
-
+            "men",
+            "rohirrim",
+            "lord_of_the_rings",
+            "hama",
+            "third_age"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "209",
+        name = "Hamfast Gamyi",
         tags = listOf(
-
+            "hobbits",
+            "hamfast",
+            "gamyi",
+            "lord_of_the_rings",
+            "gamgee",
+            "third_age",
+            "fourth_age",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "210",
+        name = "Handir",
         tags = listOf(
-
+            "men",
+            "edain",
+            "handir",
+            "house_of_haleth",
+            "first_age",
+            "silmarillion",
+            "chieftain_of_brethil",
+            "chieftain_of_the_haladin",
+            "lords_of_brethil"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "211",
+        name = "Harding",
         tags = listOf(
-
+            "men",
+            "rohirrim",
+            "harding",
+            "third_age",
+            "lord_of_the_rings",
+            "minor_character",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "212",
+        name = "Hareth",
         tags = listOf(
-
+            "hareth",
+            "silmarillion",
+            "first_age",
+            "men",
+            "edain",
+            "house_of_haleth",
+            "unfinished_tales"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "213",
+        name = "Enrique Madreselva",
         tags = listOf(
-
+            "harry goatleaf",
+            "herri madreselva",
+            "lord_of_the_rings",
+            "third_age",
+            "men",
+            "bree_men",
+            "servants_of_saruman",
+            "servants_of_sauron"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "214",
+        name = "Hathaldir",
         tags = listOf(
-
+            "men",
+            "edain",
+            "first_age",
+            "hathaldir",
+            "barahir_outlaws",
+            "silmarillion",
+            "house_of_beor"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "215",
+        name = "Hathol",
         tags = listOf(
-
+            "men",
+            "edain",
+            "silmarillion",
+            "first_age",
+            "hathol",
+            "house_of_hador",
+            "chieftain_of_the_haladin"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "216",
+        name = "Herefara",
         tags = listOf(
-
+            "men",
+            "rohirrim",
+            "herefara",
+            "third_age",
+            "lord_of_the_rings",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "217",
+        name = "Herubrand",
         tags = listOf(
-
+            "men",
+            "rohirrim",
+            "herubrand",
+            "third_age",
+            "lord_of_the_rings",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "218",
+        name = "Herumor",
         tags = listOf(
-
+            "men",
+            "black_numenoreans",
+            "silmarillion",
+            "herumor",
+            "mariners",
+            "numenorean",
+            "second_age",
+            "servants_of_sauron"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "219",
+        name = "Hirgon",
         tags = listOf(
-
+            "men",
+            "hirgon",
+            "gondorians",
+            "third_age",
+            "lord_of_the_rings",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "220",
+        name = "Hirluin",
         tags = listOf(
-
+            "hirluin",
+            "gondorians",
+            "men",
+            "third_age",
+            "lord_of_the_rings",
+            "dunedain",
+            "lords_of_gondor",
+            "minor_character",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "221",
+        name = "Hob Guardacercas",
         tags = listOf(
-
+            "hobbits",
+            "hob guardacercas",
+            "hob hayward",
+            "third_age",
+            "lord_of_the_rings",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "222",
+        name = "Hombres Muertos de el Sagrario",
         tags = listOf(
-
+            "lord_of_the_rings",
+            "hombres muertos de el sagrario",
+            "oathbreakers",
+            "muertos",
+            "gondorians",
+            "undead",
+            "servants_of_sauron",
+            "armies"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "223",
+        name = "Horn",
         tags = listOf(
-
+            "men",
+            "rohirrim",
+            "horn",
+            "lord_of_the_rings",
+            "third_age",
+            "minor_character",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "224",
+        name = "Huan",
         tags = listOf(
-
+            "silmarillion",
+            "dogs",
+            "first_age",
+            "huan",
+            "book_of_lost_tales",
+            "other_races",
+            "the_history_of_middle_earth",
+            "valar_animals"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "225",
+        name = "Hunthor",
         tags = listOf(
-
+            "men",
+            "hunthor",
+            "house_of_haleth",
+            "edain",
+            "children_of_hurin",
+            "silmarillion",
+            "first_age"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "226",
+        name = "Huor",
         tags = listOf(
-
+            "huor",
+            "men",
+            "first_age",
+            "silmarillion",
+            "edain",
+            "house_of_hador",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "227",
+        name = "Húrin",
         tags = listOf(
-
+            "hurin",
+            "men",
+            "edain",
+            "first_age",
+            "silmarillion",
+            "children_of_hurin",
+            "house_of_hador",
+            "lords_of_dor_lomin",
+            "book_of_lost_tales",
+            "rulers_in_the_great_lands",
+            "unfinished_tales",
+            "the_history_of_middle_earth",
+            "beren_and_luthien"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "228",
+        name = "Húrin (Guardián de las Llaves)",
         tags = listOf(
-
+            "men",
+            "gondorians",
+            "hurin",
+            "third_age",
+            "lord_of_the_rings",
+            "dunedain",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "229",
+        name = "Ibûn",
         tags = listOf(
-
+            "dwarves",
+            "petty_dwarves",
+            "ibun",
+            "first_age",
+            "silmarillion",
+            "children_of_hurin",
+            "unfinished_tales"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "230",
+        name = "Idril",
         tags = listOf(
-
+            "elves",
+            "noldor",
+            "idril",
+            "first_age",
+            "calaquendi",
+            "silmarillion",
+            "gondolindrim",
+            "house_of_fingolfin",
+            "book_of_lost_tales",
+            "rulers_in_beleriand",
+            "princesses",
+            "unfinished_tales",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "231",
+        name = "Ilmarë",
         tags = listOf(
-
+            "silmarillion",
+            "maiar",
+            "ilmare",
+            "ainur",
+            "book_of_lost_tales",
+            "valarindi",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "232",
+        name = "Imlach",
         tags = listOf(
-
+            "men",
+            "imlach",
+            "silmarillion",
+            "first_age",
+            "edain",
+            "house_of_hador",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "233",
+        name = "Imrahil",
         tags = listOf(
-
+            "men",
+            "gondorians",
+            "imrahil",
+            "lord_of_the_rings",
+            "third_age",
+            "fourth_age",
+            "dunedain",
+            "princes_of_dol_amroth",
+            "lords_of_gondor",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "234",
+        name = "Indis",
         tags = listOf(
-
+            "elves",
+            "indis",
+            "vanyar",
+            "calaquendi",
+            "silmarillion",
+            "first_age",
+            "house_of_ingwe",
+            "minyar",
+            "queens",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "235",
+        name = "Indor",
         tags = listOf(
-
+            "men",
+            "edain",
+            "first_age",
+            "children_of_hurin",
+            "indor",
+            "house_of_hador"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "236",
+        name = "Ingold",
         tags = listOf(
-
+            "men",
+            "gondorians",
+            "ingold",
+            "lord_of_the_rings",
+            "third_age",
+            "dunedain",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "237",
+        name = "Ingwë",
         tags = listOf(
-
+            "elves",
+            "vanyar",
+            "calaquendi",
+            "ingwe",
+            "house_of_ingwe",
+            "silmarillion",
+            "first_age",
+            "ruler_aman",
+            "book_of_lost_tales",
+            "house_of_imin",
+            "minyar",
+            "kings",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "238",
+        name = "Inzilbêth",
         tags = listOf(
-
+            "men",
+            "numenorean",
+            "second_age",
+            "inzilbeth",
+            "silmarillion",
+            "faithful",
+            "queens_of_numenor",
+            "unfinished_tales"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "239",
+        name = "Ioreth",
         tags = listOf(
-
+            "men",
+            "ioreth",
+            "lord_of_the_rings",
+            "third_age",
+            "gondorians",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "240",
+        name = "Iorlas",
         tags = listOf(
-
+            "men",
+            "gondorians",
+            "iorlas",
+            "lord_of_the_rings",
+            "third_age"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "241",
+        name = "Irmo (Lórien)",
         tags = listOf(
-
+            "valar",
+            "irmo",
+            "lorien",
+            "silmarillion",
+            "first_age",
+            "ainur",
+            "book_of_lost_tales"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "242",
+        name = "Isildur",
         tags = listOf(
-
+            "men",
+            "isildur",
+            "house_of_elendil",
+            "house_of_isildur",
+            "numenorean",
+            "ring_bearer",
+            "silmarillion",
+            "mariners",
+            "ruler_of_arnor",
+            "ruler_of_gondor",
+            "second_age",
+            "third_age",
+            "numenor_key_people",
+            "bearer_of_the_one_ring",
+            "featured",
+            "unfinished_tales",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "243",
+        name = "Khamûl",
         tags = listOf(
-
+            "lord_of_the_rings",
+            "khamul",
+            "third_age",
+            "easterling",
+            "nazgul",
+            "second_age",
+            "servants_of_sauron",
+            "ring_bearer",
+            "army_of_mordor",
+            "unfinished_tales"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "244",
+        name = "Khîm",
         tags = listOf(
-
+            "dwarves",
+            "khim",
+            "first_age",
+            "petty_dwarves",
+            "silmarillion",
+            "children_of_hurin"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "245",
+        name = "Kíli",
         tags = listOf(
-
+            "dwarves",
+            "kili",
+            "third_age",
+            "the_hobbit",
+            "thorin_company",
+            "durins_folk",
+            "longbeards",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "246",
+        name = "Lagduf",
         tags = listOf(
-
+            "lagduf",
+            "orcs",
+            "lord_of_the_rings",
+            "third_age",
+            "servants_of_sauron",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "247",
+        name = "Landroval",
         tags = listOf(
-
+            "eagles",
+            "landroval",
+            "lord_of_the_rings",
+            "first_age",
+            "second_age",
+            "third_age",
+            "minor_character",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "248",
+        name = "Legolas",
         tags = listOf(
-
+            "legolas",
+            "sindar",
+            "elves",
+            "third_age",
+            "lord_of_the_rings",
+            "council_of_elrond",
+            "fellowship_of_the_ring",
+            "fourth_age",
+            "moriquendi",
+            "rulers_middle_earth",
+            "featured",
+            "grey_elves"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "249",
+        name = "Lenwë",
         tags = listOf(
-
+            "elves",
+            "nandor",
+            "lenwe",
+            "first_age",
+            "silmarillion",
+            "rulers_middle_earth",
+            "nelyar"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "250",
+        name = "Lindir",
         tags = listOf(
-
+            "elves",
+            "lindir",
+            "third_age",
+            "lord_of_the_rings",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "251",
+        name = "Lindórië",
         tags = listOf(
-
+            "men",
+            "lindorie",
+            "numenorean",
+            "house_of_valandil",
+            "silmarillion",
+            "faithful",
+            "second_age",
+            "unfinished_tales"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "252",
+        name = "Lobelia Sacovilla-Bolsón",
         tags = listOf(
-
+            "hobbits",
+            "ciñatiesa",
+            "sacovilla",
+            "bracegirdle",
+            "the_hobbit",
+            "lord_of_the_rings",
+            "sackville-baggins",
+            "third_age",
+            "lobelia",
+            "sacovilla-bolson",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "253",
+        name = "Lorgan",
         tags = listOf(
-
+            "silmarillion",
+            "easterling",
+            "lorgan",
+            "first_age",
+            "men",
+            "servants_of_morgoth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "254",
+        name = "Lotho Sacovilla-Bolsón",
         tags = listOf(
-
+            "hobbits",
+            "lotho",
+            "sacovilla",
+            "bolson",
+            "sacovilla-bolson",
+            "sackville_baggins",
+            "third_age",
+            "lord_of_the_rings",
+            "servants_of_saruman",
+            "rulers_middle_earth",
+            "minor_character",
+            "shirriffs"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "255",
+        name = "Lugdush",
         tags = listOf(
-
+            "orcs",
+            "lugdush",
+            "uruk-hai",
+            "third_age",
+            "lord_of_the_rings",
+            "servants_of_saruman",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "256",
+        name = "Lúthien",
         tags = listOf(
-
+            "silmarillion",
+            "luthien",
+            "first_age",
+            "moriquendi",
+            "half_elf",
+            "half_maia",
+            "book_of_lost_tales",
+            "house_of_elwe",
+            "tinuviel",
+            "grey_elves",
+            "fays",
+            "princesses",
+            "the_history_of_middle_earth",
+            "beren_and_luthien"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "257",
+        name = "Mablung",
         tags = listOf(
-
+            "elves",
+            "sindar",
+            "mablung",
+            "silmarillion",
+            "first_age",
+            "children_of_hurin",
+            "moriquendi",
+            "book_of_lost_tales",
+            "grey_elves",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "258",
+        name = "Mablung (Montaraz de Ithilien)",
         tags = listOf(
-
+            "men",
+            "mablung",
+            "rangers",
+            "third_age",
+            "dunedain",
+            "gondorians",
+            "lord_of_the_rings",
+            "rangers_of_ithilien",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "259",
+        name = "Maedhros",
         tags = listOf(
-
+            "maedhros",
+            "elves",
+            "noldor",
+            "house_of_feanor",
+            "silmarillion",
+            "first_age",
+            "rulers_in_beleriand",
+            "book_of_lost_tales",
+            "sons_of_feanor",
+            "the_history_of_middle_earth",
+            "high_king_of_the_noldor"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "260",
+        name = "Maeglin",
         tags = listOf(
-
+            "elves",
+            "sindar",
+            "maeglin",
+            "silmarillion",
+            "first_age",
+            "gondolindrim",
+            "house_of_fingolfin",
+            "moriquendi",
+            "servants_of_morgoth",
+            "noldor",
+            "smiths",
+            "lords_of_the_twelve_houses",
+            "book_of_lost_tales",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "261",
+        name = "Granjero Maggot",
         tags = listOf(
-
+            "maggot",
+            "farmer",
+            "granjero",
+            "third_age",
+            "hobbits",
+            "lord_of_the_rings",
+            "the_adventures_of_tom_bombadil",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "262",
+        name = "Maglor",
         tags = listOf(
-
+            "elves",
+            "maglor",
+            "first_age",
+            "silmarillion",
+            "house_of_feanor",
+            "noldor",
+            "minstrels",
+            "rulers_in_beleriand",
+            "book_of_lost_tales",
+            "sons_of_feanor",
+            "loremasters",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "263",
+        name = "Magor",
         tags = listOf(
-
+            "men",
+            "magor",
+            "first_age",
+            "house_of_hador",
+            "edain",
+            "rulers_in_beleriand",
+            "silmarillion",
+            "chieftain_of_the_house_of_hador"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "264",
+        name = "Mahtan",
         tags = listOf(
-
+            "elves",
+            "noldor",
+            "calaquendi",
+            "silmarillion",
+            "mahtan",
+            "first_age",
+            "smiths",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "265",
+        name = "Malach",
         tags = listOf(
-
+            "men",
+            "edain",
+            "malach",
+            "house_of_hador",
+            "first_age",
+            "silmarillion",
+            "chieftain_of_the_house_of_hador"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "266",
+        name = "Manwë",
         tags = listOf(
-
+            "valar",
+            "ainur",
+            "manwe",
+            "silmarillion",
+            "first_age",
+            "ruler_aman",
+            "second_age",
+            "third_age",
+            "aratar",
+            "book_of_lost_tales",
+            "kings",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "267",
+        name = "Marach",
         tags = listOf(
-
+            "men",
+            "edain",
+            "first_age",
+            "marach",
+            "silmarillion",
+            "house_of_hador",
+            "chieftain_of_the_house_of_hador"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "268",
+        name = "Mardil",
         tags = listOf(
-
+            "men",
+            "gondorians",
+            "silmarillion",
+            "house_of_hurin",
+            "ruling_stewards",
+            "mardil",
+            "third_age",
+            "stewards",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "269",
+        name = "Mauhúr",
         tags = listOf(
-
+            "orcs",
+            "mauhur",
+            "uruk-hai",
+            "third_age",
+            "lord_of_the_rings",
+            "servants_of_saruman"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "270",
+        name = "Melian",
         tags = listOf(
-
+            "melian",
+            "maiar",
+            "ainur",
+            "first_age",
+            "silmarillion",
+            "children_of_hurin",
+            "rulers_in_beleriand",
+            "book_of_lost_tales",
+            "fays",
+            "queens",
+            "the_history_of_middle_earth",
+            "beren_and_luthien"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "271",
+        name = "Morgoth",
         tags = listOf(
-
+            "melkor",
+            "morgoth",
+            "silmarillion",
+            "first_age",
+            "valar",
+            "ainur",
+            "children_of_hurin",
+            "rulers_middle_earth",
+            "book_of_lost_tales",
+            "rulers_in_the_great_lands",
+            "beren_and_luthien",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "272",
+        name = "Meneldil",
         tags = listOf(
-
+            "men",
+            "numenorean",
+            "meneldil",
+            "second_age",
+            "third_age",
+            "ruler_of_gondor",
+            "silmarillion",
+            "house_of_anarion",
+            "dunedain",
+            "the_history_of_middle_earth",
+            "gondorians",
+            "kings_of_gondor"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "273",
+        name = "Meneldor",
         tags = listOf(
-
+            "eagles",
+            "lord_of_the_rings",
+            "third_age",
+            "meneldor",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "274",
+        name = "Meriadoc Brandigamo",
         tags = listOf(
-
+            "meriadoc",
+            "brandigamo",
+            "merry",
+            "hobbits",
+            "fellowship_of_the_ring",
+            "lord_of_the_rings",
+            "brandybuck",
+            "third_age",
+            "fourth_age",
+            "masters_of_buckland",
+            "featured",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "275",
+        name = "Mîm",
         tags = listOf(
-
+            "dwarves",
+            "mim",
+            "silmarillion",
+            "children_of_hurin",
+            "first_age",
+            "petty_dwarves",
+            "smiths",
+            "book_of_lost_tales",
+            "unfinished_tales",
+            "beren_and_luthien"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "276",
+        name = "Míriel",
         tags = listOf(
-
+            "elves",
+            "miriel",
+            "noldor",
+            "silmarillion",
+            "first_age",
+            "calaquendi",
+            "tatyar",
+            "queens",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "277",
+        name = "Morwen",
         tags = listOf(
-
+            "men",
+            "morwen",
+            "edain",
+            "house_of_beor",
+            "children_of_hurin",
+            "silmarillion",
+            "book_of_lost_tales",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "278",
+        name = "Muzgash",
         tags = listOf(
-
+            "orcs",
+            "muzgash",
+            "third_age",
+            "lord_of_the_rings",
+            "servants_of_sauron",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "279",
+        name = "Nahar",
         tags = listOf(
-
+            "nahar",
+            "silmarillion",
+            "horses",
+            "valar_animals"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "280",
+        name = "Namo (Mandos)",
         tags = listOf(
-
+            "namo",
+            "mandos",
+            "ainur",
+            "valar",
+            "feanturi",
+            "aratar",
+            "silmarillion",
+            "first_age",
+            "book_of_lost_tales",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "281",
+        name = "Nellas",
         tags = listOf(
-
+            "elves",
+            "nellas",
+            "children_of_hurin",
+            "first_age",
+            "sindar",
+            "grey_elves",
+            "unfinished_tales"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "282",
+        name = "Nerdanel",
         tags = listOf(
-
+            "elves",
+            "nerdanel",
+            "noldor",
+            "calaquendi",
+            "silmarillion",
+            "first_age",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "283",
+        name = "Nessa",
         tags = listOf(
-
+            "valar",
+            "ainur",
+            "nessa",
+            "silmarillion",
+            "first_age",
+            "valarindi",
+            "book_of_lost_tales",
+            "the_history_of_middle_earth",
+            "beren_and_luthien"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "284",
+        name = "Nienna",
         tags = listOf(
-
+            "valar",
+            "ainur",
+            "nienna",
+            "aratar",
+            "silmarillion",
+            "first_age",
+            "book_of_lost_tales",
+            "queens",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "285",
+        name = "Nienor",
         tags = listOf(
-
+            "nienor",
+            "niniel",
+            "edain",
+            "men",
+            "house_of_hador",
+            "children_of_hurin",
+            "silmarillion",
+            "first_age",
+            "book_of_lost_tales",
+            "unfinished_tales"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "286",
+        name = "Nimloth",
         tags = listOf(
-
+            "nimloth",
+            "elves",
+            "sindar",
+            "silmarillion",
+            "first_age",
+            "moriquendi",
+            "queens",
+            "grey_elves",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "287",
+        name = "Nob",
         tags = listOf(
-
+            "hobbits",
+            "nob",
+            "third_age",
+            "lord_of_the_rings",
+            "minor_character",
+            "bree_hobbits"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "288",
+        name = "Nori",
         tags = listOf(
-
+            "nori",
+            "dwarves",
+            "third_age",
+            "thorin_company",
+            "the_hobbit",
+            "durins_folk",
+            "longbeards"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "289",
+        name = "Odo Ganapié",
         tags = listOf(
-
+            "odo",
+            "ganapie",
+            "proudfoot",
+            "hobbits",
+            "third_age",
+            "lord_of_the_rings",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "290",
+        name = "Ohtar",
         tags = listOf(
-
+            "dunedain",
+            "men",
+            "ohtar",
+            "silmarillion",
+            "second_age",
+            "third_age",
+            "unfinished_tales"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "291",
+        name = "Óin",
         tags = listOf(
-
+            "oin",
+            "dwarves",
+            "thorin_company",
+            "the_hobbit",
+            "third_age",
+            "longbeards"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "292",
+        name = "Olwë",
         tags = listOf(
-
+            "elves",
+            "teleri",
+            "falmari",
+            "olwe",
+            "calaquendi",
+            "silmarillion",
+            "first_age",
+            "ruler_aman",
+            "nelyar",
+            "the_history_of_middle_earth",
+            "unfinished_tales"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "293",
+        name = "Ori",
         tags = listOf(
-
+            "ori",
+            "dwarves",
+            "thorin_company",
+            "the_hobbit",
+            "third_age",
+            "longbeards",
+            "durins_folk"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "294",
+        name = "Orleg",
         tags = listOf(
-
+            "orleg",
+            "edain",
+            "first_age",
+            "children_of_hurin",
+            "men",
+            "gaurwaith"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "295",
+        name = "Orodreth",
         tags = listOf(
-
+            "elves",
+            "noldor",
+            "orodreth",
+            "calaquendi",
+            "children_of_hurin",
+            "silmarillion",
+            "first_age",
+            "house_of_finarfin",
+            "rulers_in_beleriand",
+            "book_of_lost_tales",
+            "rulers_in_the_great_lands",
+            "death_in_battle",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "296",
+        name = "Oromë",
         tags = listOf(
-
+            "orome",
+            "valar",
+            "ainur",
+            "aratar",
+            "silmarillion",
+            "first_age",
+            "book_of_lost_tales",
+            "valarindi",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "297",
+        name = "Oropher",
         tags = listOf(
-
+            "oropher",
+            "elves",
+            "sindar",
+            "moriquendi",
+            "first_age",
+            "second_age",
+            "rulers_middle_earth",
+            "grey_elves",
+            "kings",
+            "unfinished_tales",
+            "the_history_of_middle_earth",
+            "death_in_battle",
+            "lords_of_the_silvan_elves"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "298",
+        name = "Orophin",
         tags = listOf(
-
+            "elves",
+            "silvan",
+            "orophin",
+            "third_age",
+            "lord_of_the_rings",
+            "galadhrim",
+            "nandor",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "299",
+        name = "Ossë",
         tags = listOf(
-
+            "osse",
+            "silmarillion",
+            "maiar",
+            "ainur",
+            "first_age",
+            "second_age",
+            "servants_of_morgoth",
+            "book_of_lost_tales"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "300",
+        name = "Otho Sacovilla-Bolsón",
         tags = listOf(
-
+            "otho",
+            "sacovilla",
+            "bolson",
+            "sackville-baggins",
+            "sacovilla-bolson",
+            "hobbits",
+            "third_age",
+            "lord_of_the_rings",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "301",
+        name = "Papá Dospiés",
         tags = listOf(
-
+            "papa",
+            "dospies",
+            "daddy",
+            "twofoot",
+            "third_age",
+            "lord_of_the_rings",
+            "hobbits",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "302",
+        name = "Peregrin Tuk",
         tags = listOf(
-
+            "peregrin",
+            "took",
+            "tuk",
+            "pippin",
+            "hobbits",
+            "fellowship_of_the_ring",
+            "thains",
+            "lord_of_the_rings",
+            "fourth_age",
+            "third_age",
+            "featured",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "303",
+        name = "Radagast",
         tags = listOf(
-
+            "maiar",
+            "ainur",
+            "istari",
+            "radagast",
+            "third_age",
+            "lord_of_the_rings",
+            "silmarillion",
+            "first_age",
+            "wizards",
+            "unfinished_tales",
+            "white_council"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "304",
+        name = "Radbug",
         tags = listOf(
-
+            "radbug",
+            "lord_of_the_rings",
+            "orcs",
+            "servants_of_sauron",
+            "third_age",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "305",
+        name = "Radhruin",
         tags = listOf(
-
+            "men",
+            "edain",
+            "house_of_beor",
+            "barahir_outlaws",
+            "silmarillion",
+            "radhruin",
+            "first_age",
+            "beren_and_luthien"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "306",
+        name = "Ragnor",
         tags = listOf(
-
+            "men",
+            "edain",
+            "ragnor",
+            "first_age",
+            "silmarillion",
+            "house_of_beor",
+            "barahir_outlaws",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "307",
+        name = "Rey Brujo",
         tags = listOf(
-
+            "rey brujo",
+            "witch king",
+            "servants_of_sauron",
+            "second_age",
+            "nazgul",
+            "silmarillion",
+            "third_age",
+            "witch",
+            "brujo",
+            "men",
+            "wraith",
+            "featured",
+            "ring_bearer",
+            "kings",
+            "death_in_battle",
+            "army_of_mordor"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "308",
+        name = "Rey de los Muertos",
         tags = listOf(
-
+            "lord_of_the_rings",
+            "rey de los muertos",
+            "servants_of_sauron",
+            "third_age",
+            "men",
+            "wraith",
+            "second_age",
+            "kings",
+            "minor_character",
+            "undead"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "309",
+        name = "Rían",
         tags = listOf(
-
+            "men",
+            "rian",
+            "edain",
+            "silmarillion",
+            "first_age",
+            "house_of_beor",
+            "unfinished_tales",
+            "children_of_hurin"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "310",
+        name = "Roäc",
         tags = listOf(
-
+            "ravens",
+            "roac",
+            "the_hobbit",
+            "third_age"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "311",
+        name = "Robin Madriguera",
         tags = listOf(
-
+            "robin",
+            "madriguera",
+            "smallburrow",
+            "third_age",
+            "hobbits",
+            "lord_of_the_rings",
+            "servants_of_saruman",
+            "minor_character",
+            "shirriffs"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "312",
+        name = "Rochallor",
         tags = listOf(
-
+            "rochallor",
+            "horses",
+            "silmarillion",
+            "first_age"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "313",
+        name = "Rosa Coto",
         tags = listOf(
-
+            "rosie",
+            "rosa",
+            "coto",
+            "cotton",
+            "rosita",
+            "hobbits",
+            "lord_of_the_rings",
+            "third_age",
+            "fourth_age",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "314",
+        name = "Rúmil (Tirion)",
         tags = listOf(
-
+            "elves",
+            "rumil",
+            "noldor",
+            "calaquendi",
+            "silmarillion",
+            "first_age",
+            "book_of_lost_tales",
+            "chroniclers_of_arda",
+            "the_history_of_middle_earth",
+            "story_tellers",
+            "loremasters"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "315",
+        name = "Rúmil (Lórien)",
         tags = listOf(
-
+            "elves",
+            "rumil",
+            "silvan",
+            "lord_of_the_rings",
+            "third_age",
+            "galadhrim",
+            "nandor",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "316",
+        name = "Sador",
         tags = listOf(
-
+            "edain",
+            "sador",
+            "children_of_hurin",
+            "house_of_hador",
+            "first_age",
+            "unfinished_tales",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "317",
+        name = "Saeros",
         tags = listOf(
-
+            "elves",
+            "nandor",
+            "saeros",
+            "children_of_hurin",
+            "silmarillion",
+            "first_age",
+            "book_of_lost_tales",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "318",
+        name = "Salmar",
         tags = listOf(
-
+            "maiar",
+            "ainur",
+            "salmar",
+            "silmarillion",
+            "book_of_lost_tales",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "319",
+        name = "Samsagaz Gamyi",
         tags = listOf(
-
+            "hobbits",
+            "samsagaz",
+            "sam",
+            "samwise",
+            "gamyi",
+            "gamgee",
+            "council_of_elrond",
+            "ring_bearer",
+            "fellowship_of_the_ring",
+            "third_age",
+            "lord_of_the_rings",
+            "fourth_age",
+            "mayors_of_michel_delving",
+            "bearer_of_the_one_ring",
+            "chroniclers_of_arda",
+            "featured"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "320",
+        name = "Saruman",
         tags = listOf(
-
+            "saruman",
+            "maiar",
+            "ainur",
+            "istari",
+            "third_age",
+            "lord_of_the_rings",
+            "silmarillion",
+            "first_age",
+            "rulers_middle_earth",
+            "servants_of_sauron",
+            "smiths",
+            "wizards",
+            "white_council"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "321",
+        name = "Sauron",
         tags = listOf(
-
+            "sauron",
+            "annatar",
+            "maiar",
+            "ainur",
+            "ring_bearer",
+            "lord_of_the_rings",
+            "silmarillion",
+            "first_age",
+            "second_age",
+            "third_age",
+            "rulers_middle_earth",
+            "servants_of_morgoth",
+            "smiths",
+            "gorthaur",
+            "mairon",
+            "numenor_key_people",
+            "bearer_of_the_one_ring",
+            "featured",
+            "unfinished_tales",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "322",
+        name = "Señor de las Águilas",
         tags = listOf(
-
+            "eagles",
+            "lord of eagles",
+            "señor",
+            "gran aguila",
+            "aguilas",
+            "the_hobbit",
+            "rulers_middle_earth",
+            "third_age"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "323",
+        name = "Shagrat",
         tags = listOf(
-
+            "shagrat",
+            "uruk-hai",
+            "servants_of_sauron",
+            "lord_of_the_rings",
+            "third_age",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "324",
+        name = "Silmariën",
         tags = listOf(
-
+            "silmarien",
+            "men",
+            "numenorean",
+            "silmarillion",
+            "house_of_elros",
+            "second_age",
+            "numenor_key_people",
+            "unfinished_tales",
+            "the_history_of_middle_earth",
+            "princesses"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "325",
+        name = "Smaug",
         tags = listOf(
-
+            "dragons",
+            "smaug",
+            "the_hobbit",
+            "third_age",
+            "death_in_battle",
+            "kings"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "326",
+        name = "Snaga (Isengard)",
         tags = listOf(
-
+            "snaga",
+            "orcs",
+            "third_age",
+            "lord_of_the_rings",
+            "servants_of_saruman",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "327",
+        name = "Tar-Ancalimon",
         tags = listOf(
-
+            "men",
+            "ancalimon",
+            "tar-ancalimon",
+            "silmarillion",
+            "house_of_elros",
+            "rulers_of_numenor",
+            "second_age",
+            "numenorean",
+            "kings_men",
+            "kings_of_numenor",
+            "unfinished_tales"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "328",
+        name = "Tar-Atanamir",
         tags = listOf(
-
+            "men",
+            "tar-atanamir",
+            "atanamir",
+            "house_of_elros",
+            "silmarillion",
+            "rulers_of_numenor",
+            "second_age",
+            "numenorean",
+            "kings_of_numenor",
+            "unfinished_tales",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "329",
+        name = "Tar-Ciryatan",
         tags = listOf(
-
+            "men",
+            "tar-ciryatan",
+            "ciryatan",
+            "house_of_elros",
+            "silmarillion",
+            "rulers_of_numenor",
+            "second_age",
+            "numenorean",
+            "kings_of_numenor",
+            "unfinished_tales",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "330",
+        name = "Tar-Elendil",
         tags = listOf(
-
+            "men",
+            "numenorean",
+            "tar-elendil",
+            "elendil",
+            "house_of_elros",
+            "silmarillion",
+            "second_age",
+            "rulers_of_numenor",
+            "kings_of_numenor",
+            "unfinished_tales"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "331",
+        name = "Tar-Minastir",
         tags = listOf(
-
+            "men",
+            "numenorean",
+            "tar-minastir",
+            "minastir",
+            "silmarillion",
+            "second_age",
+            "rulers_of_numenor",
+            "house_of_elros",
+            "kings_of_numenor",
+            "unfinished_tales",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "332",
+        name = "Tar-Míriel",
         tags = listOf(
-
+            "men",
+            "tar-miriel",
+            "tar miriel",
+            "miriel",
+            "second_age",
+            "silmarillion",
+            "house_of_elros",
+            "numenorean",
+            "faithful",
+            "kings_of_numenor",
+            "queens_of_numenor"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "333",
+        name = "Tar-Palantir",
         tags = listOf(
-
+            "men",
+            "numenorean",
+            "tar-palantir",
+            "tar palantir",
+            "palantir",
+            "second_age",
+            "silmarillion",
+            "house_of_elros",
+            "faithful",
+            "kings_of_numenor",
+            "numenor_key_people",
+            "rulers_of_numenor",
+            "unfinished_tales"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "334",
+        name = "Ted Arenas",
         tags = listOf(
-
+            "hobbits",
+            "ted",
+            "ted arenas",
+            "arenas",
+            "third_age",
+            "lord_of_the_rings",
+            "sandyman",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "335",
+        name = "Telchar",
         tags = listOf(
-
+            "telchar",
+            "dwarves",
+            "first_age",
+            "silmarillion",
+            "smiths",
+            "unfinished_tales",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "336",
+        name = "Telemnar",
         tags = listOf(
-
+            "telemnar",
+            "gondorians",
+            "men",
+            "silmarillion",
+            "house_of_anarion",
+            "ruler_of_gondor",
+            "third_age",
+            "dunedain",
+            "kings_of_gondor",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "337",
+        name = "Théoden",
         tags = listOf(
-
+            "men",
+            "theoden",
+            "rohirrim",
+            "third_age",
+            "lord_of_the_rings",
+            "kings_of_rohan",
+            "the_history_of_middle_earth",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "338",
+        name = "Théodred",
         tags = listOf(
-
+            "theodred",
+            "men",
+            "rohirrim",
+            "third_age",
+            "lord_of_the_rings",
+            "minor_character",
+            "unfinished_tales",
+            "the_history_of_middle_earth",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "339",
+        name = "Thingol",
         tags = listOf(
-
+            "elves",
+            "sindar",
+            "elu thingol",
+            "singollo",
+            "elu",
+            "thingol",
+            "elwe",
+            "silmarillion",
+            "first_age",
+            "calaquendi",
+            "children_of_hurin",
+            "house_of_elwe",
+            "rulers_in_beleriand",
+            "book_of_lost_tales",
+            "nelyar",
+            "rulers_in_the_great_lands",
+            "kings",
+            "teleri",
+            "grey_elves",
+            "the_history_of_middle_earth",
+            "unfinished_tales",
+            "beren_and_luthien",
+            "kings_of_doriath"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "340",
+        name = "Thorin II",
         tags = listOf(
-
+            "thorin",
+            "thorin II",
+            "thorin ii",
+            "escudo de roble",
+            "oakenshield",
+            "dwarves",
+            "third_age",
+            "the_hobbit",
+            "thorin_company",
+            "durins_folk",
+            "longbeards",
+            "smiths",
+            "kings_of_durins_folk",
+            "kings_under_the_mountain",
+            "featured",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "341",
+        name = "Thorondor",
         tags = listOf(
-
+            "eagles",
+            "thorondor",
+            "children_of_hurin",
+            "silmarillion",
+            "first_age",
+            "rulers_in_beleriand",
+            "book_of_lost_tales",
+            "kings",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "342",
+        name = "Thráin II",
         tags = listOf(
-
+            "thrain",
+            "thrain ii",
+            "dwarves",
+            "the_hobbit",
+            "durins_folk",
+            "longbeards",
+            "third_age",
+            "kings_of_durins_folk",
+            "kings_under_the_mountain",
+            "ring_bearer"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "343",
+        name = "Thranduil",
         tags = listOf(
-
+            "thranduil",
+            "elvenking",
+            "elves",
+            "sindar",
+            "the_hobbit",
+            "lord_of_the_rings",
+            "silmarillion",
+            "moriquendi",
+            "rulers_middle_earth",
+            "second_age",
+            "third_age",
+            "grey_elves",
+            "kings",
+            "unfinished_tales",
+            "the_history_of_middle_earth",
+            "minor_character",
+            "lords_of_the_silvan_elves"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "344",
+        name = "Thrór",
         tags = listOf(
-
+            "dwarves",
+            "thror",
+            "durins_folk",
+            "the_hobbit",
+            "longbeards",
+            "third_age",
+            "kings_of_durins_folk",
+            "kings_under_the_mountain",
+            "ring_bearer"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "345",
+        name = "Thuringwethil",
         tags = listOf(
-
+            "thuringwethil",
+            "silmarillion",
+            "unknown_race",
+            "vampire",
+            "enigmas",
+            "first_age",
+            "servants_of_morgoth",
+            "servants_of_sauron",
+            "bats",
+            "fays",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "346",
+        name = "Tilion",
         tags = listOf(
-
+            "tilion",
+            "maiar",
+            "ainur",
+            "silmarillion",
+            "first_age",
+            "middle_earth_cosmology"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "347",
+        name = "Tolman Coto",
         tags = listOf(
-
+            "tolman",
+            "tom coto",
+            "tolman coto",
+            "tom",
+            "cotton",
+            "coto",
+            "third_age",
+            "lord_of_the_rings",
+            "fourth_age",
+            "hobbits",
+            "minor_character"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "348",
+        name = "Tom Bombadil",
         tags = listOf(
-
+            "tom",
+            "bombadil",
+            "lord_of_the_rings",
+            "enigmas",
+            "first_age",
+            "second_age",
+            "third_age",
+            "ring_bearer",
+            "bearer_of_the_one_ring",
+            "forest_folk",
+            "spirits",
+            "unknown_race"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "349",
+        name = "Tulkas",
         tags = listOf(
-
+            "ainur",
+            "tulkas",
+            "valar",
+            "silmarillion",
+            "first_age",
+            "book_of_lost_tales",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "350",
+        name = "Tuor",
         tags = listOf(
-
+            "men",
+            "edain",
+            "first_age",
+            "silmarillion",
+            "tuor",
+            "gondolindrim",
+            "house_of_hador",
+            "mariners",
+            "lords_of_the_twelve_houses",
+            "book_of_lost_tales",
+            "unfinished_tales",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "351",
+        name = "Turgon",
         tags = listOf(
-
+            "turgon",
+            "house_of_fingolfin",
+            "elves",
+            "noldor",
+            "silmarillion",
+            "calaquendi",
+            "first_age",
+            "gondolindrim",
+            "rulers_in_beleriand",
+            "lords_of_the_twelve_houses",
+            "book_of_lost_tales",
+            "rulers_in_the_great_lands",
+            "high_king_of_the_noldor",
+            "unfinished_tales",
+            "the_history_of_middle_earth",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "352",
+        name = "Túrin",
         tags = listOf(
-
+            "turin",
+            "men",
+            "edain",
+            "turambar",
+            "gaurwaith",
+            "children_of_hurin",
+            "silmarillion",
+            "first_age",
+            "house_of_hador",
+            "book_of_lost_tales",
+            "rulers_in_the_great_lands",
+            "unfinished_tales",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "353",
+        name = "Uglúk",
         tags = listOf(
-
+            "ugluk",
+            "orcs",
+            "uruk-hai",
+            "third_age",
+            "lord_of_the_rings",
+            "servants_of_saruman",
+            "minor_character",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "354",
+        name = "Uinen",
         tags = listOf(
-
+            "uinen",
+            "maiar",
+            "ainur",
+            "silmarillion",
+            "first_age",
+            "second_age",
+            "book_of_lost_tales",
+            "fays",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "355",
+        name = "Uldor",
         tags = listOf(
-
+            "men",
+            "uldor",
+            "easterling",
+            "silmarillion",
+            "first_age",
+            "servants_of_morgoth",
+            "rulers_in_beleriand",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "356",
+        name = "Ulfang",
         tags = listOf(
-
+            "men",
+            "easterling",
+            "ulfang",
+            "silmarillion",
+            "first_age",
+            "servants_of_morgoth",
+            "rulers_in_beleriand",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "357",
+        name = "Ulfast",
         tags = listOf(
-
+            "men",
+            "easterling",
+            "ulfast",
+            "silmarillion",
+            "first_age",
+            "servants_of_morgoth",
+            "death_in_battle"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "358",
+        name = "Ulmo",
         tags = listOf(
-
+            "valar",
+            "ulmo",
+            "ainur",
+            "aratar",
+            "silmarillion",
+            "first_age",
+            "book_of_lost_tales",
+            "the_history_of_middle_earth"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "359",
+        name = "Ulrad",
         tags = listOf(
-
+            "edain",
+            "ulrad",
+            "men",
+            "silmarillion",
+            "first_age",
+            "gaurwaith",
+            "children_of_hurin"
         )
     ),
     CharacterData(
-        id = "",
-        name = "",
+        id = "360",
+        name = "Ulwarth",
         tags = listOf(
-
+            "ulwarth",
+            "men",
+            "easterling",
+            "silmarillion",
+            "first_age",
+            "servants_of_morgoth",
+            "death_in_battle"
         )
     ),
-
+    CharacterData(
+        id = "361",
+        name = "Ungoliant",
+        tags = listOf(
+            "ungoliant",
+            "silmarillion",
+            "enigmas",
+            "first_age",
+            "servants_of_morgoth",
+            "spiders",
+            "spirits",
+            "book_of_lost_tales",
+            "demons",
+            "the_history_of_middle_earth"
+        )
+    ),
+    CharacterData(
+        id = "362",
+        name = "Urthel",
+        tags = listOf(
+            "urthel",
+            "men",
+            "edain",
+            "house_of_beor",
+            "first_age",
+            "silmarillion",
+            "barahir_outlaws",
+            "the_history_of_middle_earth"
+        )
+    ),
+    CharacterData(
+        id = "363",
+        name = "Urwen",
+        tags = listOf(
+            "men",
+            "urwen",
+            "lalaith",
+            "edain",
+            "children_of_hurin",
+            "silmarillion",
+            "first_age",
+            "house_of_hador",
+            "unfinished_tales"
+        )
+    ),
+    CharacterData(
+        id = "364",
+        name = "Vairë",
+        tags = listOf(
+            "valar",
+            "vaire",
+            "ainur",
+            "silmarillion",
+            "first_age",
+            "queens",
+            "the_history_of_middle_earth"
+        )
+    ),
+    CharacterData(
+        id = "365",
+        name = "Valandil (Rey de Arnor)",
+        tags = listOf(
+            "men",
+            "arnorians",
+            "valandil",
+            "silmarillion",
+            "house_of_isildur",
+            "ruler_of_arnor",
+            "second_age",
+            "third_age",
+            "dunedain",
+            "dunedain_of_the_north",
+            "kings_of_arnor",
+            "the_history_of_middle_earth"
+        )
+    ),
+    CharacterData(
+        id = "366",
+        name = "Vána",
+        tags = listOf(
+            "vana",
+            "ainur",
+            "valar",
+            "silmarillion",
+            "first_age",
+            "book_of_lost_tales",
+            "the_history_of_middle_earth"
+        )
+    ),
+    CharacterData(
+        id = "367",
+        name = "Varda",
+        tags = listOf(
+            "varda",
+            "valar",
+            "ainur",
+            "aratar",
+            "silmarillion",
+            "first_age",
+            "ruler_aman",
+            "third_age",
+            "book_of_lost_tales",
+            "queens",
+            "the_history_of_middle_earth"
+        )
+    ),
+    CharacterData(
+        id = "368",
+        name = "Viejo Hombre-Sauce",
+        tags = listOf(
+            "lord_of_the_rings",
+            "viejo hombre sauce",
+            "hombre-sauce",
+            "old man willow",
+            "third_age",
+            "enigmas",
+            "trees",
+            "sauce",
+            "forest_folk",
+            "the_adventures_of_tom_bombadil",
+            "minor_character"
+        )
+    ),
+    CharacterData(
+        id = "369",
+        name = "Gerontiuis Tuk",
+        tags = listOf(
+            "gerontius",
+            "tuk",
+            "took",
+            "viejo tuk",
+            "hobbits",
+            "third_age",
+            "the_hobbit",
+            "thains"
+        )
+    ),
+    CharacterData(
+        id = "370",
+        name = "Voronwë",
+        tags = listOf(
+            "elves",
+            "voronwe",
+            "noldor",
+            "silmarillion",
+            "first_age",
+            "gondolindrim",
+            "house_of_fingolfin",
+            "mariners",
+            "moriquendi",
+            "book_of_lost_tales",
+            "unfinished_tales",
+            "the_history_of_middle_earth"
+        )
+    ),
+    CharacterData(
+        id = "371",
+        name = "Wídfara",
+        tags = listOf(
+            "widfara",
+            "men",
+            "rohirrim",
+            "lord_of_the_rings",
+            "third_age",
+            "minor_character"
+        )
+    ),
+    CharacterData(
+        id = "372",
+        name = "Yavanna",
+        tags = listOf(
+            "yavanna",
+            "ainur",
+            "valar",
+            "aratar",
+            "silmarillion",
+            "first_age",
+            "second_age",
+            "third_age",
+            "book_of_lost_tales",
+            "the_history_of_middle_earth"
+        )
     )
+)

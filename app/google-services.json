@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "989899784702",
+    "project_id": "tolkienwiki-5686f",
+    "storage_bucket": "tolkienwiki-5686f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989899784702:android:a7ba59d81c0c07569840af",
+        "android_client_info": {
+          "package_name": "com.cgaraydev.tolkienapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHCZFw74HjN1yuZGzvzggyHUfQic-0Md0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989899784702:android:8f114ae62fc023ba9840af",
+        "android_client_info": {
+          "package_name": "com.cgaraydev.tolkienapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHCZFw74HjN1yuZGzvzggyHUfQic-0Md0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
