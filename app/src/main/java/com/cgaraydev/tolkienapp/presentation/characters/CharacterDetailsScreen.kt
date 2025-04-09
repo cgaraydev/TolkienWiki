@@ -1,5 +1,6 @@
 package com.cgaraydev.tolkienapp.presentation.characters
 
+import android.net.Uri
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
@@ -87,7 +89,10 @@ fun CharacterDetailsScreen(
 }
 
 @Composable
-fun CharacterDetailsContent(character: Character, navController: NavController) {
+fun CharacterDetailsContent(
+    character: Character,
+    navController: NavController
+) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -142,14 +147,15 @@ fun CharacterDetailsContent(character: Character, navController: NavController) 
                     navController = navController,
                 )
             }
-            Text("Imagenes", modifier = Modifier.clickable {
-                Log.d("characterdetails", character.images.toString())
-            })
-            ImageCarousel(
-                images = character.images,
-                modifier = Modifier.padding(vertical = 16.dp)
-            )
+            CustomExpandable(title = "Imagenes") {
+                ImageCarousel(
+                    images = character.images,
+                    modifier = Modifier.padding(vertical = 16.dp),
+                    navController = navController
+                )
+            }
             CustomSpacer(40)
+
         }
     }
 }

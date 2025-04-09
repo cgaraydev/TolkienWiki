@@ -8,6 +8,7 @@ import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,6 +29,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -41,18 +43,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.ImageData
 import com.cgaraydev.tolkienapp.ui.theme.Golden
-import com.cgaraydev.tolkienapp.ui.theme.LightGray
+import com.cgaraydev.tolkienapp.utils.HtmlText
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
@@ -115,39 +122,48 @@ fun CustomExpandable(
 fun ZoomableImage(
     imageUrl: String,
     modifier: Modifier = Modifier,
-    maxScale: Float = 4f,
-    minScale: Float = 1f,
+    maxScale: Float = 5f,
     resetTrigger: Boolean = false,
+    onGestureStateChange: (Boolean) -> Unit = {}
 ) {
     var scale by remember { mutableFloatStateOf(1f) }
-    var offset by remember { mutableStateOf(Offset.Zero) }
-
     LaunchedEffect(resetTrigger) {
         if (resetTrigger) {
             scale = 1f
-            offset = Offset.Zero
+            onGestureStateChange(false)
         }
     }
-
     Box(
         modifier = modifier
             .clipToBounds()
             .pointerInput(Unit) {
-                detectTransformGestures { _, pan, zoom, _ ->
-                    scale = (scale * zoom).coerceIn(minScale, maxScale)
-                    offset += pan
+                detectTransformGestures(
+                    panZoomLock = false,
+                ) { _, _, zoom, _ ->
+                    scale = (scale * zoom).coerceIn(1f, maxScale)
+                    onGestureStateChange(scale > 1f)
                 }
             }
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onDoubleTap = {
+                        scale = if (scale > 1f) 1f else 2f
+                        onGestureStateChange(scale > 1f)
+                    }
+                )
+            }
     ) {
+        val fullImageUrl =
+            "https://firebasestorage.googleapis.com/v0/b/lotrwiki-2dd76.appspot.com/o/$imageUrl"
         AsyncImage(
-            model = imageUrl,
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(fullImageUrl)
+                .build(),
             contentDescription = null,
             modifier = Modifier
                 .graphicsLayer(
                     scaleX = scale,
-                    scaleY = scale,
-                    translationX = offset.x,
-                    translationY = offset.y
+                    scaleY = scale
                 )
                 .fillMaxSize(),
             contentScale = ContentScale.Fit
@@ -160,54 +176,99 @@ fun ZoomableImage(
 fun ImageCarousel(
     images: List<ImageData>,
     modifier: Modifier = Modifier,
-
-    ) {
+    maxScale: Float = 5f,
+    navController: NavController,
+    coroutineScope: CoroutineScope = rememberCoroutineScope()
+) {
     if (images.isEmpty()) return
-
     val pagerState = rememberPagerState { images.size }
-    val scope = rememberCoroutineScope()
-    val currentPage = pagerState.currentPage
-
-    Column(
-        modifier = modifier
-    ) {
-        Box(modifier = Modifier.height(300.dp)) {
+    Column(modifier = modifier) {
+        Box(
+            modifier = Modifier
+                .height(350.dp)
+        ) {
             HorizontalPager(
                 state = pagerState,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
+                userScrollEnabled = false
             ) { page ->
                 ZoomableImage(
-                    imageUrl = "https://firebasestorage.googleapis.com/v0/b/lotrwiki-2dd76.appspot.com/o/${images[page].url}",
-                    modifier = Modifier.fillMaxSize(),
-                    resetTrigger = pagerState.currentPage == page
+                    imageUrl = images[page].url,
+                    maxScale = maxScale,
+                    resetTrigger = pagerState.currentPage == page,
+                    modifier = Modifier.fillMaxSize()
                 )
+            }
+            if (pagerState.currentPage > 0) {
+                IconButton(
+                    onClick = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(pagerState.currentPage - 1)
+                        }
+                    },
+                    modifier = Modifier
+                        .align(Alignment.CenterStart)
+                        .background(Color.Black.copy(alpha = 0.3f), CircleShape)
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_left),
+                        contentDescription = "Anterior",
+                        tint = Color.White
+                    )
+                }
+            }
+            if (pagerState.currentPage < images.size - 1) {
+                IconButton(
+                    onClick = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                        }
+                    },
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .background(Color.Black.copy(alpha = 0.3f), CircleShape)
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_right),
+                        contentDescription = "Siguiente",
+                        tint = Color.White
+                    )
+                }
             }
             Row(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.Center
+                    .padding(bottom = 16.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 repeat(images.size) { index ->
-                    val color = if (pagerState.currentPage == index) Golden else LightGray
+                    val color =
+                        if (pagerState.currentPage == index) Golden else Color.White.copy(alpha = 0.3f)
                     Box(
                         modifier = Modifier
                             .padding(4.dp)
-                            .size(8.dp)
+                            .size(if (pagerState.currentPage == index) 10.dp else 6.dp)
                             .clip(CircleShape)
                             .background(color)
                             .clickable {
-                                scope.launch {
+                                coroutineScope.launch {
                                     pagerState.animateScrollToPage(index)
                                 }
                             }
                     )
                 }
             }
-
         }
-
-
+        val currentArtist = images.getOrNull(pagerState.currentPage)?.artist ?: ""
+        if (currentArtist.isNotEmpty()) {
+            HtmlText(
+                htmlText = currentArtist,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+                navController = navController
+            )
+        }
     }
-
 }
