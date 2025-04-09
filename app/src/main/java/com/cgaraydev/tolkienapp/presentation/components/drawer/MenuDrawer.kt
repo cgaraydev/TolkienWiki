@@ -102,8 +102,7 @@ fun MenuDrawer() {
                 TopAppBar(
                     title = {
                         Text(
-                            text = "Inicio",
-                            fontFamily = FontFamily(Font(R.font.ring_bearer_medium))
+                            text = ""
                         )
                     },
                     navigationIcon = {

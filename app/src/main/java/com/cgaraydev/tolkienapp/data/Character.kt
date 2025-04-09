@@ -12,11 +12,11 @@ data class Character(
     val genre: String? = null,
     val otherNames: String? = null,
     val family: String? = null,
-    val etimology: String? = null,
+    val etymology: String? = null,
     val house: String? = null,
     val wikiUrl: WikiUrl? = null,
     val biography: String? = null,
-    val images: List<Images> = emptyList(),
+    val images: List<ImageData> = emptyList(),
     val faction: String? = null,
     val tags: List<String> = emptyList()
 )

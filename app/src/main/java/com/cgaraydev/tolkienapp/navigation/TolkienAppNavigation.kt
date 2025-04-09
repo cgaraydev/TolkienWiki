@@ -21,6 +21,7 @@ import com.cgaraydev.tolkienapp.presentation.others.OthersScreen
 import com.cgaraydev.tolkienapp.presentation.races.RacesScreen
 import com.cgaraydev.tolkienapp.presentation.tolkien.TolkienScreen
 import com.cgaraydev.tolkienapp.presentation.trivia.TriviaScreen
+import okhttp3.Route
 
 @Composable
 fun TolkienAppNavigation(
@@ -34,32 +35,40 @@ fun TolkienAppNavigation(
         composable(Routes.Home.route) {
             HomeScreen(navController)
         }
+
         composable(Routes.Characters.route) {
             CharactersScreen(navController = navController)
         }
+
         composable(
             route = Routes.CharacterDetails.route,
             arguments = listOf(navArgument("characterId") { type = NavType.StringType })
         ) { backStackEntry ->
             val characterId =
                 backStackEntry.arguments?.getString("characterId") ?: return@composable
-            CharacterDetailsScreen(characterId = characterId)
+            CharacterDetailsScreen(characterId = characterId, navController = navController)
         }
+
         composable(Routes.Locations.route) {
             LocationsScreen { navController.popBackStack() }
         }
+
         composable(Routes.Books.route) {
             BooksScreen { navController.popBackStack() }
         }
+
         composable(Routes.Tolkien.route) {
             TolkienScreen { navController.popBackStack() }
         }
+
         composable(Routes.Events.route) {
             EventsScreen { navController.popBackStack() }
         }
+
         composable(Routes.Games.route) {
             GamesScreen { navController.popBackStack() }
         }
+
         composable(Routes.Languages.route) {
             LanguagesScreen { navController.popBackStack() }
         }

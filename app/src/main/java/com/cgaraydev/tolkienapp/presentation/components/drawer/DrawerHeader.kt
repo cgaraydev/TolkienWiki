@@ -30,6 +30,7 @@ fun DrawerHeader(closeDrawer: () -> Unit) {
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxSize()
+                .padding(end = 5.dp)
         )
         IconButton(
             onClick = closeDrawer,

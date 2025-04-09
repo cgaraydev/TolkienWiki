@@ -195,7 +195,6 @@ fun ExpandableSubCategory(
                     characters.forEach { character ->
                         CharacterItem(
                             character = character,
-//                            onClick = { navController.navigate("character/${character.id}") }
                             onClick = {
                                 navController.navigate(
                                     Routes.CharacterDetails.createRoute(
