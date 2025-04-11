@@ -46,6 +46,7 @@ import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.CharacterData
 import com.cgaraydev.tolkienapp.navigation.Routes
 import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.ScreenHeader
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.ui.theme.Gray
 import com.cgaraydev.tolkienapp.ui.theme.RingBearer
@@ -62,7 +63,7 @@ fun CharactersScreen(
             .background(Color.Black)
             .padding(top = 80.dp)
     ) {
-        CharactersScreenHeader()
+        ScreenHeader(imageRes = R.drawable.characters, label = "Personajes")
         CustomSpacer(40)
         CharactersScreenBody(characters, viewModel, navController)
         CustomSpacer(40)
@@ -244,30 +245,6 @@ fun CharacterItem(
                 tint = Gray
             )
         }
-    }
-}
-
-@Composable
-fun CharactersScreenHeader() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(140.dp)
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.characters),
-            contentDescription = null,
-            contentScale = ContentScale.FillBounds,
-            modifier = Modifier
-                .fillMaxSize()
-                .alpha(0.4f)
-        )
-        Text(
-            text = "Personajes",
-            color = Color.White,
-            fontSize = 48.sp,
-            modifier = Modifier.align(Alignment.Center)
-        )
     }
 }
 

@@ -30,12 +30,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.drawer.Items
 import com.cgaraydev.tolkienapp.navigation.TolkienAppNavigation
 import com.cgaraydev.tolkienapp.ui.theme.Golden

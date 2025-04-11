@@ -63,10 +63,6 @@ fun DrawerItem(
                     restoreState = true
                 }
             }
-
-//            navController.navigate(route) {
-//                popUpTo(0)
-//            }
         },
         colors = NavigationDrawerItemDefaults.colors(
             selectedContainerColor = GoldenLight,

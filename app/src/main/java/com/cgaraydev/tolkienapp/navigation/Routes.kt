@@ -8,6 +8,9 @@ sealed class Routes(val route: String) {
         fun createRoute(characterId: String) = "characterDetails/$characterId"
     }
     data object Locations : Routes("locations")
+    data object LocationDetails : Routes("locationDetails/{locationId}") {
+        fun createRoute(locationId: String) = "locationDetails/$locationId"
+    }
     data object Races : Routes("races")
     data object Maps : Routes("maps")
     data object Tolkien : Routes("tolkien")

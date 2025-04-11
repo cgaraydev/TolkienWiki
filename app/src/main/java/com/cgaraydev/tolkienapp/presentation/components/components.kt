@@ -1,11 +1,14 @@
 package com.cgaraydev.tolkienapp.presentation.components
 
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -23,7 +26,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Card
@@ -41,6 +46,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
@@ -48,6 +54,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
@@ -57,6 +64,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.ImageData
+import com.cgaraydev.tolkienapp.data.WikiUrl
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.utils.HtmlText
 import kotlinx.coroutines.CoroutineScope
@@ -76,7 +84,12 @@ fun CustomExpandable(
     var expanded by remember { mutableStateOf(false) }
     Card(
         modifier = modifier,
-        colors = CardDefaults.cardColors(containerColor = Color.Black)
+        colors = CardDefaults.cardColors(containerColor = Color.Black),
+        border = BorderStroke(
+            width = if (expanded) 1.dp else 0.dp,
+            color = Golden.copy(alpha = 0.3f)
+        ),
+        shape = RoundedCornerShape(4.dp)
     ) {
         Column {
             Row(modifier = Modifier
@@ -104,14 +117,18 @@ fun CustomExpandable(
                 Column(modifier = Modifier.padding(horizontal = 16.dp)) {
                     content()
                     CustomSpacer(12)
-                    Text(
-                        text = "Cerrar",
-                        color = Golden,
+                    Icon(
+                        imageVector = Icons.Default.Close,
+                        contentDescription = "Cerrar",
+                        tint = Golden.copy(alpha = 0.8f),
                         modifier = Modifier
-                            .align(Alignment.End)
+                            .size(32.dp)
+                            .fillMaxWidth()
                             .clickable { expanded = false }
-                            .padding(top = 8.dp)
+                            .align(Alignment.CenterHorizontally)
+                            .padding(8.dp)
                     )
+                    CustomSpacer(8)
                 }
             }
         }
@@ -270,5 +287,96 @@ fun ImageCarousel(
                 navController = navController
             )
         }
+    }
+}
+
+@Composable
+fun WikiLinksExpandable(
+    wikiUrls: WikiUrl?,
+    modifier: Modifier = Modifier
+) {
+    val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
+
+    val validLinks = remember(wikiUrls) {
+        listOfNotNull(
+            wikiUrls?.tolkienGateway?.takeIf { it.isNotEmpty() }?.let { "Tolkien Gateway" to it },
+            wikiUrls?.lotrFandom?.takeIf { it.isNotEmpty() }?.let { "LotR Fandom (EN)" to it },
+            wikiUrls?.lotrFandomEs?.takeIf { it.isNotEmpty() }?.let { "LotR Fandom (ES)" to it },
+            wikiUrls?.wikipedia?.takeIf { it.isNotEmpty() }?.let { "Wikipedia" to it },
+            wikiUrls?.elFenomeno?.takeIf { it.isNotEmpty() }?.let { "El Fenómeno" to it }
+        )
+    }
+
+    if (validLinks.isNotEmpty()) {
+        CustomExpandable(title = "Enlaces", modifier = modifier) {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+            ) {
+                validLinks.forEach { (name, url) ->
+                    Row(
+                        modifier = Modifier
+                            .clickable {
+                                try {
+                                    uriHandler.openUri(url)
+                                } catch (e: Exception) {
+                                    Toast.makeText(
+                                        context,
+                                        "No se pudo abrir el enlace",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                            .padding(vertical = 8.dp)
+                            .fillMaxWidth()
+                            .height(30.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = name,
+                            color = Color.White,
+                            style = TextStyle(),
+                            fontSize = 16.sp,
+                            modifier = Modifier.weight(1f),
+                        )
+                        Icon(
+                            painter = painterResource(R.drawable.ic_link),
+                            contentDescription = null,
+                            tint = Color.White,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ScreenHeader(
+    imageRes: Int,
+    label:String
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(140.dp)
+    ) {
+        Image(
+            painter = painterResource(imageRes),
+            contentDescription = null,
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier
+                .fillMaxSize()
+                .alpha(0.4f)
+        )
+        Text(
+            text = label,
+            color = Color.White,
+            fontSize = 48.sp,
+            modifier = Modifier.align(Alignment.Center)
+        )
     }
 }
