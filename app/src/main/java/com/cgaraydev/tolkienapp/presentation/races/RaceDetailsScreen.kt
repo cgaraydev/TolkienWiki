@@ -1,4 +1,4 @@
-package com.cgaraydev.tolkienapp.presentation.locations
+package com.cgaraydev.tolkienapp.presentation.races
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.cgaraydev.tolkienapp.data.Location
+import com.cgaraydev.tolkienapp.data.Race
 import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
 import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow
@@ -36,17 +36,17 @@ import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.utils.HtmlText
 
 @Composable
-fun LocationDetailsScreen(
-    locationId: String,
+fun RaceDetailsScreen(
+    raceId: String,
     navController: NavController,
-    viewModel: LocationsViewModel = hiltViewModel()
+    viewModel: RacesViewModel = hiltViewModel()
 ) {
-    val location by viewModel.locationDetails.collectAsState()
+    val race by viewModel.raceDetails.collectAsState()
     val isLoading by viewModel.isLoadingDetails.collectAsState()
     val error by viewModel.errorDetails.collectAsState()
 
-    LaunchedEffect(locationId) {
-        viewModel.loadLocationDetails(locationId)
+    LaunchedEffect(raceId) {
+        viewModel.loadRaceDetails(raceId)
     }
 
     Box(
@@ -71,21 +71,21 @@ fun LocationDetailsScreen(
                 )
             }
 
-            location != null -> {
-                LocationDetailsContent(location = location!!, navController = navController)
+            race != null -> {
+                RaceDetailsContent(race = race!!, navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun LocationDetailsContent(
-    location: Location,
+fun RaceDetailsContent(
+    race: Race,
     navController: NavController
 ) {
     Column {
         Text(
-            text = location.name,
+            text = race.name,
             fontSize = 48.sp,
             color = Color.White,
             modifier = Modifier
@@ -98,9 +98,9 @@ fun LocationDetailsContent(
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            item{
+            item {
                 CustomSpacer(16)
-                location.poster.let{ url ->
+                race.poster.let { url ->
                     AsyncImage(
                         model = "https://firebasestorage.googleapis.com/v0/b/lotrwiki-2dd76.appspot.com/o/$url",
                         contentDescription = null,
@@ -112,27 +112,42 @@ fun LocationDetailsContent(
                     )
                     CustomSpacer(16)
                 }
-                DetailRow("Tipo", location.type, navController)
-                DetailRow("Otros nombres", location.otherNames, navController)
-                DetailRow("Fundada", location.founded, navController)
-                DetailRow("Destruida", location.destroyed, navController)
-                DetailRow("Ubicación", location.location, navController)
-                DetailRow("Eventos", location.events, navController)
-                DetailRow("Idiomas", location.languages, navController)
-                DetailRow("Etimologia", location.etymology, navController)
-                DetailRow("Habitantes", location.inhabitants, navController)
+                DetailRow("Otros nombres", race.otherNames, navController)
+                DetailRow("Ubicaciones", race.location, navController)
+                DetailRow("Idiomas", race.languages, navController)
+                DetailRow("Pueblos", race.people, navController)
+                DetailRow("Miembros destacados", race.members, navController)
+                DetailRow("Esperanza de vida", race.lifespan, navController)
+                DetailRow("Etimologia", race.etymology, navController)
+                CustomSpacer(16)
+                race.origins?.let {
+                    CustomExpandable("Origenes") {
+                        HtmlText(
+                            htmlText = race.origins,
+                            navController = navController
+                        )
+                    }
+                }
+                race.characteristics?.let {
+                    CustomExpandable("Caracteristicas") {
+                        HtmlText(
+                            htmlText = race.characteristics,
+                            navController = navController
+                        )
+                    }
+                }
                 CustomExpandable("Historia") {
                     HtmlText(
-                        htmlText = location.history!!,
+                        htmlText = race.history!!,
                         navController = navController
                     )
                 }
                 WikiLinksExpandable(
-                    wikiUrls = location.wikiUrl
+                    wikiUrls = race.wikiUrl
                 )
                 CustomExpandable(title = "Imagenes") {
                     ImageCarousel(
-                        images = location.images,
+                        images = race.images,
                         modifier = Modifier.padding(vertical = 16.dp),
                         navController = navController
                     )

@@ -36,12 +36,12 @@ import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.Character
 import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
 import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.DetailRow
 import com.cgaraydev.tolkienapp.presentation.components.ImageCarousel
 import com.cgaraydev.tolkienapp.presentation.components.WikiLinksExpandable
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.ui.theme.LightGray
 import com.cgaraydev.tolkienapp.utils.HtmlText
-import com.google.rpc.Help.Link
 
 @Composable
 fun CharacterDetailsScreen(
@@ -166,27 +166,4 @@ fun CharacterDetailsContent(
     }
 }
 
-@Composable
-fun DetailRow(
-    label: String,
-    value: String?,
-    navController: NavController
-) {
-    value?.let {
-        Row(
-            modifier = Modifier.padding(vertical = 4.dp)
-        ) {
-            Text(
-                text = "$label: ",
-                style = TextStyle(),
-                fontSize = 16.sp,
-                color = LightGray,
-                fontWeight = FontWeight.Bold
-            )
-            HtmlText(
-                htmlText = value,
-                navController = navController
-            )
-        }
-    }
-}
+

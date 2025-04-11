@@ -19,6 +19,7 @@ import com.cgaraydev.tolkienapp.presentation.locations.LocationsScreen
 import com.cgaraydev.tolkienapp.presentation.maps.MapsScreen
 import com.cgaraydev.tolkienapp.presentation.movies.MoviesScreen
 import com.cgaraydev.tolkienapp.presentation.others.OthersScreen
+import com.cgaraydev.tolkienapp.presentation.races.RaceDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.races.RacesScreen
 import com.cgaraydev.tolkienapp.presentation.tolkien.TolkienScreen
 import com.cgaraydev.tolkienapp.presentation.trivia.TriviaScreen
@@ -31,7 +32,7 @@ fun TolkienAppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.Characters.route,
+        startDestination = Routes.Home.route,
     ) {
         composable(Routes.Home.route) {
             HomeScreen(navController)
@@ -59,9 +60,21 @@ fun TolkienAppNavigation(
             arguments = listOf(navArgument("locationId") { type = NavType.StringType })
         ) { backStackEntry ->
             val locationId =
-             backStackEntry.arguments?.getString("locationId") ?: return@composable
+                backStackEntry.arguments?.getString("locationId") ?: return@composable
             LocationDetailsScreen(locationId = locationId, navController = navController)
+        }
 
+        composable(Routes.Races.route) {
+            RacesScreen(navController = navController)
+        }
+
+        composable(
+            route = Routes.RaceDetails.route,
+            arguments = listOf(navArgument("raceId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val raceId =
+                backStackEntry.arguments?.getString("raceId") ?: return@composable
+            RaceDetailsScreen(raceId = raceId, navController = navController)
         }
 
         composable(Routes.Books.route) {
@@ -92,9 +105,7 @@ fun TolkienAppNavigation(
         composable(Routes.Others.route) {
             OthersScreen { navController.popBackStack() }
         }
-        composable(Routes.Races.route) {
-            RacesScreen { navController.popBackStack() }
-        }
+
         composable(Routes.Trivia.route) {
             TriviaScreen { navController.popBackStack() }
         }

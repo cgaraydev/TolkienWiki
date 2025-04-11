@@ -109,6 +109,10 @@ private fun handleCustomLink(
             val id = url.substringAfter("character:")
             if (id.isNotEmpty()) navController.navigate(Routes.CharacterDetails.createRoute(id)) else onInvalid()
         }
+        url.startsWith("location:") -> {
+            val id = url.substringAfter("location:")
+            if (id.isNotEmpty()) navController.navigate(Routes.LocationDetails.createRoute(id)) else onInvalid()
+        }
 
         url.startsWith("http") -> uriHandler.openUri(url)
         else -> onInvalid()
@@ -119,6 +123,7 @@ private fun handleCustomLink(
 private fun isValidCustomLink(url: String): Boolean {
     return when {
         url.startsWith("character:") -> url.substringAfter("character:").isNotEmpty()
+        url.startsWith("location:") -> url.substringAfter("location:").isNotEmpty()
         else -> Patterns.WEB_URL.matcher(url).matches()
     }
 }

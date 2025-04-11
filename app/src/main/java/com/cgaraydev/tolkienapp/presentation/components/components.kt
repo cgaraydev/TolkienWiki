@@ -57,6 +57,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -66,6 +67,7 @@ import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.ImageData
 import com.cgaraydev.tolkienapp.data.WikiUrl
 import com.cgaraydev.tolkienapp.ui.theme.Golden
+import com.cgaraydev.tolkienapp.ui.theme.LightGray
 import com.cgaraydev.tolkienapp.utils.HtmlText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -378,5 +380,30 @@ fun ScreenHeader(
             fontSize = 48.sp,
             modifier = Modifier.align(Alignment.Center)
         )
+    }
+}
+
+@Composable
+fun DetailRow(
+    label: String,
+    value: String?,
+    navController: NavController
+) {
+    value?.let {
+        Row(
+            modifier = Modifier.padding(vertical = 4.dp)
+        ) {
+            Text(
+                text = "$label: ",
+                style = TextStyle(),
+                fontSize = 16.sp,
+                color = LightGray,
+                fontWeight = FontWeight.Bold
+            )
+            HtmlText(
+                htmlText = value,
+                navController = navController
+            )
+        }
     }
 }

@@ -42,7 +42,6 @@ import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
 import com.cgaraydev.tolkienapp.presentation.components.ScreenHeader
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.ui.theme.RingBearer
-import kotlinx.coroutines.flow.forEach
 
 @Composable
 fun LocationsScreen(
@@ -158,9 +157,10 @@ fun LocationCategoryItem(
             ) {
                 Column {
                     locations.forEach { location ->
-                        LocationItem(location = location, onClick = {
-                            Routes.LocationDetails.createRoute(location.id)
-                        })
+                        LocationItem(
+                            location = location,
+                            navController = navController
+                        )
                     }
                 }
             }
@@ -171,13 +171,15 @@ fun LocationCategoryItem(
 @Composable
 fun LocationItem(
     location: LocationData,
-    onClick: () -> Unit
+    navController: NavController
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp, vertical = 4.dp)
-            .clickable(onClick = onClick),
+            .clickable {
+                navController.navigate(Routes.LocationDetails.createRoute(location.id))
+            },
         colors = CardDefaults.cardColors(
             containerColor = Color.Black.copy(alpha = 0.7f)
         )

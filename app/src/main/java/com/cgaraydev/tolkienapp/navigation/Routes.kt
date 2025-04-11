@@ -3,15 +3,22 @@ package com.cgaraydev.tolkienapp.navigation
 sealed class Routes(val route: String) {
 
     data object Home : Routes("home")
+
     data object Characters : Routes("characters")
     data object CharacterDetails : Routes("characterDetails/{characterId}") {
         fun createRoute(characterId: String) = "characterDetails/$characterId"
     }
+
     data object Locations : Routes("locations")
     data object LocationDetails : Routes("locationDetails/{locationId}") {
         fun createRoute(locationId: String) = "locationDetails/$locationId"
     }
+
     data object Races : Routes("races")
+    data object RaceDetails : Routes("raceDetails/{raceId}") {
+        fun createRoute(raceId: String) = "raceDetails/$raceId"
+    }
+
     data object Maps : Routes("maps")
     data object Tolkien : Routes("tolkien")
     data object Movies : Routes("movies")
