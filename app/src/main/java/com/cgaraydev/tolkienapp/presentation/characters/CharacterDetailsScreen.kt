@@ -24,8 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,7 +39,6 @@ import com.cgaraydev.tolkienapp.presentation.components.DetailRow
 import com.cgaraydev.tolkienapp.presentation.components.ImageCarousel
 import com.cgaraydev.tolkienapp.presentation.components.WikiLinksExpandable
 import com.cgaraydev.tolkienapp.ui.theme.Golden
-import com.cgaraydev.tolkienapp.ui.theme.LightGray
 import com.cgaraydev.tolkienapp.utils.HtmlText
 
 @Composable
@@ -61,7 +59,6 @@ fun CharacterDetailsScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
-            .padding(top = 80.dp)
     ) {
         when {
             isLoading -> {
@@ -122,11 +119,11 @@ fun CharacterDetailsContent(
                 }
                 Row {
                     val iconVector = when (character.genre?.lowercase()) {
-                        "masculino" -> R.drawable.ic_male
-                        "femenino" -> R.drawable.ic_female
+                        stringResource(R.string.male) -> R.drawable.ic_male
+                        stringResource(R.string.female) -> R.drawable.ic_female
                         else -> R.drawable.ic_unknown
                     }
-                    DetailRow("Raza", character.race, navController)
+                    DetailRow(stringResource(R.string.race), character.race, navController)
                     Spacer(Modifier.weight(1f))
                     Icon(
                         painter = painterResource(iconVector),
@@ -134,15 +131,15 @@ fun CharacterDetailsContent(
                         tint = Golden
                     )
                 }
-                DetailRow("Otros nombres", character.otherNames, navController)
-                DetailRow("Nacimiento", character.birth, navController)
-                DetailRow("Muerte", character.death, navController)
-                DetailRow("Titulos", character.titles, navController)
-                DetailRow("Casa", character.house, navController)
-                DetailRow("Familia", character.family, navController)
-                DetailRow("Cónyuge", character.love, navController)
+                DetailRow(stringResource(R.string.other_names), character.otherNames, navController)
+                DetailRow(stringResource(R.string.birth), character.birth, navController)
+                DetailRow(stringResource(R.string.death), character.death, navController)
+                DetailRow(stringResource(R.string.titles), character.titles, navController)
+                DetailRow(stringResource(R.string.house), character.house, navController)
+                DetailRow(stringResource(R.string.family), character.family, navController)
+                DetailRow(stringResource(R.string.love), character.love, navController)
                 CustomSpacer(24)
-                CustomExpandable(title = "Biografia") {
+                CustomExpandable(title = stringResource(R.string.biography)) {
                     HtmlText(
                         htmlText = character.biography!!,
                         navController = navController,
@@ -151,16 +148,16 @@ fun CharacterDetailsContent(
                 WikiLinksExpandable(
                     wikiUrls = character.wikiUrl
                 )
-
-                CustomExpandable(title = "Imagenes") {
-                    ImageCarousel(
-                        images = character.images,
-                        modifier = Modifier.padding(vertical = 16.dp),
-                        navController = navController
-                    )
+                character.images?.let {
+                    CustomExpandable(title = stringResource(R.string.images)) {
+                        ImageCarousel(
+                            images = character.images,
+                            modifier = Modifier.padding(vertical = 16.dp),
+                            navController = navController
+                        )
+                    }
                 }
                 CustomSpacer(40)
-
             }
         }
     }

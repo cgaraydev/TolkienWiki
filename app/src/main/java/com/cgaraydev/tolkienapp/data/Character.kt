@@ -16,7 +16,7 @@ data class Character(
     val house: String? = null,
     val wikiUrl: WikiUrl? = null,
     val biography: String? = null,
-    val images: List<ImageData> = emptyList(),
+    val images: List<ImageData>? = null,
     val faction: String? = null,
     val tags: List<String> = emptyList()
 )

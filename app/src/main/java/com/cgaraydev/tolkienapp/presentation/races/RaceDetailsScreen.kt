@@ -53,7 +53,6 @@ fun RaceDetailsScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
-            .padding(top = 80.dp)
     ) {
         when {
             isLoading -> {
@@ -145,12 +144,14 @@ fun RaceDetailsContent(
                 WikiLinksExpandable(
                     wikiUrls = race.wikiUrl
                 )
-                CustomExpandable(title = "Imagenes") {
-                    ImageCarousel(
-                        images = race.images,
-                        modifier = Modifier.padding(vertical = 16.dp),
-                        navController = navController
-                    )
+                race.images?.let {
+                    CustomExpandable(title = "Imagenes") {
+                        ImageCarousel(
+                            images = race.images,
+                            modifier = Modifier.padding(vertical = 16.dp),
+                            navController = navController
+                        )
+                    }
                 }
                 CustomSpacer(40)
             }

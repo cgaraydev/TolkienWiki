@@ -10,10 +10,6 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun MapsScreen(
-    onBack: () -> Unit
 ) {
 
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Maps", modifier = Modifier.clickable { onBack() })
-    }
 }

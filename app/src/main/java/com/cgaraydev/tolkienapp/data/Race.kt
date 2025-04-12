@@ -18,6 +18,6 @@ data class Race(
     val etymology: String? = null,
     val category: String? = null,
     val wikiUrl: WikiUrl? = null,
-    val images: List<ImageData> = emptyList(),
+    val images: List<ImageData>? = null,
     val tags: List<String> = emptyList()
 )

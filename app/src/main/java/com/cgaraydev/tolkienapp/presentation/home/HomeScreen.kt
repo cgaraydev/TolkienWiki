@@ -61,7 +61,6 @@ fun HomeScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
-            .padding(top = 80.dp)
             .verticalScroll(rememberScrollState())
     ) {
         HeaderSection()

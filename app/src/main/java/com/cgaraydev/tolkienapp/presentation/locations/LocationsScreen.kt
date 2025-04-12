@@ -54,7 +54,6 @@ fun LocationsScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
-            .padding(top = 80.dp)
     ) {
         ScreenHeader(imageRes = R.drawable.locations, label = "Ubicaciones")
         CustomSpacer(40)

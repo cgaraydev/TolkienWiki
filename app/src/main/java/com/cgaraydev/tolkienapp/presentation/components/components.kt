@@ -33,6 +33,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -56,6 +57,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -68,6 +70,7 @@ import com.cgaraydev.tolkienapp.data.ImageData
 import com.cgaraydev.tolkienapp.data.WikiUrl
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.ui.theme.LightGray
+import com.cgaraydev.tolkienapp.utils.Constants.BASE_IMAGE_URL
 import com.cgaraydev.tolkienapp.utils.HtmlText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -103,12 +106,12 @@ fun CustomExpandable(
             ) {
                 Text(
                     text = title,
-                    style = TextStyle().copy(color = Golden, fontSize = 16.sp)
+                    style = TextStyle().copy(color = LightGray, fontSize = 16.sp)
                 )
                 Icon(
                     imageVector = if (expanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                     contentDescription = null,
-                    tint = Golden
+                    tint = LightGray
                 )
             }
             AnimatedVisibility(
@@ -121,8 +124,8 @@ fun CustomExpandable(
                     CustomSpacer(12)
                     Icon(
                         imageVector = Icons.Default.Close,
-                        contentDescription = "Cerrar",
-                        tint = Golden.copy(alpha = 0.8f),
+                        contentDescription = stringResource(R.string.close),
+                        tint = LightGray.copy(alpha = 0.8f),
                         modifier = Modifier
                             .size(32.dp)
                             .fillMaxWidth()
@@ -231,7 +234,7 @@ fun ImageCarousel(
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.ic_left),
-                        contentDescription = "Anterior",
+                        contentDescription = stringResource(R.string.prev),
                         tint = Color.White
                     )
                 }
@@ -249,7 +252,7 @@ fun ImageCarousel(
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.ic_right),
-                        contentDescription = "Siguiente",
+                        contentDescription = stringResource(R.string.next),
                         tint = Color.White
                     )
                 }
@@ -311,7 +314,7 @@ fun WikiLinksExpandable(
     }
 
     if (validLinks.isNotEmpty()) {
-        CustomExpandable(title = "Enlaces", modifier = modifier) {
+        CustomExpandable(title = stringResource(R.string.links), modifier = modifier) {
             Column(
                 modifier = Modifier
                     .padding(16.dp)
@@ -326,7 +329,7 @@ fun WikiLinksExpandable(
                                 } catch (e: Exception) {
                                     Toast.makeText(
                                         context,
-                                        "No se pudo abrir el enlace",
+                                        context.getString(R.string.link_down),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
@@ -359,7 +362,7 @@ fun WikiLinksExpandable(
 @Composable
 fun ScreenHeader(
     imageRes: Int,
-    label:String
+    label: String
 ) {
     Box(
         modifier = Modifier
@@ -405,5 +408,128 @@ fun DetailRow(
                 navController = navController
             )
         }
+    }
+}
+//
+
+@Composable
+fun GoodEvilSection(
+    title: String,
+    goodContent: String?,
+    evilContent: String?,
+    navController: NavController
+) {
+    if (goodContent.isNullOrBlank() && evilContent.isNullOrBlank()) return
+
+    CustomExpandable(title = title) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(24.dp)
+        ) {
+            if (!goodContent.isNullOrBlank()) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = stringResource(R.string.good),
+                        style = TextStyle(
+                            color = Color.White,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                    HtmlText(
+                        htmlText = goodContent,
+                        navController = navController,
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
+                }
+            }
+
+            if (!evilContent.isNullOrBlank()) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = stringResource(R.string.bad),
+                        style = TextStyle(
+                            color = Color.White,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                    HtmlText(
+                        htmlText = evilContent,
+                        navController = navController,
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun StateHandler(
+    isLoading: Boolean,
+    error: String?,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(Color.Black)
+    ) {
+        when {
+            isLoading -> {
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center),
+                    color = Golden
+                )
+            }
+
+            error != null -> {
+                Text(
+                    text = error,
+                    color = Color.Red,
+                    modifier = Modifier.align(Alignment.Center),
+                    style = TextStyle()
+                )
+            }
+
+            else -> {
+                content()
+            }
+        }
+    }
+}
+
+@Composable
+fun PosterImage(
+    imagePath: String?,
+    modifier: Modifier = Modifier,
+    contentDescription: String? = null,
+) {
+    if (imagePath.isNullOrBlank()) return
+
+    val imageUrl = "${BASE_IMAGE_URL}$imagePath"
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(350.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .background(Color.Black.copy(alpha = 0.2f))
+    ) {
+        AsyncImage(
+            model = imageUrl,
+            contentDescription = contentDescription,
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier.fillMaxSize()
+        )
     }
 }

@@ -19,13 +19,25 @@ sealed class Routes(val route: String) {
         fun createRoute(raceId: String) = "raceDetails/$raceId"
     }
 
+    data object Events : Routes("events")
+    data object EventDetails : Routes("eventDetails/{eventId}") {
+        fun createRoute(eventId: String) = "eventDetails/$eventId"
+    }
+
+    data object Others : Routes("others")
+    data object OtherDetails : Routes("otherDetails/{otherId}") {
+        fun createRoute(otherId: String) = "otherDetails/$otherId"
+    }
+
+    data object Languages : Routes("languages")
+    data object LanguageDetails : Routes("languageDetails/{languageId}"){
+        fun createRoute(languageId: String) = "languageDetails/$languageId"
+    }
+
     data object Maps : Routes("maps")
     data object Tolkien : Routes("tolkien")
     data object Movies : Routes("movies")
     data object Books : Routes("books")
     data object Games : Routes("games")
     data object Trivia : Routes("trivia")
-    data object Events : Routes("events")
-    data object Languages : Routes("languages")
-    data object Others : Routes("others")
 }

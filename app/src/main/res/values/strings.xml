@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">TolkienApp</string>
+    <string name="characters">Personajes</string>
+    <string name="male">masculino</string>
+    <string name="female">femenino</string>
+    <string name="race">Raza</string>
+    <string name="other_names">Otros nombres</string>
+    <string name="birth">Nacimiento</string>
+    <string name="death">Muerte</string>
+    <string name="titles">Titulos</string>
+    <string name="house">Casa</string>
+    <string name="family">Familia</string>
+    <string name="love">Cónyuge</string>
+    <string name="biography">Biografia</string>
+    <string name="images">Imagenes</string>
+    <string name="commanders">Comandantes</string>
+    <string name="strength">Fuerzas</string>
+    <string name="casualties">Bajas</string>
+    <string name="close">Cerrar</string>
+    <string name="prev">Anterior</string>
+    <string name="next">Siguiente</string>
+    <string name="links">Enlaces</string>
+    <string name="link_down">No se pudo abrir el enlace</string>
+    <string name="good">Bien</string>
+    <string name="bad">Mal</string>
 </resources>

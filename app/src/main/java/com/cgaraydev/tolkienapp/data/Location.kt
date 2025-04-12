@@ -17,7 +17,7 @@ data class Location(
     val majorTowns: String? = null,
     val regions: String? = null,
     val etymology: String? = null,
-    val images: List<ImageData> = emptyList(),
+    val images: List<ImageData>? = null,
     val tags: List<String> = emptyList(),
     val wikiUrl: WikiUrl? = null
 )

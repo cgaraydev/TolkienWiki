@@ -1,13 +1,17 @@
 package com.cgaraydev.tolkienapp.presentation.components.drawer
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -38,7 +42,6 @@ import com.cgaraydev.tolkienapp.navigation.TolkienAppNavigation
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import kotlinx.coroutines.launch
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuDrawer() {
@@ -111,14 +114,23 @@ fun MenuDrawer() {
                         containerColor = Color.Black,
                         titleContentColor = Color.White,
                         navigationIconContentColor = Color.White
-                    )
+                    ),
+                    modifier = Modifier.statusBarsPadding()
+                )
+            },
+            contentWindowInsets = WindowInsets(0, 0, 0, 0)
+        ) { padding ->
+            Box(
+                modifier = Modifier
+                    .padding(padding)
+                    .navigationBarsPadding() // Añade padding para la barra de navegación
+                    .imePadding() // Padding para el teclado
+            ) {
+                TolkienAppNavigation(
+                    navController = navController
                 )
             }
-        ) { padding ->
-            TolkienAppNavigation(
-                navController = navController,
-                modifier = Modifier.padding(padding)
-            )
+
         }
     }
 }

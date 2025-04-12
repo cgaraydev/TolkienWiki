@@ -1,4 +1,4 @@
-package com.cgaraydev.tolkienapp.presentation.locations
+package com.cgaraydev.tolkienapp.presentation.others
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.cgaraydev.tolkienapp.data.Location
+import com.cgaraydev.tolkienapp.data.Other
 import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
 import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow
@@ -36,17 +36,17 @@ import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.utils.HtmlText
 
 @Composable
-fun LocationDetailsScreen(
-    locationId: String,
+fun OtherDetailsScreen(
+    otherId: String,
     navController: NavController,
-    viewModel: LocationsViewModel = hiltViewModel()
+    viewModel: OthersViewModel = hiltViewModel()
 ) {
-    val location by viewModel.locationDetails.collectAsState()
+    val other by viewModel.otherDetails.collectAsState()
     val isLoading by viewModel.isLoadingDetails.collectAsState()
     val error by viewModel.errorDetails.collectAsState()
 
-    LaunchedEffect(locationId) {
-        viewModel.loadLocationDetails(locationId)
+    LaunchedEffect(otherId) {
+        viewModel.loadOtherDetails(otherId)
     }
 
     Box(
@@ -70,21 +70,21 @@ fun LocationDetailsScreen(
                 )
             }
 
-            location != null -> {
-                LocationDetailsContent(location = location!!, navController = navController)
+            other != null -> {
+                OtherDetailsContent(other = other!!, navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun LocationDetailsContent(
-    location: Location,
+fun OtherDetailsContent(
+    other: Other,
     navController: NavController
 ) {
     Column {
         Text(
-            text = location.name,
+            text = other.name,
             fontSize = 48.sp,
             color = Color.White,
             modifier = Modifier
@@ -99,7 +99,7 @@ fun LocationDetailsContent(
         ) {
             item {
                 CustomSpacer(16)
-                location.poster.let { url ->
+                other.poster.let { url ->
                     AsyncImage(
                         model = "https://firebasestorage.googleapis.com/v0/b/lotrwiki-2dd76.appspot.com/o/$url",
                         contentDescription = null,
@@ -111,28 +111,31 @@ fun LocationDetailsContent(
                     )
                     CustomSpacer(16)
                 }
-                DetailRow("Tipo", location.type, navController)
-                DetailRow("Otros nombres", location.otherNames, navController)
-                DetailRow("Fundada", location.founded, navController)
-                DetailRow("Destruida", location.destroyed, navController)
-                DetailRow("Ubicación", location.location, navController)
-                DetailRow("Eventos", location.events, navController)
-                DetailRow("Idiomas", location.languages, navController)
-                DetailRow("Etimologia", location.etymology, navController)
-                DetailRow("Habitantes", location.inhabitants, navController)
+                DetailRow("Otros nombres", other.otherNames, navController)
+                DetailRow("Categoria", other.category, navController)
+                DetailRow("Descripcion", other.description, navController)
+                DetailRow("Ubicaciones", other.location, navController)
+                DetailRow("Propietario", other.owner, navController)
+                DetailRow("Creador", other.creator, navController)
+                DetailRow("Idiomas", other.languages, navController)
+                DetailRow("Fundador", other.founder, navController)
+                DetailRow("Fundado", other.founded, navController)
+                DetailRow("Lider", other.leader, navController)
+                DetailRow("Artefactos", other.heirlooms, navController)
+                DetailRow("Etimologia", other.etymology, navController)
                 CustomExpandable("Historia") {
                     HtmlText(
-                        htmlText = location.history!!,
+                        htmlText = other.history!!,
                         navController = navController
                     )
                 }
                 WikiLinksExpandable(
-                    wikiUrls = location.wikiUrl
+                    wikiUrls = other.wikiUrl
                 )
-                location.images?.let {
+                other.images?.let {
                     CustomExpandable(title = "Imagenes") {
                         ImageCarousel(
-                            images = location.images,
+                            images = other.images,
                             modifier = Modifier.padding(vertical = 16.dp),
                             navController = navController
                         )

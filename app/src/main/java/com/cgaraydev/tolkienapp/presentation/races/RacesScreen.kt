@@ -54,7 +54,6 @@ fun RacesScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
-            .padding(top = 80.dp)
     ) {
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 4.dp, vertical = 8.dp),

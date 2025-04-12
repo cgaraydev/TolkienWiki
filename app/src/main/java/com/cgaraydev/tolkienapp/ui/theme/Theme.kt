@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorScheme = darkColorScheme(
@@ -53,12 +54,20 @@ fun TolkienAppTheme(
     }
 
     val systemUiController = rememberSystemUiController()
+    val view = LocalView.current
 
-    SideEffect {
-        systemUiController.setSystemBarsColor(
-            color = Color.Black,
-            darkIcons = darkTheme
-        )
+    if (!view.isInEditMode) {
+
+
+        SideEffect {
+            systemUiController.setSystemBarsColor(
+                color = Color.Black,
+                darkIcons = darkTheme
+            )
+            systemUiController.setNavigationBarColor(
+                color = Color.Black.copy(alpha = 0.7f)
+            )
+        }
     }
 
     MaterialTheme(
