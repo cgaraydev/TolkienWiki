@@ -35,7 +35,15 @@ sealed class Routes(val route: String) {
     }
 
     data object Maps : Routes("maps")
+    data object MapDetails : Routes("mapDetails/{mapId}") {
+        fun createRoute(mapId: String) = "mapDetails/$mapId"
+    }
+
     data object Tolkien : Routes("tolkien")
+
+
+
+
     data object Movies : Routes("movies")
     data object Books : Routes("books")
     data object Games : Routes("games")

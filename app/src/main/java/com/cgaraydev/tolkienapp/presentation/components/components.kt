@@ -533,3 +533,48 @@ fun PosterImage(
         )
     }
 }
+
+@Composable
+fun ZoomableImage2(
+    imageUrl: String,
+    modifier: Modifier = Modifier
+) {
+    val scale = remember { mutableFloatStateOf(1f) }
+    val offsetX = remember { mutableFloatStateOf(0f) }
+    val offsetY = remember { mutableFloatStateOf(0f) }
+
+    Box(
+        modifier = modifier
+            .pointerInput(Unit) {
+                detectTransformGestures { _, pan, zoom, _ ->
+                    scale.floatValue *= zoom
+                    offsetX.floatValue += pan.x
+                    offsetY.floatValue += pan.y
+                }
+            }
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onDoubleTap = {
+                        // Resetear zoom al hacer doble tap
+                        scale.floatValue = 1f
+                        offsetX.floatValue = 0f
+                        offsetY.floatValue = 0f
+                    }
+                )
+            }
+    ) {
+        AsyncImage(
+            model = imageUrl,
+            contentDescription = "Mapa detallado",
+            modifier = Modifier
+                .graphicsLayer {
+                    scaleX = scale.floatValue
+                    scaleY = scale.floatValue
+                    translationX = offsetX.floatValue
+                    translationY = offsetY.floatValue
+                }
+                .fillMaxSize(),
+            contentScale = ContentScale.Fit
+        )
+    }
+}

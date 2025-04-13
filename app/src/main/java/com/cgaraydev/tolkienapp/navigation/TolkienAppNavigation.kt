@@ -17,6 +17,7 @@ import com.cgaraydev.tolkienapp.presentation.languages.LanguageDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.languages.LanguagesScreen
 import com.cgaraydev.tolkienapp.presentation.locations.LocationDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.locations.LocationsScreen
+import com.cgaraydev.tolkienapp.presentation.maps.MapDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.maps.MapsScreen
 import com.cgaraydev.tolkienapp.presentation.movies.MoviesScreen
 import com.cgaraydev.tolkienapp.presentation.others.OtherDetailsScreen
@@ -114,17 +115,33 @@ fun TolkienAppNavigation(
             val languageId =
                 backStackEntry.arguments?.getString("languageId") ?: return@composable
             LanguageDetailsScreen(languageId = languageId, navController = navController)
-
         }
+
+        //MAPS
+        composable(Routes.Maps.route) {
+            MapsScreen(navController = navController)
+        }
+        composable(
+            route = Routes.MapDetails.route,
+            arguments = listOf(navArgument("mapId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val mapId =
+                backStackEntry.arguments?.getString("mapId") ?: return@composable
+            MapDetailsScreen(mapId = mapId, navController = navController)
+        }
+
+        //TOLKIEN
+        composable(Routes.Tolkien.route) {
+            TolkienScreen()
+        }
+
 
 
         composable(Routes.Books.route) {
             BooksScreen { navController.popBackStack() }
         }
 
-        composable(Routes.Tolkien.route) {
-            TolkienScreen { navController.popBackStack() }
-        }
+
 
 
 
@@ -133,9 +150,7 @@ fun TolkienAppNavigation(
         }
 
 
-        composable(Routes.Maps.route) {
-            MapsScreen()
-        }
+
         composable(Routes.Movies.route) {
             MoviesScreen { navController.popBackStack() }
         }
