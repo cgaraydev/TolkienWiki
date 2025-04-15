@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
@@ -34,6 +35,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -51,7 +53,9 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -59,7 +63,10 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -78,6 +85,27 @@ import kotlinx.coroutines.launch
 @Composable
 fun CustomSpacer(size: Int) {
     Spacer(modifier = Modifier.height(size.dp))
+}
+
+@Composable
+fun CustomDivider(modifier: Modifier = Modifier) {
+    HorizontalDivider(color = DarkGray, modifier = modifier.padding(vertical = 8.dp))
+}
+
+@Composable
+fun CustomTitle(
+    text: String,
+    fontSize: Int,
+    modifier: Modifier = Modifier,
+    textDecoration: TextDecoration
+) {
+    Text(
+        text = text,
+        color = Golden,
+        fontSize = fontSize.sp,
+        modifier = modifier,
+        textDecoration = textDecoration
+    )
 }
 
 @Composable
@@ -578,3 +606,13 @@ fun ZoomableImage2(
         )
     }
 }
+
+@Composable
+fun YoutubePlayer(
+    videoId: String,
+    modifier: Modifier = Modifier
+) {
+    val context = LocalContext.current
+
+}
+

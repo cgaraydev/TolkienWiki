@@ -33,7 +33,7 @@ fun TolkienAppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.Home.route,
+        startDestination = Routes.Tolkien.route,
     ) {
         composable(Routes.Home.route) {
             HomeScreen(navController)

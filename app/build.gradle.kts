@@ -72,4 +72,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation (libs.accompanist.systemuicontroller)
+
+    implementation (libs.youtube.player)
 }
