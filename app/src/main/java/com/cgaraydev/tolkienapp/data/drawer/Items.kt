@@ -117,11 +117,11 @@ object Items {
         ItemSection(
             "Entretenimiento", listOf(
                 Item(
-                    "Trivia",
+                    "Quiz",
                     false,
                     R.drawable.ic_dice,
-                    "Trivia",
-                    Routes.Trivia.route
+                    "Quiz",
+                    Routes.QuizIntro.route
                 ),
                 Item(
                     "Memes",

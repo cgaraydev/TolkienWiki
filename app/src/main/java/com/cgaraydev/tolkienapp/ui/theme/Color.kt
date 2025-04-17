@@ -23,3 +23,7 @@ val TransparentBlack = Color(0x80000000)
 val Gray = Color(0xFFCCCCCC)
 val LightGray = Color(0xFFA8A8A8)
 val YoutubeRed = Color(0xFFFF0000)
+
+val QuizGreen = Color(0xFF66BB6A)
+val QuizRed = Color(0xFFEF5350)
+val QuizCancel = Color(0xFFB71C1C)

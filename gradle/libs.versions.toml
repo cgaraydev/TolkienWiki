@@ -17,9 +17,6 @@ ksp = "2.0.21-1.0.28"
 firebaseBom = "33.1.1"
 service = "4.4.2"
 
-
-
-
 [libraries]
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -47,6 +44,7 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
 
 youtube-player = { module = "com.pierfrancescosoffritti.androidyoutubeplayer:core", version.ref = "youtubePlayer" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -16,5 +16,5 @@ val gridItems = listOf(
     GridItem("Razas", R.drawable.races, Routes.Races.route),
     GridItem("Eventos", R.drawable.events, Routes.Events.route),
     GridItem("Mapas", R.drawable.maps, Routes.Maps.route),
-    GridItem("Trivia", R.drawable.maps, Routes.Trivia.route)
+    GridItem("Trivia", R.drawable.maps, Routes.QuizIntro.route)
 )

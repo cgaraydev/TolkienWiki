@@ -22,10 +22,12 @@ import com.cgaraydev.tolkienapp.presentation.maps.MapsScreen
 import com.cgaraydev.tolkienapp.presentation.movies.MoviesScreen
 import com.cgaraydev.tolkienapp.presentation.others.OtherDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.others.OthersScreen
+import com.cgaraydev.tolkienapp.presentation.quiz.QuizIntroScreen
+import com.cgaraydev.tolkienapp.presentation.quiz.QuizQuestionScreen
+import com.cgaraydev.tolkienapp.presentation.quiz.QuizResultScreen
 import com.cgaraydev.tolkienapp.presentation.races.RaceDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.races.RacesScreen
 import com.cgaraydev.tolkienapp.presentation.tolkien.TolkienScreen
-import com.cgaraydev.tolkienapp.presentation.trivia.TriviaScreen
 
 @Composable
 fun TolkienAppNavigation(
@@ -33,7 +35,7 @@ fun TolkienAppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.Tolkien.route,
+        startDestination = Routes.QuizIntro.route,
     ) {
         composable(Routes.Home.route) {
             HomeScreen(navController)
@@ -135,6 +137,31 @@ fun TolkienAppNavigation(
             TolkienScreen()
         }
 
+        //QUIZ
+        composable(Routes.QuizIntro.route){
+            QuizIntroScreen(navController)
+        }
+        composable(
+            route = Routes.QuizQuestions.route,
+            arguments = listOf(navArgument("difficulty"){ type = NavType.StringType })
+        ) { backStackEntry ->
+            val difficulty = backStackEntry.arguments?.getString("difficulty") ?: "hobbit"
+            QuizQuestionScreen(navController, difficulty)
+
+        }
+        composable(
+            route = Routes.QuizResult.route,
+            arguments = listOf(
+                navArgument("correct") {type = NavType.IntType},
+                navArgument("total") {type = NavType.IntType}
+            )
+        ) { backStackEntry ->
+            val correct = backStackEntry.arguments?.getInt("correct") ?: 0
+            val total = backStackEntry.arguments?.getInt("total") ?: 0
+            QuizResultScreen(navController, correct, total)
+        }
+
+
 
 
         composable(Routes.Books.route) {
@@ -156,8 +183,5 @@ fun TolkienAppNavigation(
         }
 
 
-        composable(Routes.Trivia.route) {
-            TriviaScreen { navController.popBackStack() }
-        }
     }
 }

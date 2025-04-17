@@ -41,11 +41,20 @@ sealed class Routes(val route: String) {
 
     data object Tolkien : Routes("tolkien")
 
+    data object QuizIntro : Routes("quizIntro")
+    data object QuizQuestions : Routes("quizQuestions/{difficulty}") {
+        fun createRoute(difficulty: String) = "quizQuestions/$difficulty"
+    }
+    data object QuizResult : Routes("quizResult/{correct}/{total}"){
+        fun createRoute(correct: Int, total: Int) = "quizResult/$correct/$total"
+    }
+
+
+
 
 
 
     data object Movies : Routes("movies")
     data object Books : Routes("books")
     data object Games : Routes("games")
-    data object Trivia : Routes("trivia")
 }

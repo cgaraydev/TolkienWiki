@@ -74,4 +74,5 @@ dependencies {
     implementation (libs.accompanist.systemuicontroller)
 
     implementation (libs.youtube.player)
+
 }
