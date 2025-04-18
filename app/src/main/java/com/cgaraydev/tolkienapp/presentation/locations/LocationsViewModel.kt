@@ -2,9 +2,9 @@ package com.cgaraydev.tolkienapp.presentation.locations
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cgaraydev.tolkienapp.data.Location
-import com.cgaraydev.tolkienapp.data.LocationData
-import com.cgaraydev.tolkienapp.data.locationsTags
+import com.cgaraydev.tolkienapp.data.models.Location
+import com.cgaraydev.tolkienapp.data.local.datalocal.LocationData
+import com.cgaraydev.tolkienapp.data.local.datalocal.locationsTags
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

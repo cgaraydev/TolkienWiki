@@ -19,6 +19,8 @@ import com.cgaraydev.tolkienapp.presentation.locations.LocationDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.locations.LocationsScreen
 import com.cgaraydev.tolkienapp.presentation.maps.MapDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.maps.MapsScreen
+import com.cgaraydev.tolkienapp.presentation.memory.MemoryGameScreen
+import com.cgaraydev.tolkienapp.presentation.memory.MemoryIntroScreen
 import com.cgaraydev.tolkienapp.presentation.movies.MoviesScreen
 import com.cgaraydev.tolkienapp.presentation.others.OtherDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.others.OthersScreen
@@ -35,7 +37,7 @@ fun TolkienAppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.QuizIntro.route,
+        startDestination = Routes.MemoryIntro.route,
     ) {
         composable(Routes.Home.route) {
             HomeScreen(navController)
@@ -138,28 +140,40 @@ fun TolkienAppNavigation(
         }
 
         //QUIZ
-        composable(Routes.QuizIntro.route){
+        composable(Routes.QuizIntro.route) {
             QuizIntroScreen(navController)
         }
         composable(
             route = Routes.QuizQuestions.route,
-            arguments = listOf(navArgument("difficulty"){ type = NavType.StringType })
+            arguments = listOf(navArgument("difficulty") { type = NavType.StringType })
         ) { backStackEntry ->
             val difficulty = backStackEntry.arguments?.getString("difficulty") ?: "hobbit"
             QuizQuestionScreen(navController, difficulty)
-
         }
         composable(
             route = Routes.QuizResult.route,
             arguments = listOf(
-                navArgument("correct") {type = NavType.IntType},
-                navArgument("total") {type = NavType.IntType}
+                navArgument("correct") { type = NavType.IntType },
+                navArgument("total") { type = NavType.IntType }
             )
         ) { backStackEntry ->
             val correct = backStackEntry.arguments?.getInt("correct") ?: 0
             val total = backStackEntry.arguments?.getInt("total") ?: 0
             QuizResultScreen(navController, correct, total)
         }
+
+        //MEMORY GAME
+        composable(Routes.MemoryIntro.route) {
+            MemoryIntroScreen(navController)
+        }
+        composable(
+            route = Routes.MemoryGame.route,
+            arguments = listOf(navArgument("difficulty") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val difficulty = backStackEntry.arguments?.getString("difficulty") ?: "hobbit"
+            MemoryGameScreen(navController, difficulty)
+        }
+
 
 
 

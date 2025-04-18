@@ -49,6 +49,11 @@ sealed class Routes(val route: String) {
         fun createRoute(correct: Int, total: Int) = "quizResult/$correct/$total"
     }
 
+    data object MemoryIntro : Routes("memoryIntro")
+    data object MemoryGame : Routes("memoryGame/{difficulty}") {
+        fun createRoute(difficulty: String) = "memoryGame/$difficulty"
+    }
+
 
 
 

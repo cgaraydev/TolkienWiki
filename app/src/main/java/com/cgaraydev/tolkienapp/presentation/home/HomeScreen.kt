@@ -44,10 +44,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
-import com.cgaraydev.tolkienapp.data.grid.GridItem
-import com.cgaraydev.tolkienapp.data.grid.gridItems
-import com.cgaraydev.tolkienapp.data.quotes.Quote
-import com.cgaraydev.tolkienapp.data.quotes.tolkienQuotes
+import com.cgaraydev.tolkienapp.data.local.datalocal.Quote
+import com.cgaraydev.tolkienapp.data.local.datalocal.tolkienQuotes
 import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
 import com.cgaraydev.tolkienapp.ui.theme.Aniron
 import com.cgaraydev.tolkienapp.ui.theme.Golden

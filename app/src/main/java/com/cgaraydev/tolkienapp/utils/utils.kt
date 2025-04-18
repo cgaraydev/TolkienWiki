@@ -1,6 +1,6 @@
 package com.cgaraydev.tolkienapp.utils
 
-import com.cgaraydev.tolkienapp.data.QuizQuestion
+import com.cgaraydev.tolkienapp.data.models.QuizQuestion
 
 sealed class QuizUiState {
     object Loading : QuizUiState()

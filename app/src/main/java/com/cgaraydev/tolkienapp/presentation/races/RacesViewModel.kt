@@ -2,8 +2,8 @@ package com.cgaraydev.tolkienapp.presentation.races
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.cgaraydev.tolkienapp.data.Race
-import com.cgaraydev.tolkienapp.data.racesList
+import com.cgaraydev.tolkienapp.data.models.Race
+import com.cgaraydev.tolkienapp.data.local.datalocal.racesList
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

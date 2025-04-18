@@ -32,7 +32,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.cgaraydev.tolkienapp.R
-import com.cgaraydev.tolkienapp.data.Character
+import com.cgaraydev.tolkienapp.data.models.Character
 import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
 import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow

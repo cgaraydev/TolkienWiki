@@ -2,9 +2,9 @@ package com.cgaraydev.tolkienapp.presentation.characters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cgaraydev.tolkienapp.data.Character
-import com.cgaraydev.tolkienapp.data.CharacterData
-import com.cgaraydev.tolkienapp.data.charactersTags
+import com.cgaraydev.tolkienapp.data.models.Character
+import com.cgaraydev.tolkienapp.data.local.datalocal.CharacterData
+import com.cgaraydev.tolkienapp.data.local.datalocal.charactersTags
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

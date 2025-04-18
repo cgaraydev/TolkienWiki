@@ -36,7 +36,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
-import com.cgaraydev.tolkienapp.data.EventData
+import com.cgaraydev.tolkienapp.data.local.datalocal.EventData
 import com.cgaraydev.tolkienapp.navigation.Routes
 import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
 import com.cgaraydev.tolkienapp.presentation.components.ScreenHeader

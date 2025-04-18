@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.cgaraydev.tolkienapp.data.Language
+import com.cgaraydev.tolkienapp.data.models.Language
 import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
 import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow

@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
-import com.cgaraydev.tolkienapp.data.Event
+import com.cgaraydev.tolkienapp.data.models.Event
 import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
 import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow

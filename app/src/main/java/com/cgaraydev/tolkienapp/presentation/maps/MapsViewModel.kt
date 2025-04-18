@@ -1,8 +1,8 @@
 package com.cgaraydev.tolkienapp.presentation.maps
 
 import androidx.lifecycle.ViewModel
-import com.cgaraydev.tolkienapp.data.MapData
-import com.cgaraydev.tolkienapp.data.mapsList
+import com.cgaraydev.tolkienapp.data.local.datalocal.MapData
+import com.cgaraydev.tolkienapp.data.local.datalocal.mapsList
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

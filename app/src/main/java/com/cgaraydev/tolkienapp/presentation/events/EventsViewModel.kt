@@ -2,9 +2,9 @@ package com.cgaraydev.tolkienapp.presentation.events
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cgaraydev.tolkienapp.data.Event
-import com.cgaraydev.tolkienapp.data.EventData
-import com.cgaraydev.tolkienapp.data.eventsTags
+import com.cgaraydev.tolkienapp.data.models.Event
+import com.cgaraydev.tolkienapp.data.local.datalocal.EventData
+import com.cgaraydev.tolkienapp.data.local.datalocal.eventsTags
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

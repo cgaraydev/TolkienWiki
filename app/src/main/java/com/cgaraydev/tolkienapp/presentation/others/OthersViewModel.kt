@@ -2,9 +2,9 @@ package com.cgaraydev.tolkienapp.presentation.others
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cgaraydev.tolkienapp.data.Other
-import com.cgaraydev.tolkienapp.data.OtherData
-import com.cgaraydev.tolkienapp.data.othersTags
+import com.cgaraydev.tolkienapp.data.models.Other
+import com.cgaraydev.tolkienapp.data.local.datalocal.OtherData
+import com.cgaraydev.tolkienapp.data.local.datalocal.othersTags
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

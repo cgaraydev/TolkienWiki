@@ -2,9 +2,9 @@ package com.cgaraydev.tolkienapp.presentation.languages
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cgaraydev.tolkienapp.data.Language
-import com.cgaraydev.tolkienapp.data.LanguageData
-import com.cgaraydev.tolkienapp.data.languagesTags
+import com.cgaraydev.tolkienapp.data.models.Language
+import com.cgaraydev.tolkienapp.data.local.datalocal.LanguageData
+import com.cgaraydev.tolkienapp.data.local.datalocal.languagesTags
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
