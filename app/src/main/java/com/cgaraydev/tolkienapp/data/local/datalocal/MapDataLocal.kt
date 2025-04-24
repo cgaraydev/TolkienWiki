@@ -7,7 +7,8 @@ data class MapData(
     val id: String,
     val name: String,
     val imageUrl: String,
-    @DrawableRes val thumbnailRes: Int
+    @DrawableRes
+    val thumbnailRes: Int
 )
 
 val mapsList = listOf(

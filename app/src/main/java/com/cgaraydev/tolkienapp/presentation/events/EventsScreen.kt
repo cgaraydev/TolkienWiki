@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -42,13 +43,13 @@ import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
 import com.cgaraydev.tolkienapp.presentation.components.ScreenHeader
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.ui.theme.RingBearer
+import com.cgaraydev.tolkienapp.utils.StateHandler
 
 @Composable
 fun EventsScreen(
     viewModel: EventsViewModel = hiltViewModel(),
     navController: NavController
 ) {
-
     val events by viewModel.events.collectAsState()
 
     Column(
@@ -58,53 +59,58 @@ fun EventsScreen(
     ) {
         ScreenHeader(imageRes = R.drawable.events, label = "Eventos")
         CustomSpacer(40)
-        EventsScreenBody(events, viewModel, navController)
+
+        if (events.isEmpty()) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator(color = Golden)
+            }
+        } else {
+            EventsScreenBody(
+                viewModel = viewModel,
+                navController = navController
+            )
+        }
+
         CustomSpacer(40)
     }
 }
 
 @Composable
 fun EventsScreenBody(
-    events: List<EventData>,
     viewModel: EventsViewModel,
     navController: NavController
 ) {
-    if (events.isEmpty()) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator(color = Golden)
-        }
-    } else {
-        EventsCategoriesList(viewModel, navController)
-    }
+    val mainCategories = listOf(
+        "Batallas", "Guerras", "Asedios",
+        "Primera Edad", "Segunda Edad", "Tercera Edad",
+        "Guerra de las Joyas", "Guerra del Anillo", "Todos"
+    )
 
+    EventsCategoriesList(
+        categories = mainCategories,
+        getEventsByTag = { category -> viewModel.getEventsByTag(category) },
+        navController = navController
+    )
 }
 
 @Composable
 fun EventsCategoriesList(
-    viewModel: EventsViewModel,
+    categories: List<String>,
+    getEventsByTag: (String) -> List<EventData>,
     navController: NavController
 ) {
     LazyColumn(
         modifier = Modifier.padding(horizontal = 16.dp)
     ) {
-        val mainCategories = listOf(
-            "Batallas",
-            "Guerras",
-            "Asedios",
-            "Primera Edad",
-            "Segunda Edad",
-            "Tercera Edad",
-            "Guerra de las Joyas",
-            "Guerra del Anillo",
-            "Todos"
-        )
-        mainCategories.forEach { category ->
-            item {
-                EventCategoryItem(category, viewModel, navController)
-            }
+        items(categories) { category ->
+            EventCategoryItem(
+                category = category,
+                events = getEventsByTag(category),
+                navController = navController
+            )
         }
     }
 }
@@ -112,12 +118,10 @@ fun EventsCategoriesList(
 @Composable
 fun EventCategoryItem(
     category: String,
-    viewModel: EventsViewModel,
+    events: List<EventData>,
     navController: NavController
 ) {
     var expanded by remember { mutableStateOf(false) }
-    val events = viewModel.getEventsByTag(category)
-
     Card(colors = CardDefaults.cardColors(containerColor = Color.Black)) {
         Column {
             Row(
@@ -144,8 +148,7 @@ fun EventCategoryItem(
                     modifier = Modifier.padding(end = 8.dp)
                 )
                 Icon(
-                    imageVector = if (expanded) Icons.Default.KeyboardArrowUp
-                    else Icons.Default.KeyboardArrowDown,
+                    imageVector = if (expanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                     contentDescription = "Expandir/Cerrar",
                     tint = Golden
                 )
@@ -157,10 +160,7 @@ fun EventCategoryItem(
             ) {
                 Column {
                     events.forEach { event ->
-                        EventItem(
-                            event = event,
-                            navController = navController
-                        )
+                        EventItem(event = event, navController = navController)
                     }
                 }
             }
@@ -196,7 +196,6 @@ fun EventItem(
                 ),
                 modifier = Modifier.weight(1f)
             )
-
             Icon(
                 imageVector = Icons.Default.KeyboardArrowUp,
                 contentDescription = "Ver detalle",
@@ -204,5 +203,202 @@ fun EventItem(
             )
         }
     }
-
 }
+
+
+
+//@Composable
+//fun EventsScreen(
+//    viewModel: EventsViewModel = hiltViewModel(),
+//    navController: NavController
+//) {
+//
+////    val events by viewModel.events.collectAsState()
+////    val events = viewModel.getEvents()
+//
+//
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .background(Color.Black)
+//    ) {
+//        ScreenHeader(imageRes = R.drawable.events, label = "Eventos")
+//        CustomSpacer(40)
+//        EventsScreenBody(
+////            events = events,
+//            viewModel = viewModel,
+//            navController = navController
+//        )
+//        CustomSpacer(40)
+//    }
+//}
+//
+//@Composable
+//fun EventsScreenBody(
+////    events: List<EventData>,
+//    viewModel: EventsViewModel,
+//    navController: NavController
+//) {
+//    val mainCategories = listOf(
+//        "Batallas",
+//        "Guerras",
+//        "Asedios",
+//        "Primera Edad",
+//        "Segunda Edad",
+//        "Tercera Edad",
+//        "Guerra de las Joyas",
+//        "Guerra del Anillo",
+//        "Todos"
+//    )
+////    if (events.isEmpty()) {
+////        Box(
+////            modifier = Modifier.fillMaxSize(),
+////            contentAlignment = Alignment.Center
+////        ) {
+////            CircularProgressIndicator(color = Golden)
+////        }
+////    } else {
+////        EventsCategoriesList(viewModel, navController)
+////    }
+//    EventsCategoriesList(
+//        categories = mainCategories,
+//        getEventsByTag = { category -> viewModel.getEventsByTag(category) },
+//        navController = navController
+//    )
+//}
+//
+//@Composable
+//fun EventsCategoriesList(
+//    categories: List<String>,
+////    viewModel: EventsViewModel,
+//    getEventsByTag: (String) -> List<EventData>,
+//    navController: NavController
+//) {
+//    LazyColumn(
+//        modifier = Modifier.padding(horizontal = 16.dp)
+//    ) {
+//        items(categories) { category ->
+//            EventCategoryItem(
+//                category = category,
+//                events = getEventsByTag(category),
+//                navController = navController
+//            )
+//        }
+////        val mainCategories = listOf(
+////            "Batallas",
+////            "Guerras",
+////            "Asedios",
+////            "Primera Edad",
+////            "Segunda Edad",
+////            "Tercera Edad",
+////            "Guerra de las Joyas",
+////            "Guerra del Anillo",
+////            "Todos"
+////        )
+////        mainCategories.forEach { category ->
+////            item {
+////                EventCategoryItem(category, viewModel, navController)
+////            }
+////        }
+//    }
+//}
+//
+//@Composable
+//fun EventCategoryItem(
+//    category: String,
+//    events: List<EventData>,
+////    viewModel: EventsViewModel,
+//    navController: NavController
+//) {
+//    var expanded by remember { mutableStateOf(false) }
+////    val events = viewModel.getEventsByTag(category)
+//
+//    Card(colors = CardDefaults.cardColors(containerColor = Color.Black)) {
+//        Column {
+//            Row(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .clickable { expanded = !expanded }
+//                    .padding(16.dp),
+//                verticalAlignment = Alignment.CenterVertically
+//            ) {
+//                Text(
+//                    text = category,
+//                    style = RingBearer.bodyMedium.copy(
+//                        fontSize = 24.sp,
+//                        color = Golden
+//                    ),
+//                    modifier = Modifier.weight(1f)
+//                )
+//                Text(
+//                    text = "(${events.size})",
+//                    style = RingBearer.bodyMedium.copy(
+//                        fontSize = 16.sp,
+//                        color = Golden.copy(alpha = 0.7f)
+//                    ),
+//                    modifier = Modifier.padding(end = 8.dp)
+//                )
+//                Icon(
+//                    imageVector = if (expanded) Icons.Default.KeyboardArrowUp
+//                    else Icons.Default.KeyboardArrowDown,
+//                    contentDescription = "Expandir/Cerrar",
+//                    tint = Golden
+//                )
+//            }
+//            AnimatedVisibility(
+//                visible = expanded,
+//                enter = fadeIn() + expandVertically(),
+//                exit = fadeOut() + shrinkVertically()
+//            ) {
+//                Column {
+//                    events.forEach { event ->
+//                        EventItem(
+//                            event = event,
+//                            navController = navController
+//                        )
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
+//
+//@Composable
+//fun EventItem(
+//    event: EventData,
+//    navController: NavController
+//) {
+//    Card(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .padding(horizontal = 8.dp, vertical = 4.dp)
+//            .clickable {
+//                navController.navigate(Routes.EventDetails.createRoute(event.id))
+//            },
+//        colors = CardDefaults.cardColors(
+//            containerColor = Color.Black.copy(alpha = 0.7f)
+//        )
+//    ) {
+//        Row(
+//            modifier = Modifier.padding(16.dp),
+//            verticalAlignment = Alignment.CenterVertically
+//        ) {
+//            Text(
+//                text = event.name,
+//                style = RingBearer.bodyMedium.copy(
+//                    fontSize = 16.sp,
+//                    color = Color.White
+//                ),
+//                modifier = Modifier.weight(1f)
+//            )
+//
+//            Icon(
+//                imageVector = Icons.Default.KeyboardArrowUp,
+//                contentDescription = "Ver detalle",
+//                tint = Golden.copy(alpha = 0.7f)
+//            )
+//        }
+//    }
+//
+//}
+//

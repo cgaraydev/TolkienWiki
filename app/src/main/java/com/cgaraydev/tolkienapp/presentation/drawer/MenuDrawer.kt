@@ -1,5 +1,11 @@
 package com.cgaraydev.tolkienapp.presentation.drawer
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +30,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -32,12 +40,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.cgaraydev.tolkienapp.navigation.TolkienAppNavigation
+import com.cgaraydev.tolkienapp.presentation.components.GlowingSnackbar
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import kotlinx.coroutines.launch
 
@@ -49,6 +59,7 @@ fun MenuDrawer() {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination?.route
+    val snackbarHostState = remember { SnackbarHostState() }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -117,6 +128,22 @@ fun MenuDrawer() {
                     modifier = Modifier.statusBarsPadding()
                 )
             },
+            snackbarHost = {
+                SnackbarHost(
+                    hostState = snackbarHostState,
+                    modifier = Modifier
+                        .navigationBarsPadding()
+                        .padding(bottom = 16.dp)
+                ) { data ->
+                    AnimatedVisibility(
+                        visible = true,
+                        enter = fadeIn(tween(300)) + expandVertically(expandFrom = Alignment.Top),
+                        exit = fadeOut(tween(300)) + shrinkVertically(shrinkTowards = Alignment.Bottom)
+                    ) {
+                        GlowingSnackbar(message = data.visuals.message)
+                    }
+                }
+            },
             contentWindowInsets = WindowInsets(0, 0, 0, 0)
         ) { padding ->
             Box(
@@ -126,7 +153,8 @@ fun MenuDrawer() {
                     .imePadding() // Padding para el teclado
             ) {
                 TolkienAppNavigation(
-                    navController = navController
+                    navController = navController,
+                    snackbarHostState = snackbarHostState
                 )
             }
 

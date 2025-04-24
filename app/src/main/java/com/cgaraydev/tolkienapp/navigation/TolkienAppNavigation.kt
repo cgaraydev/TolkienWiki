@@ -1,5 +1,6 @@
 package com.cgaraydev.tolkienapp.navigation
 
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -33,7 +34,8 @@ import com.cgaraydev.tolkienapp.presentation.tolkien.TolkienScreen
 
 @Composable
 fun TolkienAppNavigation(
-    navController: NavHostController
+    navController: NavHostController,
+    snackbarHostState: SnackbarHostState
 ) {
     NavHost(
         navController = navController,
@@ -171,7 +173,7 @@ fun TolkienAppNavigation(
             arguments = listOf(navArgument("difficulty") { type = NavType.StringType })
         ) { backStackEntry ->
             val difficulty = backStackEntry.arguments?.getString("difficulty") ?: "hobbit"
-            MemoryGameScreen(navController, difficulty)
+            MemoryGameScreen(navController, difficulty, snackbarHostState)
         }
 
 
