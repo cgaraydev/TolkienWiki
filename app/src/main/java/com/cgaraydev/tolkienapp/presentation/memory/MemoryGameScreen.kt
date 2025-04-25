@@ -70,7 +70,7 @@ fun MemoryGameScreen(
     val gridColumns = when (difficulty) {
         "hobbit" -> 4
         "elfo" -> 6
-        "maia" -> 8
+        "ainur" -> 8
         else -> 4
     }
     Column(
@@ -173,6 +173,9 @@ fun MemoryGameScreen(
                 }
             }
             if (gameState is GameState.FINISHED) {
+                LaunchedEffect(Unit) {
+                    viewModel.saveBestTimeIfNeeded()
+                }
                 GameResultDialog(
                     moves = moveCount,
                     time = elapsedTime,

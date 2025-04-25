@@ -1,6 +1,7 @@
 [versions]
 accompanistSystemuicontroller = "0.30.1"
 agp = "8.8.2"
+datastorePreferences = "1.0.0"
 youtubePlayer = "12.1.1"
 kotlin = "2.0.21"
 coreKtx = "1.15.0"
@@ -20,6 +21,7 @@ service = "4.4.2"
 [libraries]
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

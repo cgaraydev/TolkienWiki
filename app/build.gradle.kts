@@ -75,4 +75,9 @@ dependencies {
 
     implementation (libs.youtube.player)
 
+    implementation(libs.androidx.datastore.preferences)
+
+//    implementation("androidx.datastore:datastore-preferences-core:1.1.5")
+
+
 }

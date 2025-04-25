@@ -1,9 +1,12 @@
 package com.cgaraydev.tolkienapp.di
 
+import android.content.Context
+import com.cgaraydev.tolkienapp.utils.BestTimesManager
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -15,6 +18,12 @@ object AppModule {
     @Singleton
     fun provideFirebaseFirestore(): FirebaseFirestore {
         return FirebaseFirestore.getInstance()
+    }
+
+    @Provides
+    @Singleton
+    fun provideBestTimesManager(@ApplicationContext context: Context): BestTimesManager {
+        return BestTimesManager(context)
     }
 }
 
