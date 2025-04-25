@@ -117,7 +117,7 @@ object Items {
                     false,
                     R.drawable.ic_memory,
                     "Memorice",
-                    Routes.MemoryGame.route
+                    Routes.MemoryIntro.route
                 ),
                 Item(
                     "Memes",

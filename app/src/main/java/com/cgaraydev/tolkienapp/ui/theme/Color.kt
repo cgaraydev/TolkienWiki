@@ -28,3 +28,6 @@ val QuizGreen = Color(0xFF66BB6A)
 val QuizRed = Color(0xFFEF5350)
 val QuizCancel = Color(0xFFB71C1C)
 val MatchGreen = Color(0xFF4CAF50)
+
+val GoldenButton = Color(0xFFE1C16E)
+val GlowContainer = Color(0xFF1E1E1E)

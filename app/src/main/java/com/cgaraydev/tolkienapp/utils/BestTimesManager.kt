@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
+import com.cgaraydev.tolkienapp.data.models.Record
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -17,33 +18,46 @@ class BestTimesManager(private val context: Context) {
         private val AINUR_TIMES = stringPreferencesKey("ainur_times")
     }
 
-    private fun getKey(difficulty: String) = when(difficulty) {
+    private fun getKey(difficulty: String) = when (difficulty) {
         "hobbit" -> HOBBIT_TIMES
         "elfo" -> ELFO_TIMES
         "ainur" -> AINUR_TIMES
         else -> throw IllegalArgumentException("Dificultad no válida")
     }
 
-    suspend fun saveTime(difficulty: String, time: Long) {
+    suspend fun saveTime(difficulty: String, time: Long, moves: Int) {
         context.dataStore.edit { prefs ->
             val current = prefs[getKey(difficulty)] ?: ""
-            val newTimes = (current.split(",") + time.toString())
+            val newRecords = (current.split("|") + "$time,$moves,${System.currentTimeMillis()}")
                 .filter { it.isNotEmpty() }
-                .map { it.toLong() }
-                .sorted()
-                .take(10) // Guardamos solo los 10 mejores
-                .joinToString(",")
+                .map {
+                    val parts = it.split(",")
+                    Record(parts[0].toLong(), parts[1].toInt(), parts[2].toLong())
+                }
+                .sortedBy { it.time }
+                .take(5)
+                .joinToString("|") { "${it.time},${it.moves},${it.date}" }
 
-            prefs[getKey(difficulty)] = newTimes
+            prefs[getKey(difficulty)] = newRecords
         }
     }
 
-    fun getTimes(difficulty: String): Flow<List<Long>> {
+    fun getTimes(difficulty: String): Flow<List<Record>> {
         return context.dataStore.data.map { prefs ->
-            prefs[getKey(difficulty)]?.split(",")
+            prefs[getKey(difficulty)]?.split("|")
                 ?.filter { it.isNotEmpty() }
-                ?.map { it.toLong() }
-                ?.sorted() ?: emptyList()
+                ?.map {
+                    val parts = it.split(",")
+                    Record(parts[0].toLong(), parts[1].toInt(), parts[2].toLong())
+                }
+                ?.sortedBy { it.time } ?: emptyList()
         }
     }
+
+    suspend fun clearTimes(difficulty: String) {
+        context.dataStore.edit { prefs ->
+            prefs.remove(getKey(difficulty))
+        }
+    }
+
 }

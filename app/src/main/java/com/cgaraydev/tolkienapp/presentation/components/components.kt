@@ -69,7 +69,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.ui.theme.Aniron
+import com.cgaraydev.tolkienapp.ui.theme.GlowContainer
 import com.cgaraydev.tolkienapp.ui.theme.Golden
+import com.cgaraydev.tolkienapp.ui.theme.GoldenButton
 import com.cgaraydev.tolkienapp.ui.theme.LightGray
 import com.cgaraydev.tolkienapp.ui.theme.RingBearer
 import com.cgaraydev.tolkienapp.utils.HtmlText
@@ -248,68 +250,7 @@ fun StateHandler(
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
-@Composable
-fun AnimatedGlowButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    var isPressed by remember { mutableStateOf(false) }
-    val glowAlpha by animateFloatAsState(
-        targetValue = if (isPressed) 0.3f else 1f,
-        animationSpec = tween(durationMillis = 200),
-        label = "GlowAlpha"
-    )
-    val infiniteGlow = rememberInfiniteTransition()
-    val glow by infiniteGlow.animateFloat(
-        initialValue = 0.7f,
-        targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(1500, easing = FastOutSlowInEasing),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = "InfiniteGlow"
-    )
-    val borderColor = Color(0xFFE1C16E).copy(alpha = glow * glowAlpha)
-    val scale by animateFloatAsState(
-        targetValue = if (isPressed) 0.98f else 1f,
-        animationSpec = tween(100)
-    )
 
-    Button(
-        onClick = onClick,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF1E1E1E),
-            contentColor = Color(0xFFE1C16E)
-        ),
-        border = BorderStroke(2.dp, borderColor),
-        shape = RoundedCornerShape(12.dp),
-        modifier = modifier
-            .scale(scale)
-            .height(65.dp)
-            .fillMaxWidth()
-            .padding(horizontal = 32.dp)
-            .shadow(
-                elevation = 10.dp,
-                shape = RoundedCornerShape(12.dp),
-                ambientColor = borderColor,
-                spotColor = borderColor
-            )
-            .pointerInteropFilter {
-                when (it.action) {
-                    MotionEvent.ACTION_DOWN -> isPressed = true
-                    MotionEvent.ACTION_UP -> isPressed = false
-                }
-                false
-            }
-    ) {
-        Text(
-            text = "iniciar",
-            fontFamily = Aniron.bodyMedium.fontFamily,
-            fontSize = 18.sp
-        )
-    }
-}
 
 @Composable
 fun CustomSnackbar(

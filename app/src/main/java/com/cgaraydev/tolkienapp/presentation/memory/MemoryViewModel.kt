@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cgaraydev.tolkienapp.data.local.datalocal.MemoryCard
 import com.cgaraydev.tolkienapp.data.local.datalocal.charactersCards
+import com.cgaraydev.tolkienapp.data.models.Record
 import com.cgaraydev.tolkienapp.utils.BestTimesManager
 import com.cgaraydev.tolkienapp.utils.GameState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,8 +14,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -57,6 +61,11 @@ class MemoryViewModel @Inject constructor(
 
     private var isFirstMove = true
 
+    val shouldDimBackground: StateFlow<Boolean> =
+        combine(isGamePaused, gameState) { paused, state ->
+            paused || state is GameState.FINISHED
+        }.stateIn(viewModelScope, SharingStarted.Lazily, false)
+
 
     init {
         viewModelScope.launch {
@@ -69,6 +78,13 @@ class MemoryViewModel @Inject constructor(
     fun setDifficulty(difficulty: String) {
         _selectedDifficulty.value = difficulty
         generateCardsForDifficulty(difficulty)
+    }
+
+    fun getGridColumns(): Int = when(selectedDifficulty.value) {
+        "hobbit" -> 4
+        "elfo" -> 6
+        "ainur" -> 8
+        else -> 4
     }
 
     // Genera las cartas en base a la dificultad seleccionada
@@ -191,13 +207,25 @@ class MemoryViewModel @Inject constructor(
             viewModelScope.launch {
                 bestTimesManager.saveTime(
                     _selectedDifficulty.value,
-                    _elapsedTime.value
+                    _elapsedTime.value,
+                    _moveCount.value
                 )
             }
         }
     }
 
-    fun getBestTimes(difficulty: String): Flow<List<Long>> {
+    //    fun getBestTimes(difficulty: String): Flow<List<Long>> {
+//        return bestTimesManager.getTimes(difficulty)
+//    }
+    fun getBestTimes(difficulty: String): Flow<List<Record>> {
         return bestTimesManager.getTimes(difficulty)
     }
+
+    fun clearBestTimes(difficulty: String) {
+        viewModelScope.launch {
+            bestTimesManager.clearTimes(difficulty)
+        }
+    }
+
+
 }

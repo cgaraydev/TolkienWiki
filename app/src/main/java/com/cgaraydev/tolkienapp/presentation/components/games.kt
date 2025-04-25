@@ -3,7 +3,6 @@ package com.cgaraydev.tolkienapp.presentation.components
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -16,41 +15,44 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Surface
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.local.datalocal.MemoryCard
 import com.cgaraydev.tolkienapp.ui.theme.Golden
+import com.cgaraydev.tolkienapp.utils.toTimeString
 
 @Composable
 fun GameStats(moves: Int, time: Long, isPaused: Boolean) {
     val formattedTime = remember(time) {
-        String.format("%02d:%02d", time / 60, time % 60)
+        time.toTimeString()
     }
 
     Row(
@@ -165,120 +167,160 @@ fun MemoryCardItem(
     }
 }
 
+
+
 @Composable
-fun GameResultDialog(
-    moves: Int,
-    time: Long,
-    difficulty: String,
-    onDismiss: () -> Unit,
-    onRestart: () -> Unit,
-    modifier: Modifier = Modifier
+fun DifficultySelector(
+    selectedDifficulty: String,
+    onDifficultySelected: (String) -> Unit
 ) {
-    val formattedTime = remember(time) {
-        String.format("%02d:%02d", time / 60, time % 60)
-    }
-    val funFacts = remember {
-        listOf(
-            "Gandalf era conocido como Mithrandir entre los elfos",
-            "Los hobbits tienen los pies peludos y no usan zapatos",
-            "El Anillo Único fue forjado por Sauron en el Monte del Destino"
-        )
-    }
-    val randomFact = remember { funFacts.random() }
+    val difficulties = listOf("hobbit", "elfo", "ainur")
 
-    Dialog(
-        onDismissRequest = onDismiss,
-        properties = DialogProperties(usePlatformDefaultWidth = false)
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                color = Color.Black.copy(alpha = 0.3f),
+                shape = RoundedCornerShape(8.dp)
+            )
+            .padding(16.dp)
     ) {
-        Surface(
-            shape = RoundedCornerShape(16.dp),
-            color = Color(0xFF1E1E1E),
-            modifier = modifier
-                .fillMaxWidth(0.9f)
-                .border(2.dp, Golden, RoundedCornerShape(16.dp))
+        Text(
+            text = "Selecciona la dificultad:",
+            style = TextStyle(color = Color.White),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 12.dp),
+            textAlign = TextAlign.Center,
+            fontFamily = FontFamily(Font(R.font.cardo)),
+            fontSize = 20.sp
+        )
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier.fillMaxWidth()
         ) {
-            Column(
-                modifier = Modifier.padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    "¡Juego Completado!",
-                    color = Golden,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                // Estadísticas
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    StatItem(
-                        icon = painterResource(R.drawable.ic_clock),
-                        value = formattedTime
-                    )
-                    StatItem(
-                        icon = painterResource(R.drawable.ic_moves),
-                        value = moves.toString()
-                    )
-                    StatItem(
-                        icon = painterResource(R.drawable.ic_ring),
-                        value = difficulty.uppercase()
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                // Datos curiosos
-                Column(
+            difficulties.forEach { difficulty ->
+                val isSelected = difficulty == selectedDifficulty
+                Box(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Color.Black.copy(alpha = 0.3f))
-                        .padding(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        "¿Sabías que?",
-                        color = Golden,
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                    Text(
-                        randomFact,
-                        color = Color.White,
-                        textAlign = TextAlign.Center
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                // Botones
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    Button(
-                        onClick = onDismiss,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.Black,
-                            contentColor = Golden
-                        ),
-                        border = BorderStroke(1.dp, Golden)
-                    ) {
-                        Text("Salir")
-                    }
-                    Button(
-                        onClick = onRestart,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Golden,
-                            contentColor = Color.Black
+                        .clickable { onDifficultySelected(difficulty) }
+                        .background(
+                            color = if (isSelected) Color(0xFFE1C16E) else Color.Transparent,
+                            shape = RoundedCornerShape(8.dp)
                         )
-                    ) {
-                        Text("Jugar de nuevo")
-                    }
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                ) {
+                    Text(
+                        text = difficulty.uppercase(),
+                        fontSize = 16.sp,
+                        color = if (isSelected) Color.Black else Color.White,
+                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+                        fontFamily = FontFamily(Font(R.font.cardo))
+                    )
                 }
             }
         }
+    }
+}
+
+@Composable
+fun GameHeader(
+    difficulty: String,
+    onBack: () -> Unit,
+    isPaused: Boolean,
+    onTogglePause: () -> Unit
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = "dificultad: ${difficulty.uppercase()}",
+                color = Color.White,
+                fontSize = 14.sp
+            )
+            IconButton(onClick = onBack, modifier = Modifier.size(48.dp)) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_replay),
+                    contentDescription = "Volver",
+                    tint = Golden,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
+        }
+        PauseButton(isPaused = isPaused, onToggle = onTogglePause)
+    }
+}
+
+@Composable
+fun PauseButton(isPaused: Boolean, onToggle: () -> Unit) {
+    IconButton(
+        onClick = onToggle,
+        modifier = Modifier.size(48.dp)
+    ) {
+        Icon(
+            painter = if (isPaused) painterResource(R.drawable.ic_play)
+            else painterResource(R.drawable.ic_pause),
+            contentDescription = if (isPaused) "Reanudar" else "Pausar",
+            tint = Golden,
+            modifier = Modifier.size(48.dp)
+        )
+    }
+}
+
+@Composable
+fun GameBoard(
+    cards: List<MemoryCard>,
+    matchEffect: Pair<Int, String>?,
+    isInteractionBlocked: Boolean,
+    gridColumns: Int,
+    shouldDim: Boolean,
+    onCardClick: (Int) -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .alpha(if (shouldDim) 0.7f else 1f)
+    ) {
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(gridColumns),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            items(cards, key = { it.id }) { card ->
+                MemoryCardItem(
+                    card = card,
+                    highlight = matchEffect?.first == card.id,
+                    isInteractionBlocked = isInteractionBlocked,
+                    onClick = { onCardClick(card.id) }
+                )
+            }
+        }
+
+        if (shouldDim) {
+            PauseOverlay(onResume = {  })
+        }
+    }
+}
+
+@Composable
+fun PauseOverlay(onResume: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black.copy(alpha = 0.7f))
+            .clickable(onClick = onResume),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            "JUEGO EN PAUSA",
+            color = Golden,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
