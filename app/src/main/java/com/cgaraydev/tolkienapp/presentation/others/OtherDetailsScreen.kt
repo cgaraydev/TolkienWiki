@@ -27,11 +27,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.cgaraydev.tolkienapp.data.models.Other
-import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
 import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow
 import com.cgaraydev.tolkienapp.presentation.components.ImageCarousel
-import com.cgaraydev.tolkienapp.presentation.components.WikiLinksExpandable
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.utils.HtmlText
 
@@ -123,24 +121,24 @@ fun OtherDetailsContent(
                 DetailRow("Lider", other.leader, navController)
                 DetailRow("Artefactos", other.heirlooms, navController)
                 DetailRow("Etimologia", other.etymology, navController)
-                CustomExpandable("Historia") {
-                    HtmlText(
-                        htmlText = other.history!!,
-                        navController = navController
-                    )
-                }
-                WikiLinksExpandable(
-                    wikiUrls = other.wikiUrl
-                )
-                other.images?.let {
-                    CustomExpandable(title = "Imagenes") {
-                        ImageCarousel(
-                            images = other.images,
-                            modifier = Modifier.padding(vertical = 16.dp),
-                            navController = navController
-                        )
-                    }
-                }
+//                CustomExpandable("Historia") {
+//                    HtmlText(
+//                        htmlText = other.history!!,
+//                        navController = navController
+//                    )
+//                }
+//                WikiLinksExpandable(
+//                    wikiUrls = other.wikiUrl
+//                )
+//                other.images?.let {
+//                    CustomExpandable(title = "Imagenes") {
+//                        ImageCarousel(
+//                            images = other.images,
+//                            modifier = Modifier.padding(vertical = 16.dp),
+//                            navController = navController
+//                        )
+//                    }
+//                }
                 CustomSpacer(40)
             }
         }

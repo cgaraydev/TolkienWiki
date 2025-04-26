@@ -22,11 +22,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.data.models.Language
-import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
 import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow
 import com.cgaraydev.tolkienapp.presentation.components.ImageCarousel
-import com.cgaraydev.tolkienapp.presentation.components.WikiLinksExpandable
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.utils.HtmlText
 
@@ -96,24 +94,24 @@ fun LanguageDetailsContent(
             item {
                 CustomSpacer(16)
                 DetailRow("Otros nombres", language.otherNames, navController)
-                CustomExpandable("Historia") {
-                    HtmlText(
-                        htmlText = language.history!!,
-                        navController = navController
-                    )
-                }
-                WikiLinksExpandable(
-                    wikiUrls = language.wikiUrl
-                )
-                language.images?.let {
-                    CustomExpandable(title = "Imagenes") {
-                        ImageCarousel(
-                            images = language.images,
-                            modifier = Modifier.padding(vertical = 16.dp),
-                            navController = navController
-                        )
-                    }
-                }
+//                CustomExpandable("Historia") {
+//                    HtmlText(
+//                        htmlText = language.history!!,
+//                        navController = navController
+//                    )
+//                }
+//                WikiLinksExpandable(
+//                    wikiUrls = language.wikiUrl
+//                )
+//                language.images?.let {
+//                    CustomExpandable(title = "Imagenes") {
+//                        ImageCarousel(
+//                            images = language.images,
+//                            modifier = Modifier.padding(vertical = 16.dp),
+//                            navController = navController
+//                        )
+//                    }
+//                }
                 CustomSpacer(40)
             }
         }

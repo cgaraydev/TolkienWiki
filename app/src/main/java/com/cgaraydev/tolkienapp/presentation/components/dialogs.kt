@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -36,7 +34,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -48,7 +45,6 @@ import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.ui.theme.QuizRed
 import com.cgaraydev.tolkienapp.utils.toDateString
 import com.cgaraydev.tolkienapp.utils.toTimeString
-import java.util.Locale
 
 @Composable
 fun RecordsDialog(
@@ -250,7 +246,7 @@ fun GameResultDialog(
     modifier: Modifier = Modifier
 ) {
     val formattedTime = remember(time) {
-        String.format(Locale.getDefault(), "%02d:%02d", time / 60, time % 60)
+        time.toTimeString()
     }
     val funFacts = remember {
         listOf(
@@ -285,26 +281,54 @@ fun GameResultDialog(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    "¡Juego Completado!",
+                    "¡Juego completado!",
                     color = Golden,
                     fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
+                    fontFamily = FontFamily(Font(R.font.cardo))
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
 
                 // Estadísticas
-                Row(
+                Column(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                    verticalArrangement = Arrangement.SpaceEvenly,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    Text(
+                        "ESTADISTICAS",
+                        color = Color.White,
+                        fontSize = 16.sp,
+                        fontFamily = FontFamily(Font(R.font.cardo)),
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+                    Text(
+                        "Tiempo:",
+                        color = Color.White,
+                        fontSize = 12.sp,
+                        fontFamily = FontFamily(Font(R.font.cardo)),
+                    )
                     StatItem(
                         icon = painterResource(R.drawable.ic_clock),
                         value = formattedTime
                     )
+                    Spacer(Modifier.height(8.dp))
+                    Text(
+                        "Movimientos:",
+                        color = Color.White,
+                        fontSize = 12.sp,
+                        fontFamily = FontFamily(Font(R.font.cardo)),
+                    )
                     StatItem(
                         icon = painterResource(R.drawable.ic_moves),
                         value = moves.toString()
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    Text(
+                        "Dificultad:",
+                        color = Color.White,
+                        fontSize = 12.sp,
+                        fontFamily = FontFamily(Font(R.font.cardo)),
                     )
                     StatItem(
                         icon = painterResource(R.drawable.ic_ring),
@@ -325,41 +349,39 @@ fun GameResultDialog(
                     Text(
                         "¿Sabías que?",
                         color = Golden,
-                        modifier = Modifier.padding(bottom = 8.dp)
+                        modifier = Modifier.padding(bottom = 8.dp),
+                        fontSize = 22.sp,
+                        fontFamily = FontFamily(Font(R.font.cardo))
                     )
                     Text(
                         randomFact,
                         color = Color.White,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        fontSize = 16.sp,
+                        fontFamily = FontFamily(Font(R.font.cardo))
                     )
                 }
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // Botones
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    Button(
-                        onClick = onDismiss,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.Black,
-                            contentColor = Golden
-                        ),
-                        border = BorderStroke(1.dp, Golden)
-                    ) {
-                        Text("Salir")
-                    }
-                    Button(
+                    AnimatedGlowButtonCompact(
+                        text = "reiniciar",
                         onClick = onRestart,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Golden,
-                            contentColor = Color.Black
-                        )
-                    ) {
-                        Text("Jugar de nuevo")
-                    }
+                        glowColor = Color.White,
+                        modifier = Modifier.weight(1f)
+                    )
+                    AnimatedGlowButtonCompact(
+                        text = "cerrar",
+                        onClick = onDismiss,
+                        glowColor = QuizRed,
+                        modifier = Modifier.weight(1f)
+                    )
                 }
             }
         }

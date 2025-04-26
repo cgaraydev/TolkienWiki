@@ -1,7 +1,6 @@
 package com.cgaraydev.tolkienapp.presentation.components
 
-import android.graphics.fonts.Font
-import android.view.MotionEvent
+import android.annotation.SuppressLint
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -11,8 +10,8 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,29 +22,20 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.ThumbUp
+import androidx.compose.material3.Card
+import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Snackbar
-import androidx.compose.material3.SnackbarData
-import androidx.compose.material3.SnackbarVisuals
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
@@ -54,26 +44,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
-import com.cgaraydev.tolkienapp.ui.theme.Aniron
-import com.cgaraydev.tolkienapp.ui.theme.GlowContainer
 import com.cgaraydev.tolkienapp.ui.theme.Golden
-import com.cgaraydev.tolkienapp.ui.theme.GoldenButton
 import com.cgaraydev.tolkienapp.ui.theme.LightGray
-import com.cgaraydev.tolkienapp.ui.theme.RingBearer
 import com.cgaraydev.tolkienapp.utils.HtmlText
 
 @Composable
@@ -130,165 +117,112 @@ fun ScreenHeader(
 }
 
 @Composable
+fun RaceWithGenderRow(
+    race: String?,
+    gender: String?,
+    navController: NavController? = null
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        // Parte izquierda - Raza
+        Box(modifier = Modifier.weight(1f)) {
+            DetailRow(
+                label = stringResource(R.string.race),
+                value = race,
+                navController = navController,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        // Parte derecha - Icono de género
+        GenderIcon(gender = gender)
+    }
+}
+
+@Composable
+fun GenderIcon(
+    gender: String?,
+    modifier: Modifier = Modifier,
+    size: Dp = 40.dp,
+    tint: Color = Golden,
+    paddingStart: Dp = 16.dp
+) {
+    gender?.takeIf { it.isNotBlank() }?.let { g ->
+        val iconRes = when (g.lowercase()) {
+            stringResource(R.string.male) -> R.drawable.ic_male
+            stringResource(R.string.female) -> R.drawable.ic_female
+            else -> null
+        }
+
+        iconRes?.let {
+            Icon(
+                painter = painterResource(it),
+                contentDescription = "Género: $g",
+                tint = tint,
+                modifier = modifier
+                    .size(size)
+                    .padding(start = paddingStart)
+            )
+        }
+    }
+}
+
+@Composable
 fun DetailRow(
     label: String,
     value: String?,
-    navController: NavController
+    navController: NavController? = null,
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
+    labelStyle: TextStyle = TextStyle(
+        fontSize = 18.sp,
+        color = LightGray,
+        fontFamily = FontFamily(Font(R.font.cardo)),
+        fontWeight = FontWeight.Bold
+    ),
+    valueStyle: TextStyle = TextStyle(
+        fontSize = 16.sp,
+        color = Color.White,
+        fontFamily = FontFamily(Font(R.font.cardo))
+    )
 ) {
-    value?.let {
+    if (!value.isNullOrBlank()) {
         Row(
-            modifier = Modifier.padding(vertical = 4.dp)
+            modifier = modifier
+                .fillMaxWidth()
+                .clickable(enabled = onClick != null || navController != null) {
+                    onClick?.invoke()
+                },
         ) {
+            // Label con alineación precisa
             Text(
                 text = "$label: ",
-                style = TextStyle(),
-                fontSize = 16.sp,
-                color = LightGray,
-                fontWeight = FontWeight.Bold
+                style = labelStyle,
+                modifier = Modifier.alignBy(FirstBaseline)
             )
-            HtmlText(
-                htmlText = value,
-                navController = navController
-            )
-        }
-    }
-}
 
-@Composable
-fun GoodEvilSection(
-    title: String,
-    goodContent: String?,
-    evilContent: String?,
-    navController: NavController
-) {
-    if (goodContent.isNullOrBlank() && evilContent.isNullOrBlank()) return
-
-    CustomExpandable(title = title) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(24.dp)
-        ) {
-            if (!goodContent.isNullOrBlank()) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = stringResource(R.string.good),
-                        style = TextStyle(
-                            color = Color.White,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    )
+            // Contenedor para el HtmlText con alineación controlada
+            Box(
+                modifier = Modifier.weight(1f).alignBy(FirstBaseline)
+            ) {
+                if (navController != null) {
                     HtmlText(
-                        htmlText = goodContent,
+                        htmlText = value,
                         navController = navController,
-                        modifier = Modifier.padding(horizontal = 16.dp)
+                        modifier = Modifier.fillMaxWidth(),
+                        textStyle = valueStyle
+                    )
+                } else {
+                    Text(
+                        text = value,
+                        style = valueStyle,
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
             }
-
-            if (!evilContent.isNullOrBlank()) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = stringResource(R.string.bad),
-                        style = TextStyle(
-                            color = Color.White,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    )
-                    HtmlText(
-                        htmlText = evilContent,
-                        navController = navController,
-                        modifier = Modifier.padding(horizontal = 16.dp)
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun StateHandler(
-    isLoading: Boolean,
-    error: String?,
-    modifier: Modifier = Modifier,
-    content: @Composable () -> Unit
-) {
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(Color.Black)
-    ) {
-        when {
-            isLoading -> {
-                CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center),
-                    color = Golden
-                )
-            }
-
-            error != null -> {
-                Text(
-                    text = error,
-                    color = Color.Red,
-                    modifier = Modifier.align(Alignment.Center),
-                    style = TextStyle()
-                )
-            }
-
-            else -> {
-                content()
-            }
-        }
-    }
-}
-
-
-
-@Composable
-fun CustomSnackbar(
-    message: String,
-    modifier: Modifier = Modifier,
-    icon: ImageVector = Icons.Default.Star, // Puedes personalizar el icono también
-    backgroundColor: Color = Color.Black,
-    contentColor: Color = Color.White,
-    accentColor: Color = Golden, // Color dorado
-) {
-    Surface(
-        color = backgroundColor,
-        shadowElevation = 8.dp,
-        modifier = modifier
-            .fillMaxWidth()
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.border(BorderStroke(1.dp, Golden))
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = accentColor,
-                modifier = Modifier.size(24.dp)
-            )
-            Text(
-                text = message,
-                color = contentColor,
-                fontSize = 16.sp,
-            )
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = accentColor,
-                modifier = Modifier.size(24.dp)
-            )
         }
     }
 }
@@ -358,8 +292,8 @@ fun GlowingSnackbar(
             Text(
                 text = message,
                 color = contentColor,
-                fontSize = 12.sp,
-                fontFamily = Aniron.bodyMedium.fontFamily,
+                fontSize = 18.sp,
+                fontFamily = FontFamily(Font(R.font.cardo)),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .weight(1f)
@@ -379,3 +313,134 @@ fun GlowingSnackbar(
         }
     }
 }
+
+//@Composable
+//fun GoodEvilSection(
+//    title: String,
+//    goodContent: String?,
+//    evilContent: String?,
+//    navController: NavController
+//) {
+//    if (goodContent.isNullOrBlank() && evilContent.isNullOrBlank()) return
+//
+//    CustomExpandable(title = title) {
+//        Column(
+//            modifier = Modifier.fillMaxWidth(),
+//            horizontalAlignment = Alignment.CenterHorizontally,
+//            verticalArrangement = Arrangement.spacedBy(24.dp)
+//        ) {
+//            if (!goodContent.isNullOrBlank()) {
+//                Column(
+//                    horizontalAlignment = Alignment.CenterHorizontally,
+//                    modifier = Modifier.fillMaxWidth()
+//                ) {
+//                    Text(
+//                        text = stringResource(R.string.good),
+//                        style = TextStyle(
+//                            color = Color.White,
+//                            fontSize = 16.sp,
+//                            fontWeight = FontWeight.Bold
+//                        )
+//                    )
+//                    HtmlText(
+//                        htmlText = goodContent,
+//                        navController = navController,
+//                        modifier = Modifier.padding(horizontal = 16.dp)
+//                    )
+//                }
+//            }
+//
+//            if (!evilContent.isNullOrBlank()) {
+//                Column(
+//                    horizontalAlignment = Alignment.CenterHorizontally,
+//                    modifier = Modifier.fillMaxWidth()
+//                ) {
+//                    Text(
+//                        text = stringResource(R.string.bad),
+//                        style = TextStyle(
+//                            color = Color.White,
+//                            fontSize = 16.sp,
+//                            fontWeight = FontWeight.Bold
+//                        )
+//                    )
+//                    HtmlText(
+//                        htmlText = evilContent,
+//                        navController = navController,
+//                        modifier = Modifier.padding(horizontal = 16.dp)
+//                    )
+//                }
+//            }
+//        }
+//    }
+//}
+
+@Composable
+fun GoodEvilSection(
+    title: String,
+    goodContent: String?,
+    evilContent: String?,
+    navController: NavController
+) {
+    if (goodContent.isNullOrBlank() && evilContent.isNullOrBlank()) return
+
+    CustomExpandable(title = title) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            if (!goodContent.isNullOrBlank()) {
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp),
+//                    backgroundColor = Color(0xFF1E3A1E) // Verde oscuro para el bien
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = stringResource(R.string.good),
+//                            style = MaterialTheme.typography.h6.copy(
+//                                color = Color(0xFF4CAF50), // Verde brillante
+//                                fontWeight = FontWeight.Bold
+//                            ),
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
+                        HorizontalDivider(color = Color(0xFF4CAF50))
+                        HtmlText(
+                            htmlText = goodContent,
+                            navController = navController,
+                            modifier = Modifier.padding(top = 8.dp)
+                        )
+                    }
+                }
+            }
+
+            if (!evilContent.isNullOrBlank()) {
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp),
+//                    backgroundColor = Color(0xFF3A1E1E) // Rojo oscuro para el mal
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = stringResource(R.string.bad),
+//                            style = MaterialTheme.typography.h6.copy(
+//                                color = Color(0xFFF44336), // Rojo
+//                                fontWeight = FontWeight.Bold
+//                            ),
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
+                        HorizontalDivider(color = Color(0xFFF44336))
+                        HtmlText(
+                            htmlText = evilContent,
+                            navController = navController,
+                            modifier = Modifier.padding(top = 8.dp)
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+

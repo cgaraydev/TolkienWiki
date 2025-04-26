@@ -156,7 +156,8 @@ fun AnimatedGlowButtonCompact(
         Text(
             text = text,
             fontFamily = Aniron.bodyMedium.fontFamily,
-            fontSize = 14.sp
+            fontSize = 10.sp,
+            maxLines = 1
         )
     }
 }

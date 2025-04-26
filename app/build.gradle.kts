@@ -77,7 +77,8 @@ dependencies {
 
     implementation(libs.androidx.datastore.preferences)
 
-//    implementation("androidx.datastore:datastore-preferences-core:1.1.5")
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.33.2-alpha")
+
 
 
 }

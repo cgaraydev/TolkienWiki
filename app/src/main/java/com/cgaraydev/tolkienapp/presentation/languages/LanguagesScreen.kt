@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -31,6 +32,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -39,14 +44,16 @@ import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.local.datalocal.LanguageData
 import com.cgaraydev.tolkienapp.navigation.Routes
 import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.ExpandableSubCategory
+import com.cgaraydev.tolkienapp.presentation.components.ListItem
 import com.cgaraydev.tolkienapp.presentation.components.ScreenHeader
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.ui.theme.RingBearer
 
 @Composable
 fun LanguagesScreen(
-    viewModel: LanguagesViewModel = hiltViewModel(),
-    navController: NavController
+    navController: NavController,
+    viewModel: LanguagesViewModel = hiltViewModel()
 ) {
     val languages by viewModel.languages.collectAsState()
 
@@ -57,149 +64,224 @@ fun LanguagesScreen(
     ) {
         ScreenHeader(imageRes = R.drawable.languages, label = "Lenguas/Escritura")
         CustomSpacer(40)
-        LanguagesScreenBody(languages, viewModel, navController)
-        CustomSpacer(40)
-    }
 
-}
-
-@Composable
-fun LanguagesScreenBody(
-    languages: List<LanguageData>,
-    viewModel: LanguagesViewModel,
-    navController: NavController
-) {
-    if (languages.isEmpty()) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator(color = Golden)
-        }
-    } else {
-        LanguagesCategoriesList(viewModel, navController)
-    }
-
-}
-
-@Composable
-fun LanguagesCategoriesList(
-    viewModel: LanguagesViewModel,
-    navController: NavController
-) {
-    LazyColumn(
-        modifier = Modifier.padding(horizontal = 16.dp)
-    ) {
-        val mainCategories = listOf(
-            "Lenguas Humanas",
-            "Lenguas Enanas",
-            "Lenguas Elficas",
-            "Escritura",
-            "Todos"
-        )
-        mainCategories.forEach { category ->
-            item {
-                LanguageCategoryItem(category, viewModel, navController)
-            }
-        }
-    }
-
-}
-
-@Composable
-fun LanguageCategoryItem(
-    category: String,
-    viewModel: LanguagesViewModel,
-    navController: NavController
-) {
-    var expanded by remember { mutableStateOf(false) }
-    val languages = viewModel.getLanguagesByTag(category)
-
-    Card(colors = CardDefaults.cardColors(containerColor = Color.Black)) {
-        Column {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { expanded = !expanded }
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
+        if (languages.isEmpty()) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = category,
-                    style = RingBearer.bodyMedium.copy(
-                        fontSize = 24.sp,
-                        color = Golden
-                    ),
-                    modifier = Modifier.weight(1f)
-                )
-                Text(
-                    text = "(${languages.size})",
-                    style = RingBearer.bodyMedium.copy(
-                        fontSize = 16.sp,
-                        color = Golden.copy(alpha = 0.7f)
-                    ),
-                    modifier = Modifier.padding(end = 8.dp)
-                )
-                Icon(
-                    imageVector = if (expanded) Icons.Default.KeyboardArrowUp
-                    else Icons.Default.KeyboardArrowDown,
-                    contentDescription = "Expandir/Cerrar",
-                    tint = Golden
-                )
+                CircularProgressIndicator(color = Golden)
             }
-            AnimatedVisibility(
-                visible = expanded,
-                enter = fadeIn() + expandVertically(),
-                exit = fadeOut() + shrinkVertically()
+        } else {
+            LazyColumn(
+                modifier = Modifier.padding(horizontal = 16.dp)
             ) {
-                Column {
-                    languages.forEach { language ->
-                        LanguageItem(
-                            language = language,
-                            navController = navController
+                val mainCategories = listOf(
+                    "Lenguas Humanas",
+                    "Lenguas Enanas",
+                    "Lenguas Elficas",
+                    "Escritura",
+                    "Todos"
+                )
+
+                items(mainCategories) { category ->
+                    val languagesByCategory = viewModel.getLanguagesByTag(category)
+                    ExpandableSubCategory(
+                        title = category,
+                        items = languagesByCategory,
+                        itemCount = languagesByCategory.size,
+                        titleTextStyle = TextStyle(
+                            fontSize = 24.sp,
+                            color = Color.White,
+                            fontFamily = FontFamily(Font(R.font.cardo))
+                        ),
+                        countTextStyle = TextStyle(
+                            fontSize = 16.sp,
+                            color = Color.White.copy(alpha = 0.7f),
+                            fontFamily = FontFamily(Font(R.font.cardo))
+                                                    ),
+                        borderColor = Golden.copy(alpha = 0.5f)
+                    ) { language ->
+                        ListItem(
+                            item = language,
+                            text = language.name,
+                            onClick = {
+                                navController.navigate(
+                                    Routes.LanguageDetails.createRoute(language.id)
+                                )
+                            },
+                            textStyle = TextStyle(
+                                fontSize = 16.sp,
+                                color = Color.White,
+                                fontFamily = FontFamily(Font(R.font.cardo))
+                            )
                         )
                     }
                 }
             }
         }
+
+        CustomSpacer(40)
     }
 }
 
-@Composable
-fun LanguageItem(
-    language: LanguageData,
-    navController: NavController
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 4.dp)
-            .clickable {
-                navController.navigate(Routes.LanguageDetails.createRoute(language.id))
-            },
-        colors = CardDefaults.cardColors(
-            containerColor = Color.Black.copy(alpha = 0.7f)
-        )
-    ) {
-        Row(
-            modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = language.name,
-                style = RingBearer.bodyMedium.copy(
-                    fontSize = 16.sp,
-                    color = Color.White
-                ),
-                modifier = Modifier.weight(1f)
-            )
-
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowUp,
-                contentDescription = "Ver detalle",
-                tint = Golden.copy(alpha = 0.7f)
-            )
-        }
-    }
-
-}
+//@Composable
+//fun LanguagesScreen(
+//    viewModel: LanguagesViewModel = hiltViewModel(),
+//    navController: NavController
+//) {
+//    val languages by viewModel.languages.collectAsState()
+//
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .background(Color.Black)
+//    ) {
+//        ScreenHeader(imageRes = R.drawable.languages, label = "Lenguas/Escritura")
+//        CustomSpacer(40)
+//        LanguagesScreenBody(languages, viewModel, navController)
+//        CustomSpacer(40)
+//    }
+//
+//}
+//
+//@Composable
+//fun LanguagesScreenBody(
+//    languages: List<LanguageData>,
+//    viewModel: LanguagesViewModel,
+//    navController: NavController
+//) {
+//    if (languages.isEmpty()) {
+//        Box(
+//            modifier = Modifier.fillMaxSize(),
+//            contentAlignment = Alignment.Center
+//        ) {
+//            CircularProgressIndicator(color = Golden)
+//        }
+//    } else {
+//        LanguagesCategoriesList(viewModel, navController)
+//    }
+//
+//}
+//
+//@Composable
+//fun LanguagesCategoriesList(
+//    viewModel: LanguagesViewModel,
+//    navController: NavController
+//) {
+//    LazyColumn(
+//        modifier = Modifier.padding(horizontal = 16.dp)
+//    ) {
+//        val mainCategories = listOf(
+//            "Lenguas Humanas",
+//            "Lenguas Enanas",
+//            "Lenguas Elficas",
+//            "Escritura",
+//            "Todos"
+//        )
+//        mainCategories.forEach { category ->
+//            item {
+//                LanguageCategoryItem(category, viewModel, navController)
+//            }
+//        }
+//    }
+//
+//}
+//
+//@Composable
+//fun LanguageCategoryItem(
+//    category: String,
+//    viewModel: LanguagesViewModel,
+//    navController: NavController
+//) {
+//    var expanded by remember { mutableStateOf(false) }
+//    val languages = viewModel.getLanguagesByTag(category)
+//
+//    Card(colors = CardDefaults.cardColors(containerColor = Color.Black)) {
+//        Column {
+//            Row(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .clickable { expanded = !expanded }
+//                    .padding(16.dp),
+//                verticalAlignment = Alignment.CenterVertically
+//            ) {
+//                Text(
+//                    text = category,
+//                    style = RingBearer.bodyMedium.copy(
+//                        fontSize = 24.sp,
+//                        color = Golden
+//                    ),
+//                    modifier = Modifier.weight(1f)
+//                )
+//                Text(
+//                    text = "(${languages.size})",
+//                    style = RingBearer.bodyMedium.copy(
+//                        fontSize = 16.sp,
+//                        color = Golden.copy(alpha = 0.7f)
+//                    ),
+//                    modifier = Modifier.padding(end = 8.dp)
+//                )
+//                Icon(
+//                    imageVector = if (expanded) Icons.Default.KeyboardArrowUp
+//                    else Icons.Default.KeyboardArrowDown,
+//                    contentDescription = "Expandir/Cerrar",
+//                    tint = Golden
+//                )
+//            }
+//            AnimatedVisibility(
+//                visible = expanded,
+//                enter = fadeIn() + expandVertically(),
+//                exit = fadeOut() + shrinkVertically()
+//            ) {
+//                Column {
+//                    languages.forEach { language ->
+//                        LanguageItem(
+//                            language = language,
+//                            navController = navController
+//                        )
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
+//
+//@Composable
+//fun LanguageItem(
+//    language: LanguageData,
+//    navController: NavController
+//) {
+//    Card(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .padding(horizontal = 8.dp, vertical = 4.dp)
+//            .clickable {
+//                navController.navigate(Routes.LanguageDetails.createRoute(language.id))
+//            },
+//        colors = CardDefaults.cardColors(
+//            containerColor = Color.Black.copy(alpha = 0.7f)
+//        )
+//    ) {
+//        Row(
+//            modifier = Modifier.padding(16.dp),
+//            verticalAlignment = Alignment.CenterVertically
+//        ) {
+//            Text(
+//                text = language.name,
+//                style = RingBearer.bodyMedium.copy(
+//                    fontSize = 16.sp,
+//                    color = Color.White
+//                ),
+//                modifier = Modifier.weight(1f)
+//            )
+//
+//            Icon(
+//                imageVector = Icons.Default.KeyboardArrowUp,
+//                contentDescription = "Ver detalle",
+//                tint = Golden.copy(alpha = 0.7f)
+//            )
+//        }
+//    }
+//
+//}

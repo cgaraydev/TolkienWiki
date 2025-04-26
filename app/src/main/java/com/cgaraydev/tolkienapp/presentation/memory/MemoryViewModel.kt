@@ -61,10 +61,14 @@ class MemoryViewModel @Inject constructor(
 
     private var isFirstMove = true
 
+//    val shouldDimBackground: StateFlow<Boolean> =
+//        combine(isGamePaused, gameState) { paused, state ->
+//            paused || state is GameState.FINISHED
+//        }.stateIn(viewModelScope, SharingStarted.Lazily, false)
+
     val shouldDimBackground: StateFlow<Boolean> =
-        combine(isGamePaused, gameState) { paused, state ->
-            paused || state is GameState.FINISHED
-        }.stateIn(viewModelScope, SharingStarted.Lazily, false)
+        isGamePaused.stateIn(viewModelScope, SharingStarted.Lazily, false)
+
 
 
     init {
@@ -147,7 +151,6 @@ class MemoryViewModel @Inject constructor(
                         }
                     }
                     if (_cards.value.all { it.isMatched }) {
-                        println("Todas las cartas emparejadas!") // Para confirmar
                         _gameState.value = GameState.FINISHED
                     }
                 }
@@ -214,9 +217,6 @@ class MemoryViewModel @Inject constructor(
         }
     }
 
-    //    fun getBestTimes(difficulty: String): Flow<List<Long>> {
-//        return bestTimesManager.getTimes(difficulty)
-//    }
     fun getBestTimes(difficulty: String): Flow<List<Record>> {
         return bestTimesManager.getTimes(difficulty)
     }
@@ -226,6 +226,5 @@ class MemoryViewModel @Inject constructor(
             bestTimesManager.clearTimes(difficulty)
         }
     }
-
 
 }

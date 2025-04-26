@@ -88,7 +88,8 @@ fun StatItem(icon: Painter, value: String, isPaused: Boolean = false) {
             Text(
                 text = value,
                 color = if (isPaused) Color.Gray else Color.White,
-                fontWeight = FontWeight.Bold
+                fontSize = 18.sp,
+                fontFamily = FontFamily(Font(R.font.cardo))
             )
         }
     }
@@ -168,7 +169,6 @@ fun MemoryCardItem(
 }
 
 
-
 @Composable
 fun DifficultySelector(
     selectedDifficulty: String,
@@ -236,9 +236,10 @@ fun GameHeader(
     ) {
         Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = "dificultad: ${difficulty.uppercase()}",
+                text = "Dificultad: ${difficulty.uppercase()}",
                 color = Color.White,
-                fontSize = 14.sp
+                fontSize = 14.sp,
+                fontFamily = FontFamily(Font(R.font.cardo))
             )
             IconButton(onClick = onBack, modifier = Modifier.size(48.dp)) {
                 Icon(
@@ -302,7 +303,7 @@ fun GameBoard(
         }
 
         if (shouldDim) {
-            PauseOverlay(onResume = {  })
+            PauseOverlay(onResume = { })
         }
     }
 }
@@ -319,7 +320,7 @@ fun PauseOverlay(onResume: () -> Unit) {
         Text(
             "JUEGO EN PAUSA",
             color = Golden,
-            fontSize = 24.sp,
+            fontSize = 26.sp,
             fontWeight = FontWeight.Bold
         )
     }

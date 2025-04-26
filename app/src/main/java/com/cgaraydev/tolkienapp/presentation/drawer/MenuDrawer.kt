@@ -148,9 +148,11 @@ fun MenuDrawer() {
         ) { padding ->
             Box(
                 modifier = Modifier
+                    .fillMaxSize() // ¡Importante!
+                    .background(Color.Black) // <-- Aquí el fondo negro global
                     .padding(padding)
-                    .navigationBarsPadding() // Añade padding para la barra de navegación
-                    .imePadding() // Padding para el teclado
+                    .navigationBarsPadding()
+                    .imePadding()
             ) {
                 TolkienAppNavigation(
                     navController = navController,

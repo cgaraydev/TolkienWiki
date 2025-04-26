@@ -39,6 +39,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -62,6 +64,7 @@ fun HomeScreen(navController: NavController) {
             .verticalScroll(rememberScrollState())
     ) {
         HeaderSection()
+        CustomSpacer(10)
         QuotesSection(tolkienQuotes)
         CustomSpacer(80)
         ExploreText()
@@ -90,7 +93,8 @@ fun HeaderSection() {
         Spacer(modifier = Modifier.height(18.dp))
         Text(
             text = "Explora personajes, lugares, eventos y otros elementos del legendarium de J.R.R. Tolkien.",
-            style = RingBearer.bodyMedium,
+            fontFamily = FontFamily(Font(R.font.cardo)),
+            fontSize = 20.sp,
             color = Gray,
             textAlign = TextAlign.Center
         )

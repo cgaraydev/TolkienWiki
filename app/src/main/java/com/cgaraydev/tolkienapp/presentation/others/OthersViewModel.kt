@@ -34,7 +34,6 @@ class OthersViewModel @Inject constructor(
         "Armas" to "weapons",
         "Plantas" to "plants",
         "Navíos" to "ships",
-        "Titulos" to "titles",
         "Artefactos" to "objects",
         "Gente" to "people",
         "Casas Nobles" to "noble_houses",

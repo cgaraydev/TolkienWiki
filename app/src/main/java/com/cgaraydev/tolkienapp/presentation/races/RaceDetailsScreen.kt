@@ -27,11 +27,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.cgaraydev.tolkienapp.data.models.Race
-import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
 import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow
 import com.cgaraydev.tolkienapp.presentation.components.ImageCarousel
-import com.cgaraydev.tolkienapp.presentation.components.WikiLinksExpandable
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.utils.HtmlText
 
@@ -119,40 +117,40 @@ fun RaceDetailsContent(
                 DetailRow("Esperanza de vida", race.lifespan, navController)
                 DetailRow("Etimologia", race.etymology, navController)
                 CustomSpacer(16)
-                race.origins?.let {
-                    CustomExpandable("Origenes") {
-                        HtmlText(
-                            htmlText = race.origins,
-                            navController = navController
-                        )
-                    }
-                }
-                race.characteristics?.let {
-                    CustomExpandable("Caracteristicas") {
-                        HtmlText(
-                            htmlText = race.characteristics,
-                            navController = navController
-                        )
-                    }
-                }
-                CustomExpandable("Historia") {
-                    HtmlText(
-                        htmlText = race.history!!,
-                        navController = navController
-                    )
-                }
-                WikiLinksExpandable(
-                    wikiUrls = race.wikiUrl
-                )
-                race.images?.let {
-                    CustomExpandable(title = "Imagenes") {
-                        ImageCarousel(
-                            images = race.images,
-                            modifier = Modifier.padding(vertical = 16.dp),
-                            navController = navController
-                        )
-                    }
-                }
+//                race.origins?.let {
+//                    CustomExpandable("Origenes") {
+//                        HtmlText(
+//                            htmlText = race.origins,
+//                            navController = navController
+//                        )
+//                    }
+//                }
+//                race.characteristics?.let {
+//                    CustomExpandable("Caracteristicas") {
+//                        HtmlText(
+//                            htmlText = race.characteristics,
+//                            navController = navController
+//                        )
+//                    }
+//                }
+//                CustomExpandable("Historia") {
+//                    HtmlText(
+//                        htmlText = race.history!!,
+//                        navController = navController
+//                    )
+//                }
+//                WikiLinksExpandable(
+//                    wikiUrls = race.wikiUrl
+//                )
+//                race.images?.let {
+//                    CustomExpandable(title = "Imagenes") {
+//                        ImageCarousel(
+//                            images = race.images,
+//                            modifier = Modifier.padding(vertical = 16.dp),
+//                            navController = navController
+//                        )
+//                    }
+//                }
                 CustomSpacer(40)
             }
         }
