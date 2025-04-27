@@ -1,5 +1,6 @@
 package com.cgaraydev.tolkienapp.presentation.drawer
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
@@ -44,16 +45,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.cgaraydev.tolkienapp.navigation.Routes
 import com.cgaraydev.tolkienapp.navigation.TolkienAppNavigation
+import com.cgaraydev.tolkienapp.presentation.components.DualFABsWithToggle
 import com.cgaraydev.tolkienapp.presentation.components.GlowingSnackbar
+import com.cgaraydev.tolkienapp.presentation.home.HomeViewModel
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MenuDrawer() {
+fun MenuDrawer(
+    viewModel: HomeViewModel = hiltViewModel()
+) {
     val navController = rememberNavController()
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -127,6 +134,14 @@ fun MenuDrawer() {
                     ),
                     modifier = Modifier.statusBarsPadding()
                 )
+            },
+            floatingActionButton = {
+                DualFABsWithToggle(
+                    onBackClick = { navController.navigateUp() },
+                    viewModel = viewModel,
+                    navController = navController
+                )
+
             },
             snackbarHost = {
                 SnackbarHost(

@@ -123,7 +123,7 @@ fun CharacterDetailsContent(
                         )
                     }
                 }
-                CustomSpacer(40)
+                CustomSpacer(150)
             }
         }
     }
