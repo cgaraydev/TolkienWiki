@@ -26,7 +26,6 @@ import com.cgaraydev.tolkienapp.presentation.components.ImageCarousel
 import com.cgaraydev.tolkienapp.presentation.components.WikiLinksExpandable
 import com.cgaraydev.tolkienapp.utils.HtmlText
 
-
 @Composable
 fun LocationDetailsScreen(
     locationId: String,

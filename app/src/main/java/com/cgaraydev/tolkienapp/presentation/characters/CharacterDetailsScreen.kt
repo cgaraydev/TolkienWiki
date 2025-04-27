@@ -1,6 +1,8 @@
 package com.cgaraydev.tolkienapp.presentation.characters
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -22,8 +24,8 @@ import com.cgaraydev.tolkienapp.presentation.components.DetailHeader
 import com.cgaraydev.tolkienapp.presentation.components.DetailImage
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow
 import com.cgaraydev.tolkienapp.presentation.components.DetailScreenTemplate
+import com.cgaraydev.tolkienapp.presentation.components.GenderIcon
 import com.cgaraydev.tolkienapp.presentation.components.ImageCarousel
-import com.cgaraydev.tolkienapp.presentation.components.RaceWithGenderRow
 import com.cgaraydev.tolkienapp.presentation.components.WikiLinksExpandable
 import com.cgaraydev.tolkienapp.utils.HtmlText
 
@@ -72,19 +74,36 @@ fun CharacterDetailsContent(
                         .fillMaxWidth()
                         .height(350.dp)
                 )
-                CustomSpacer(16)
-                RaceWithGenderRow(
-                    race = character.race,
-                    gender = character.genre,
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    GenderIcon(
+                        gender = character.genre
+                    )
+                }
+
+                DetailRow(
+                    label = stringResource(R.string.race),
+                    value = character.race,
                     navController = navController
+
                 )
-                DetailRow(stringResource(R.string.other_names), character.otherNames, navController)
+
+                DetailRow(
+                    stringResource(R.string.other_names),
+                    character.otherNames,
+                    navController
+                )
                 DetailRow(stringResource(R.string.birth), character.birth, navController)
                 DetailRow(stringResource(R.string.death), character.death, navController)
                 DetailRow(stringResource(R.string.titles), character.titles, navController)
                 DetailRow(stringResource(R.string.house), character.house, navController)
                 DetailRow(stringResource(R.string.family), character.family, navController)
                 DetailRow(stringResource(R.string.love), character.love, navController)
+
                 CustomSpacer(24)
                 CustomExpandable(title = stringResource(R.string.biography)) {
                     HtmlText(
@@ -109,3 +128,4 @@ fun CharacterDetailsContent(
         }
     }
 }
+

@@ -15,11 +15,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.ui.theme.GoldenLight
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-
 
 @Composable
 fun DrawerItem(
@@ -52,21 +52,36 @@ fun DrawerItem(
         },
         selected = selected,
         onClick = {
-            coroutineScope.launch { drawerState.close() }
-
-            if(route != currentRoute){
-                navController.navigate(route){
-                    popUpTo(navController.graph.startDestinationId) {
-                        saveState = true
-                    }
-                    launchSingleTop = true
-                    restoreState = true
-                }
-            }
+            navigateToSection(
+                route = route,
+                navController = navController,
+                scope = coroutineScope,
+                drawerState = drawerState
+            )
         },
         colors = NavigationDrawerItemDefaults.colors(
             selectedContainerColor = GoldenLight,
             unselectedContainerColor = Color.Black
         ),
     )
+}
+
+private fun navigateToSection(
+    route: String,
+    navController: NavController,
+    scope: CoroutineScope,
+    drawerState: DrawerState
+) {
+    scope.launch {
+        launch { drawerState.close() }
+        if (navController.currentDestination?.route != route) {
+            navController.navigate(route) {
+                popUpTo(navController.graph.findStartDestination().id) {
+                    saveState = false
+                }
+                launchSingleTop = true
+                restoreState = false
+            }
+        }
+    }
 }

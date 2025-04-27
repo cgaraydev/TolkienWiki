@@ -13,6 +13,7 @@ val Pink40 = Color(0xFF7D5260)
 
 
 val DarkGreen = Color(0xFF2E7D32)
+val DarkRed = Color(0xFFB71C1C)
 val EarthBrown = Color(0xFF5D4037)
 val RingGold = Color(0xFFF9A825)
 val Golden = Color(0xE6FFD700)
