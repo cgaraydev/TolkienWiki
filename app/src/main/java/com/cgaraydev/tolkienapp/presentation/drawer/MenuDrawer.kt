@@ -1,6 +1,5 @@
 package com.cgaraydev.tolkienapp.presentation.drawer
 
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
@@ -67,6 +66,15 @@ fun MenuDrawer(
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination?.route
     val snackbarHostState = remember { SnackbarHostState() }
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination?.route
+
+    val shouldShowFAB = currentDestination !in listOf(
+        Routes.QuizQuestions.route,
+        Routes.QuizResult.route,
+        Routes.MemoryGame.route
+    )
+
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -136,12 +144,19 @@ fun MenuDrawer(
                 )
             },
             floatingActionButton = {
-                DualFABsWithToggle(
-                    onBackClick = { navController.navigateUp() },
-                    viewModel = viewModel,
-                    navController = navController
-                )
-
+                if (shouldShowFAB) {
+                    Box(
+                        modifier = Modifier
+                            .navigationBarsPadding()
+                            .padding(bottom = 16.dp)
+                    ) {
+                        DualFABsWithToggle(
+                            onBackClick = { navController.navigateUp() },
+                            viewModel = viewModel,
+                            navController = navController
+                        )
+                    }
+                }
             },
             snackbarHost = {
                 SnackbarHost(

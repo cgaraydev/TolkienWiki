@@ -33,11 +33,11 @@ fun TolkienScreen() {
                 CompleteWorksSection()
             }
         }
-        item {
-            Column(modifier = Modifier.padding(16.dp)) {
-                DidYouKnowSection()
-            }
-        }
+//        item {
+//            Column(modifier = Modifier.padding(16.dp)) {
+//                DidYouKnowSection()
+//            }
+//        }
         item {
             YouTubeMediaSection()
             CustomSpacer(20)

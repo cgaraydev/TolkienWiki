@@ -2,6 +2,8 @@ package com.cgaraydev.tolkienapp.presentation.races
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.cgaraydev.tolkienapp.data.local.datalocal.EventData
+import com.cgaraydev.tolkienapp.data.local.datalocal.RaceData
 import com.cgaraydev.tolkienapp.data.models.Race
 import com.cgaraydev.tolkienapp.data.local.datalocal.racesList
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,6 +20,7 @@ class RacesViewModel @Inject constructor(
 
     val racesLocal = mutableStateOf(racesList)
 
+
     private val _raceDetails = MutableStateFlow<Race?>(null)
     val raceDetails: StateFlow<Race?> = _raceDetails.asStateFlow()
 
@@ -26,6 +29,7 @@ class RacesViewModel @Inject constructor(
 
     private val _errorDetails = MutableStateFlow<String?>(null)
     val errorDetails: StateFlow<String?> = _errorDetails.asStateFlow()
+
 
     fun loadRaceDetails(raceId: String) {
         _isLoadingDetails.value = true

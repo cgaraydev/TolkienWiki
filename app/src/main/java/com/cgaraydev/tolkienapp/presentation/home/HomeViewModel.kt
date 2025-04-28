@@ -117,13 +117,13 @@ class HomeViewModel @Inject constructor(
                 }
             }
 
-//            //Buscar en razas (similar)
-//            racesViewModel.races.value.forEach { race ->
-//                val score = calculateRelevanceScore(race, normalizedQuery)
-//                if (score > 0) {
-//                    results.add(SearchResult.RaceResult(race) to score)
-//                }
-//            }
+            //Buscar en razas (similar)
+            racesViewModel.racesLocal.value.forEach { race ->
+                val score = calculateRelevanceScore(race, normalizedQuery)
+                if (score > 0) {
+                    results.add(SearchResult.RaceResult(race) to score)
+                }
+            }
             // Buscar en eventos (similar)
             eventsViewModel.events.value.forEach { event ->
                 val score = calculateRelevanceScore(event, normalizedQuery)

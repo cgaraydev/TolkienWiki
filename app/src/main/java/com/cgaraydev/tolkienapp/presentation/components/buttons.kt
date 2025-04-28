@@ -1,7 +1,6 @@
 package com.cgaraydev.tolkienapp.presentation.components
 
 import android.view.MotionEvent
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateDpAsState
@@ -10,8 +9,6 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -20,26 +17,19 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -61,13 +51,13 @@ import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.presentation.home.HomeViewModel
 import com.cgaraydev.tolkienapp.ui.theme.Aniron
 import com.cgaraydev.tolkienapp.ui.theme.GlowContainer
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.ui.theme.GoldenButton
+import com.cgaraydev.tolkienapp.ui.theme.Gray
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -141,7 +131,9 @@ fun AnimatedGlowButtonCompact(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    glowColor: Color = GoldenButton
+    glowColor: Color = GoldenButton,
+    enabled: Boolean = true,
+    borderWidth: Dp = 2.dp
 ) {
     var isPressed by remember { mutableStateOf(false) }
     val glowAlpha by animateFloatAsState(
@@ -151,41 +143,53 @@ fun AnimatedGlowButtonCompact(
     )
     val infiniteGlow = rememberInfiniteTransition()
     val glow by infiniteGlow.animateFloat(
-        initialValue = 0.7f,
-        targetValue = 1f,
+        initialValue = if (enabled) 0.7f else 0f,
+        targetValue = if (enabled) 1f else 0f,
         animationSpec = infiniteRepeatable(
             animation = tween(1500, easing = FastOutSlowInEasing),
             repeatMode = RepeatMode.Reverse
         ),
         label = "InfiniteGlow"
     )
-    val borderColor = glowColor.copy(alpha = glow * glowAlpha)
+    val currentBorderColor = if (enabled) {
+        glowColor.copy(alpha = glow * glowAlpha)
+    } else {
+        Gray.copy(alpha = 0.2f)
+    }
     val scale by animateFloatAsState(
-        targetValue = if (isPressed) 0.98f else 1f,
+        targetValue = if (isPressed && enabled) 0.98f else 1f,
         animationSpec = tween(100)
     )
 
     Button(
         onClick = onClick,
+        enabled = enabled,
         colors = ButtonDefaults.buttonColors(
-            containerColor = GlowContainer,
-            contentColor = glowColor
+            containerColor = if (enabled) GlowContainer else Color.Black,
+            contentColor = if (enabled) glowColor else Color.Black,
+            disabledContentColor = Color.Black,
+            disabledContainerColor = Color.Black
         ),
-        border = BorderStroke(2.dp, borderColor),
+        border = BorderStroke(
+            width = borderWidth,
+            color = currentBorderColor
+        ),
         shape = RoundedCornerShape(12.dp),
         modifier = modifier
             .scale(scale)
             .height(55.dp) // un poquito más compacto
             .shadow(
-                elevation = 8.dp,
+                elevation = if (enabled) 8.dp else 0.dp,
                 shape = RoundedCornerShape(12.dp),
-                ambientColor = borderColor,
-                spotColor = borderColor
+                ambientColor = currentBorderColor,
+                spotColor = currentBorderColor
             )
             .pointerInteropFilter {
-                when (it.action) {
-                    MotionEvent.ACTION_DOWN -> isPressed = true
-                    MotionEvent.ACTION_UP -> isPressed = false
+                if (enabled) {
+                    when (it.action) {
+                        MotionEvent.ACTION_DOWN -> isPressed = true
+                        MotionEvent.ACTION_UP -> isPressed = false
+                    }
                 }
                 false
             }
@@ -194,7 +198,8 @@ fun AnimatedGlowButtonCompact(
             text = text,
             fontFamily = Aniron.bodyMedium.fontFamily,
             fontSize = 10.sp,
-            maxLines = 1
+            maxLines = 1,
+            color = if (enabled) glowColor else Gray.copy(alpha = 0.2f)
         )
     }
 }
@@ -264,7 +269,7 @@ fun DualFABsWithToggle(
 
     LaunchedEffect(showFABs) {
         if (showFABs) {
-            delay(3000)
+            delay(2000)
             showFABs = false
         }
     }

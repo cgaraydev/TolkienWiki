@@ -61,11 +61,6 @@ class MemoryViewModel @Inject constructor(
 
     private var isFirstMove = true
 
-//    val shouldDimBackground: StateFlow<Boolean> =
-//        combine(isGamePaused, gameState) { paused, state ->
-//            paused || state is GameState.FINISHED
-//        }.stateIn(viewModelScope, SharingStarted.Lazily, false)
-
     val shouldDimBackground: StateFlow<Boolean> =
         isGamePaused.stateIn(viewModelScope, SharingStarted.Lazily, false)
 

@@ -15,6 +15,7 @@ val racesList = listOf(
     RaceData("0", "Águilas", R.drawable.eagles,
         tags = listOf(
             "eagles",
+            "aguilas",
         )),
     RaceData("1", "Ainur", R.drawable.ainur,
         tags = listOf(
@@ -23,6 +24,7 @@ val racesList = listOf(
     RaceData("2", "Arañas", R.drawable.spiders,
         tags = listOf(
             "spiders",
+            "arañas",
         )),
     RaceData("3", "Balrogs", R.drawable.balrogs,
         tags = listOf(
@@ -31,14 +33,17 @@ val racesList = listOf(
     RaceData("4", "Dragones", R.drawable.dragons,
         tags = listOf(
             "dragons",
+            "dragones",
         )),
     RaceData("5", "Elfos", R.drawable.elves,
         tags = listOf(
             "elves",
+            "elfos",
         )),
     RaceData("6", "Enanos", R.drawable.dwarves,
         tags = listOf(
             "dwarves",
+            "enanos",
         )),
     RaceData("7", "Ents", R.drawable.ents,
         tags = listOf(
@@ -51,14 +56,17 @@ val racesList = listOf(
     RaceData("9", "Hombres", R.drawable.men,
         tags = listOf(
             "men",
+            "hombres",
         )),
     RaceData("10", "Huargos", R.drawable.wargs,
         tags = listOf(
             "wargs",
+            "huargos",
         )),
     RaceData("11", "Licántropos", R.drawable.werewolves,
         tags = listOf(
             "werewolves",
+            "licantropos",
         )),
     RaceData("12", "Nazgûl", R.drawable.nazgul,
         tags = listOf(
@@ -67,6 +75,7 @@ val racesList = listOf(
     RaceData("13", "Orcos", R.drawable.orcs,
         tags = listOf(
             "orcs",
+            "orcos"
         )),
     RaceData("14", "Trolls", R.drawable.trolls,
         tags = listOf(
@@ -75,5 +84,6 @@ val racesList = listOf(
     RaceData("15", "Ucornos", R.drawable.huorns,
         tags = listOf(
             "huorns",
+            "ucornos"
         ))
 )
