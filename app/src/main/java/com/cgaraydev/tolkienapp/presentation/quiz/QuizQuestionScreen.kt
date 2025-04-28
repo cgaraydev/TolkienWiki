@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -36,7 +37,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -105,10 +105,11 @@ fun QuizQuestionScreen(
             .padding(16.dp)
     ) {
         Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            modifier = Modifier
+                .fillMaxSize(),
         ) {
             QuizHeader(difficulty, currentIndex, questions.size)
+
 
             QuestionCard(
                 question = question,
@@ -117,6 +118,8 @@ fun QuizQuestionScreen(
                     viewModel.selectOption(option)
                 }
             )
+
+
             Spacer(modifier = Modifier.weight(1f))
             QuizActions(
                 currentIndex = currentIndex,
@@ -170,17 +173,17 @@ fun QuizHeader(
 }
 
 
-
 @Composable
 fun QuestionCard(
     question: QuizQuestion,
     selectedOption: String?,
+    modifier: Modifier = Modifier,
     onOptionSelected: (String) -> Unit
 ) {
     val showFeedback = selectedOption != null
 
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
         border = BorderStroke(2.dp, Golden.copy(alpha = 0.7f)),
         colors = CardDefaults.cardColors(
@@ -189,7 +192,9 @@ fun QuestionCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(
-            modifier = Modifier.padding(20.dp),
+            modifier = Modifier
+                .padding(20.dp)
+                .heightIn(max = 500.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
@@ -238,7 +243,6 @@ fun OptionButton(
 
     val backgroundColor = animateColorAsState(
         targetValue = when {
-//            !showFeedback && isSelected -> Golden.copy(alpha = 0.3f)
             showFeedback && isCorrect -> Color(0xFF4CAF50).copy(alpha = 0.3f)
             showFeedback && isSelected -> Color(0xFFF44336).copy(alpha = 0.3f)
             else -> Color.Transparent
@@ -247,7 +251,6 @@ fun OptionButton(
     )
     val borderColor = animateColorAsState(
         targetValue = when {
-//            !showFeedback && isSelected -> Golden
             showFeedback && isCorrect -> Color(0xFF4CAF50)
             showFeedback && isSelected -> Color(0xFFF44336)
             else -> Gray.copy(alpha = 0.5f)
@@ -335,7 +338,8 @@ fun FeedbackMessage(explanation: String, isCorrect: Boolean) {
             text = explanation,
             color = Color.White.copy(alpha = 0.9f),
             fontSize = 16.sp,
-            fontFamily = FontFamily(Font(R.font.cardo))
+            fontFamily = FontFamily(Font(R.font.cardo)),
+            modifier = Modifier.verticalScroll(rememberScrollState())
         )
     }
 }
@@ -350,28 +354,41 @@ private fun QuizActions(
     onFinish: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Row(
+    Surface(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
+        color = Color.Black,
+        shadowElevation = 8.dp
     ) {
-        AnimatedGlowButtonCompact(
-            text = "Terminar",
-            onClick = onFinish,
-            glowColor = QuizRed.copy(alpha = 0.7f),
-            borderWidth = 1.dp
-        )
-        if (currentIndex < totalQuestions - 1) {
+        Row(
+            modifier = Modifier.padding(vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
             AnimatedGlowButtonCompact(
-                text = "Siguiente",
-                onClick = onNext,
-                enabled = selectedOption != null
-            )
-        } else {
-            AnimatedGlowButtonCompact(
-                text = "Ver Resultados",
+                text = "Terminar",
                 onClick = onFinish,
-                enabled = selectedOption != null
+                glowColor = QuizRed.copy(alpha = 0.7f),
+                borderWidth = 1.dp,
+                modifier = Modifier.weight(1f),
+                height = 40.dp
             )
+            Spacer(modifier = Modifier.width(16.dp))
+            if (currentIndex < totalQuestions - 1) {
+                AnimatedGlowButtonCompact(
+                    text = "Siguiente",
+                    onClick = onNext,
+                    enabled = selectedOption != null,
+                    modifier = Modifier.weight(1f),
+                    height = 40.dp
+                )
+            } else {
+                AnimatedGlowButtonCompact(
+                    text = "Ver Resultados",
+                    onClick = onFinish,
+                    enabled = selectedOption != null,
+                    modifier = Modifier.weight(1f),
+                    height = 40.dp
+                )
+            }
         }
     }
 }

@@ -71,7 +71,6 @@ fun MenuDrawer(
 
     val shouldShowFAB = currentDestination !in listOf(
         Routes.QuizQuestions.route,
-        Routes.QuizResult.route,
         Routes.MemoryGame.route
     )
 

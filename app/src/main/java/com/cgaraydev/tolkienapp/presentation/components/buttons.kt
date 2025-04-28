@@ -26,6 +26,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
@@ -52,6 +53,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.cgaraydev.tolkienapp.navigation.Routes
 import com.cgaraydev.tolkienapp.presentation.home.HomeViewModel
 import com.cgaraydev.tolkienapp.ui.theme.Aniron
 import com.cgaraydev.tolkienapp.ui.theme.GlowContainer
@@ -133,7 +135,8 @@ fun AnimatedGlowButtonCompact(
     modifier: Modifier = Modifier,
     glowColor: Color = GoldenButton,
     enabled: Boolean = true,
-    borderWidth: Dp = 2.dp
+    borderWidth: Dp = 2.dp,
+    height: Dp = 55.dp
 ) {
     var isPressed by remember { mutableStateOf(false) }
     val glowAlpha by animateFloatAsState(
@@ -177,7 +180,7 @@ fun AnimatedGlowButtonCompact(
         shape = RoundedCornerShape(12.dp),
         modifier = modifier
             .scale(scale)
-            .height(55.dp) // un poquito más compacto
+            .height(height) // un poquito más compacto
             .shadow(
                 elevation = if (enabled) 8.dp else 0.dp,
                 shape = RoundedCornerShape(12.dp),
@@ -200,6 +203,62 @@ fun AnimatedGlowButtonCompact(
             fontSize = 10.sp,
             maxLines = 1,
             color = if (enabled) glowColor else Gray.copy(alpha = 0.2f)
+        )
+    }
+}
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+fun AnimatedButtonCompact(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    borderWidth: Dp = 2.dp,
+    height: Dp = 55.dp,
+    containerColor: Color = Color.Black,
+    color: Color = GoldenButton
+) {
+    var isPressed by remember { mutableStateOf(false) }
+
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed) 0.9f else 1f,
+        animationSpec = tween(100)
+    )
+
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = containerColor,
+//            contentColor = if (enabled) glowColor else Color.Black,
+//            disabledContentColor = Color.Black,
+//            disabledContainerColor = Color.Black
+        ),
+        border = BorderStroke(
+            width = borderWidth,
+            color = color
+        ),
+        shape = RoundedCornerShape(12.dp),
+        modifier = modifier
+            .scale(scale)
+            .height(height) // un poquito más compacto
+            .shadow(
+                elevation = 8.dp,
+                shape = RoundedCornerShape(12.dp)
+            )
+            .pointerInteropFilter {
+                when (it.action) {
+                    MotionEvent.ACTION_DOWN -> isPressed = true
+                    MotionEvent.ACTION_UP -> isPressed = false
+                }
+                false
+            }
+    ) {
+        Text(
+            text = text,
+            fontFamily = Aniron.bodyMedium.fontFamily,
+            fontSize = 10.sp,
+            maxLines = 1,
+            color = color
         )
     }
 }
@@ -269,7 +328,7 @@ fun DualFABsWithToggle(
 
     LaunchedEffect(showFABs) {
         if (showFABs) {
-            delay(2000)
+            delay(3000)
             showFABs = false
         }
     }
@@ -299,11 +358,24 @@ fun DualFABsWithToggle(
                 CustomFAB(
                     onClick = {
                         showFABs = false
+                        navController.navigate(Routes.Home.route)
+                    },
+                    icon = Icons.Default.Home,
+                    fabSize = 46.dp,
+                    iconSize = 22.dp,
+                    backgroundColor = Golden,
+                    iconColor = Color.Black,
+                    borderColor = Color.Black.copy(alpha = 0.8f),
+                    shape = RoundedCornerShape(14.dp)
+                )
+                CustomFAB(
+                    onClick = {
+                        showFABs = false
                         onBackClick()
                     },
                     icon = Icons.AutoMirrored.Filled.ArrowBack,
-                    fabSize = 48.dp,
-                    iconSize = 24.dp,
+                    fabSize = 46.dp,
+                    iconSize = 22.dp,
                     backgroundColor = Golden,
                     iconColor = Color.Black,
                     borderColor = Color.Black.copy(alpha = 0.8f),
@@ -316,7 +388,7 @@ fun DualFABsWithToggle(
                         showSearchDialog = true
                     },
                     icon = Icons.Default.Search,
-                    fabSize = 56.dp,
+                    fabSize = 72.dp,
                     iconSize = 28.dp,
                     backgroundColor = Color(0xFF333333),
                     iconColor = Golden,
@@ -334,41 +406,3 @@ fun DualFABsWithToggle(
         )
     }
 }
-
-//@Composable
-//fun DualFABS(
-//    onBackClick: () -> Unit,
-//    onSearchClick: () -> Unit,
-//    modifier: Modifier = Modifier
-//) {
-//    Box(
-//        contentAlignment = Alignment.BottomEnd,
-//        modifier = modifier.padding(bottom = 24.dp, end = 24.dp)
-//    ) {
-//        Column(
-//            horizontalAlignment = Alignment.End,
-//            verticalArrangement = Arrangement.spacedBy(12.dp) // Espacio entre los FABs
-//        ) {
-//            CustomFAB(
-//                onClick = onBackClick,
-//                icon = Icons.Default.ArrowBack,
-//                fabSize = 40.dp,
-//                iconSize = 24.dp,
-//                backgroundColor = Golden,
-//                iconColor = Color.Black,
-//                borderColor = Color.Black.copy(alpha = 0.8f),
-//                shape = RoundedCornerShape(14.dp)
-//            )
-//            CustomFAB(
-//                onClick = onSearchClick,
-//                icon = Icons.Default.Search,
-//                fabSize = 72.dp,
-//                iconSize = 32.dp,
-//                backgroundColor = Color(0xFF333333),
-//                iconColor = Golden,
-//                borderColor = Golden.copy(alpha = 0.7f),
-//                shape = RoundedCornerShape(18.dp)
-//            )
-//        }
-//    }
-//}

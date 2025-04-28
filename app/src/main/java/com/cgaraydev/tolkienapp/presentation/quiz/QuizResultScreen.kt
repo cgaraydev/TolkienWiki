@@ -9,7 +9,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,14 +16,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -43,11 +42,13 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.cgaraydev.tolkienapp.R
-import com.cgaraydev.tolkienapp.navigation.Routes
+import com.cgaraydev.tolkienapp.presentation.components.AnimatedButtonCompact
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 
 @Composable
@@ -98,7 +99,7 @@ fun QuizResultScreen(
                     text = when {
                         percentage >= 80 -> "¡Maestro de la Tierra Media!"
                         percentage >= 50 -> "¡Buen Conocimiento!"
-                        else -> "¡Sigue Aprendiendo!"
+                        else -> "¡Tienes la inteligencia de un Orco!"
                     },
                     color = Golden,
                     fontSize = 28.sp,
@@ -116,52 +117,22 @@ fun QuizResultScreen(
                 Text(
                     text = "Respuestas correctas:",
                     color = Color.White.copy(alpha = 0.8f),
-                    fontSize = 18.sp
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily(Font(R.font.cardo))
                 )
                 Text(
                     text = "$correctAnswers / $totalQuestions",
                     color = Golden,
                     fontSize = 32.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = "($percentage%)",
-                    color = when {
-                        percentage >= 80 -> Color(0xFF4CAF50)
-                        percentage >= 50 -> Color(0xFFFFC107)
-                        else -> Color(0xFFF44336)
-                    },
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = FontFamily(Font(R.font.ring_bearer_medium))
                 )
             }
 
-            // Botones de acción
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
-            ) {
-                OutlinedButton(
-                    onClick = { navController.popBackStack() },
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = Golden
-                    ),
-                    border = BorderStroke(1.dp, Golden)
-                ) {
-                    Text("Ver Detalles")
-                }
-
-                Button(
-                    onClick = { navController.navigate(Routes.QuizIntro.route) },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Golden,
-                        contentColor = Color.Black
-                    ),
-                    modifier = Modifier.width(180.dp)
-                ) {
-                    Text("Nuevo Quiz")
-                }
-            }
+            ResultButtons(
+                onFinish = { navController.popBackStack() }
+            )
+            Spacer(modifier = Modifier.height(36.dp))
         }
     }
 }
@@ -186,7 +157,6 @@ private fun ResultProgressIndicator(percentage: Int) {
                 style = Stroke(width = 12f)
             )
 
-            // Arco de progreso
             drawArc(
                 color = when {
                     percentage >= 80 -> Color(0xFF4CAF50)
@@ -200,7 +170,6 @@ private fun ResultProgressIndicator(percentage: Int) {
                 style = Stroke(width = 12f, cap = StrokeCap.Round)
             )
 
-            // Texto porcentual
             drawContext.canvas.nativeCanvas.apply {
                 drawText(
                     "$percentage%",
@@ -214,6 +183,44 @@ private fun ResultProgressIndicator(percentage: Int) {
                     }
                 )
             }
+        }
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFF000000)
+@Composable
+fun QuizResultScreenPreview() {
+    val navController = rememberNavController() // Necesitas NavController falso para la preview
+    QuizResultScreen(
+        navController = navController,
+        correctAnswers = 7,
+        totalQuestions = 10
+    )
+}
+
+@Composable
+private fun ResultButtons(
+    onFinish: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        color = Color.Transparent,
+        shadowElevation = 8.dp
+    ) {
+        Row(
+            modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            AnimatedButtonCompact(
+                text = "Jugar de nuevo",
+                onClick = onFinish,
+                modifier = Modifier.weight(1f),
+                containerColor = Golden,
+                color = Color.Black,
+                borderWidth = 0.1.dp,
+                height = 40.dp
+            )
         }
     }
 }
