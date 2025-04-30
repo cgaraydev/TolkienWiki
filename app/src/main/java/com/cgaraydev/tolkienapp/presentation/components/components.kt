@@ -107,7 +107,8 @@ fun ScreenHeader(
             text = label,
             color = Color.White,
             fontSize = 48.sp,
-            modifier = Modifier.align(Alignment.Center)
+            modifier = Modifier.align(Alignment.Center),
+            textAlign = TextAlign.Center
         )
     }
 }

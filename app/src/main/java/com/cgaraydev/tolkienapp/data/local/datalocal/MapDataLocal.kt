@@ -28,7 +28,7 @@ val mapsList = listOf(
         id = "2",
         name = "Beleriand",
         imageUrl = "https://firebasestorage.googleapis.com/v0/b/lotrwiki-2dd76.appspot.com/o/maps%2FBeleriand.jpg?alt=media&token=2bb5b6d5-4436-40af-8594-bc3511038d74",
-        thumbnailRes = R.drawable.thumb_beleriand
+        thumbnailRes = R.drawable.thumb_beleriand_map
     ),
     MapData(
         id = "3",

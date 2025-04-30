@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -178,6 +180,84 @@ fun <T> ExpandableSubCategory(
                         Box(modifier = Modifier.padding(horizontal = 8.dp)) {
                             content(item)
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun <T> ExpandableHorizontalSection(
+    title: String,
+    items: List<T>,
+    itemCount: Int = items.size,
+    titleTextStyle: TextStyle = TextStyle(
+        fontSize = 20.sp,
+        fontFamily = FontFamily(Font(R.font.cardo)),
+        color = Color.White
+    ),
+    countTextStyle: TextStyle = TextStyle(
+        fontSize = 14.sp,
+        color = Color.White,
+        fontFamily = FontFamily(Font(R.font.cardo))
+    ),
+    containerColor: Color = Color.Black,
+    borderColor: Color = Golden.copy(alpha = 0.5f),
+    contentPadding: PaddingValues = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
+    content: @Composable (T) -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    Card(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = containerColor,
+            contentColor = Color.White
+        ),
+        border = BorderStroke(1.dp, borderColor)
+    ) {
+        Column {
+            // Header (igual que en ExpandableSubCategory)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { expanded = !expanded }
+                    .padding(12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = title,
+                    style = titleTextStyle,
+                    modifier = Modifier.weight(1f)
+                )
+                if (items.isNotEmpty()) {
+                    Text(
+                        text = "($itemCount)",
+                        style = countTextStyle,
+                        modifier = Modifier.padding(end = 8.dp)
+                    )
+                }
+                Icon(
+                    imageVector = if (expanded) Icons.Default.KeyboardArrowUp
+                    else Icons.Default.KeyboardArrowDown,
+                    contentDescription = null,
+                    tint = Color.White
+                )
+            }
+
+            // Contenido horizontal (la diferencia principal)
+            AnimatedVisibility(visible = expanded && items.isNotEmpty()) {
+                LazyRow(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(contentPadding),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    contentPadding = PaddingValues(horizontal = 8.dp)
+                ) {
+                    items(items) { item ->
+                        content(item)
                     }
                 }
             }

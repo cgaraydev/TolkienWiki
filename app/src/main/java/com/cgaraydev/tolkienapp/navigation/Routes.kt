@@ -54,12 +54,17 @@ sealed class Routes(val route: String) {
         fun createRoute(difficulty: String) = "memoryGame/$difficulty"
     }
 
+    data object Books : Routes("books")
+    data object BookDetails : Routes("bookDetails/{bookId}") {
+        fun createRoute(bookId: String) = "bookDetails/$bookId"
+    }
+
+
 
 
 
 
 
     data object Movies : Routes("movies")
-    data object Books : Routes("books")
     data object Games : Routes("games")
 }

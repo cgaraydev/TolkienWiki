@@ -9,6 +9,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.cgaraydev.tolkienapp.presentation.books.BookDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.books.BooksScreen
 import com.cgaraydev.tolkienapp.presentation.characters.CharacterDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.characters.CharactersScreen
@@ -41,7 +42,7 @@ fun TolkienAppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.QuizIntro.route,
+        startDestination = Routes.Books.route,
         enterTransition = {
             slideIntoContainer(
                 AnimatedContentTransitionScope.SlideDirection.Left,
@@ -205,10 +206,19 @@ fun TolkienAppNavigation(
 
 
 
-
+        //BOOKS
         composable(Routes.Books.route) {
-            BooksScreen { navController.popBackStack() }
+            BooksScreen(navController = navController)
         }
+        composable(
+            route = Routes.BookDetails.route,
+            arguments = listOf(navArgument("bookId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val bookId =
+                backStackEntry.arguments?.getString("bookId") ?: return@composable
+            BookDetailsScreen(bookId = bookId, navController = navController)
+        }
+
 
 
 

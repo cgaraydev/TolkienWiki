@@ -44,12 +44,6 @@ data class TimelineEvent(
     val description: String = ""
 )
 
-data class Fact(
-    val title: String,
-    val detail: String,
-    val source: String
-)
-
 val tolkienVideos = listOf(
     YouTubeMediaItem(
         "La vida de J.R.R. Tolkien por Kai47",
@@ -264,49 +258,6 @@ fun TolkienBioData() {
         modifier = Modifier.padding(top = 4.dp)
     )
 }
-
-val tolkienFacts = listOf(
-    Fact(
-        "Creó 15 lenguas completas con gramática y vocabulario",
-        "Incluyendo quenya, sindarin y khuzdul. El quenya se inspiró en el finés.",
-        "https://tolkiengateway.net/wiki/Languages"
-    ),
-    Fact(
-        "Escribió 23 cartas anuales como Papá Noel (1920-1943)",
-        "Con ilustraciones y personajes como el Oso Polar y el elfo secretario Ilbereth.",
-        "https://es.wikipedia.org/wiki/Las_cartas_de_Pap%C3%A1_Noel"
-    ),
-    Fact(
-        "Gandalf se inspiró en una postal de montaña suiza",
-        "Durante un viaje en 1911, vio a un anciano con larga barba blanca y sombrero redondo.",
-        "https://lotr.fandom.com/wiki/Gandalf#Inspiration"
-    ),
-    Fact(
-        "Rechazó a los Beatles para la película de El Señor de los Anillos",
-        "En 1968, querían interpretar a los protagonistas (Lennon como Gollum).",
-        "https://tolkiengateway.net/wiki/The_Lord_of_the_Rings_movies#Earlier_attempts"
-    ),
-    Fact(
-        "Tradujo partes del Libro de Jonás para la Biblia de Jerusalén",
-        "Su versión se usó en la edición católica de 1966.",
-        "https://tolkiengateway.net/wiki/Bible_translation"
-    ),
-    Fact(
-        "Inventó la palabra 'hobbit' sin saber su origen",
-        "Apareció en un examen que corregía: \"En un agujero en el suelo vivía un hobbit\".",
-        "https://es.wikipedia.org/wiki/El_Hobbit#Origen"
-    ),
-    Fact(
-        "Fue amigo cercano de C.S. Lewis (autor de Narnia)",
-        "Se reunían en el grupo literario \"Los Inklings\" para leer sus obras.",
-        "https://tolkiengateway.net/wiki/Inklings"
-    ),
-    Fact(
-        "Luchó en la Batalla del Somme (1916)",
-        "Sobrevivió a una de las batallas más sangrientas de la Primera Guerra Mundial, donde perdió a dos amigos íntimos.",
-        "https://tolkiengateway.net/wiki/World_War_I"
-    )
-)
 
 val tolkienTimeline = listOf(
     TimelineEvent("1892", "Nacimiento", "Bloemfontein, Sudáfrica"),

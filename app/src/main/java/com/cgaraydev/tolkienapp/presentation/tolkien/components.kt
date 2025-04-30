@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -35,7 +34,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -46,7 +44,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
@@ -300,84 +297,6 @@ fun ExpandableTimelineSection() {
                     .background(Golden.copy(alpha = 0.2f))
                     .padding(vertical = 8.dp)
             )
-        }
-    }
-}
-
-@Composable
-fun DidYouKnowSection() {
-   val facts = tolkienFacts
-    var expandedFactIndex by remember { mutableIntStateOf(-1) }
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
-        Text(
-            text = "¿Sabías que...?",
-            color = Golden,
-            fontSize = 24.sp,
-            fontFamily = FontFamily(Font(R.font.ring_bearer_medium)),
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-
-        facts.forEachIndexed { index, fact ->
-            Card(
-                shape = RoundedCornerShape(8.dp),
-                elevation = CardDefaults.cardElevation(2.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 6.dp)
-                    .clickable {
-                        expandedFactIndex = if (expandedFactIndex == index) -1 else index
-                    },
-                colors = CardDefaults.cardColors(
-                    containerColor = DarkGray.copy(alpha = 0.2f)
-                )
-            ) {
-                Column(
-                    modifier = Modifier.padding(12.dp)
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = fact.title,
-                            color = White,
-                            fontSize = 14.sp,
-                            modifier = Modifier.weight(1f)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Icon(
-                            imageVector = if (expandedFactIndex == index)
-                                Icons.Default.KeyboardArrowUp
-                            else
-                                Icons.Default.KeyboardArrowDown,
-                            contentDescription = if (expandedFactIndex == index)
-                                "Mostrar menos"
-                            else
-                                "Mostrar más",
-                            tint = Golden
-                        )
-                    }
-                    AnimatedVisibility(visible = expandedFactIndex == index) {
-                        Column(modifier = Modifier.padding(top = 8.dp)) {
-                            Text(
-                                text = fact.detail,
-                                color = LightGray,
-                                fontSize = 13.sp,
-                                lineHeight = 18.sp
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Text(
-                                text = "Fuente: ${fact.source}",
-                                color = LightGray.copy(alpha = 0.7f),
-                                fontSize = 10.sp,
-                                fontStyle = FontStyle.Italic
-                            )
-                        }
-                    }
-                }
-            }
         }
     }
 }

@@ -147,6 +147,11 @@ private fun handleCustomLink(
             if (id.isNotEmpty()) navController.navigate(Routes.LanguageDetails.createRoute(id)) else onInvalid()
         }
 
+        url.startsWith("book:") -> {
+            val id = url.substringAfter("book:")
+            if (id.isNotEmpty()) navController.navigate(Routes.BookDetails.createRoute(id)) else onInvalid()
+        }
+
         else -> onInvalid()
     }
 
@@ -160,6 +165,7 @@ private fun isValidCustomLink(url: String): Boolean {
         url.startsWith("event:") -> url.substringAfter("event:").isNotEmpty()
         url.startsWith("other:") -> url.substringAfter("other:").isNotEmpty()
         url.startsWith("language:") -> url.substringAfter("language:").isNotEmpty()
+        url.startsWith("book:") -> url.substringAfter("book:").isNotEmpty()
         else -> Patterns.WEB_URL.matcher(url).matches()
     }
 }
