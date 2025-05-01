@@ -207,6 +207,7 @@ fun SearchResultItem(
                         is SearchResult.LanguageResult -> painterResource(R.drawable.ic_language)
                         is SearchResult.OtherResult -> painterResource(R.drawable.ic_ring)
                         is SearchResult.RaceResult -> painterResource(R.drawable.ic_race)
+                        is SearchResult.BookResult -> painterResource(R.drawable.ic_books)
                     },
                     contentDescription = null,
                     tint = Golden,
@@ -231,6 +232,7 @@ fun SearchResultItem(
                         is SearchResult.LanguageResult -> "Lengua/Escritura"
                         is SearchResult.OtherResult -> "Otro"
                         is SearchResult.RaceResult -> "Raza"
+                        is SearchResult.BookResult -> "Libro"
                     },
                     color = Golden.copy(alpha = 0.6f),
                     style = MaterialTheme.typography.bodySmall.copy(

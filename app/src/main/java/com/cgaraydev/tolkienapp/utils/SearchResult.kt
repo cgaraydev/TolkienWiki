@@ -1,6 +1,7 @@
 package com.cgaraydev.tolkienapp.utils
 
 import androidx.navigation.NavController
+import com.cgaraydev.tolkienapp.data.local.datalocal.BookData
 import com.cgaraydev.tolkienapp.data.local.datalocal.CharacterData
 import com.cgaraydev.tolkienapp.data.local.datalocal.EventData
 import com.cgaraydev.tolkienapp.data.local.datalocal.LanguageData
@@ -15,6 +16,7 @@ sealed class SearchResult {
     data class EventResult(val data: EventData) : SearchResult()
     data class LanguageResult(val data: LanguageData) : SearchResult()
     data class OtherResult(val data: OtherData) : SearchResult()
+    data class BookResult(val data: BookData) : SearchResult()
 
     val id: String
         get() = when (this) {
@@ -24,6 +26,7 @@ sealed class SearchResult {
             is LanguageResult -> data.id
             is OtherResult -> data.id
             is RaceResult -> data.id
+            is BookResult -> data.id
         }
 
     val name: String
@@ -34,6 +37,7 @@ sealed class SearchResult {
             is LanguageResult -> data.name
             is OtherResult -> data.name
             is RaceResult -> data.name
+            is BookResult -> data.title
         }
 
     val type: String
@@ -44,6 +48,7 @@ sealed class SearchResult {
             is LanguageResult -> "language"
             is OtherResult -> "other"
             is RaceResult -> "race"
+            is BookResult -> "book"
         }
 
 
@@ -68,5 +73,8 @@ fun navigateToDetails(result: SearchResult, navController: NavController) {
 
         is SearchResult.RaceResult ->
             navController.navigate("raceDetails/${result.data.id}")
+
+        is SearchResult.BookResult ->
+            navController.navigate("bookDetails/${result.data.id}")
     }
 }

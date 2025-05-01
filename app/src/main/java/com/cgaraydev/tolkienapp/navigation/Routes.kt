@@ -59,6 +59,8 @@ sealed class Routes(val route: String) {
         fun createRoute(bookId: String) = "bookDetails/$bookId"
     }
 
+    data object RoleGame : Routes("roleGame")
+
 
 
 

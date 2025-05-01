@@ -1,5 +1,6 @@
 package com.cgaraydev.tolkienapp.di
 
+import com.cgaraydev.tolkienapp.presentation.books.BooksViewModel
 import com.cgaraydev.tolkienapp.presentation.characters.CharactersViewModel
 import com.cgaraydev.tolkienapp.presentation.events.EventsViewModel
 import com.cgaraydev.tolkienapp.presentation.languages.LanguagesViewModel
@@ -51,6 +52,12 @@ object ViewModelModule {
     @ViewModelScoped
     fun provideOthersViewModel(): OthersViewModel {
         return OthersViewModel(FirebaseFirestore.getInstance())
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideBooksViewModel(): BooksViewModel {
+        return BooksViewModel(FirebaseFirestore.getInstance())
     }
 
 }

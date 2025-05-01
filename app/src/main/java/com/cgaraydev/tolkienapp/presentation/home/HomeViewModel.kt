@@ -2,12 +2,14 @@ package com.cgaraydev.tolkienapp.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cgaraydev.tolkienapp.data.local.datalocal.BookData
 import com.cgaraydev.tolkienapp.data.local.datalocal.CharacterData
 import com.cgaraydev.tolkienapp.data.local.datalocal.EventData
 import com.cgaraydev.tolkienapp.data.local.datalocal.LanguageData
 import com.cgaraydev.tolkienapp.data.local.datalocal.LocationData
 import com.cgaraydev.tolkienapp.data.local.datalocal.OtherData
 import com.cgaraydev.tolkienapp.data.local.datalocal.RaceData
+import com.cgaraydev.tolkienapp.presentation.books.BooksViewModel
 import com.cgaraydev.tolkienapp.presentation.characters.CharactersViewModel
 import com.cgaraydev.tolkienapp.presentation.events.EventsViewModel
 import com.cgaraydev.tolkienapp.presentation.languages.LanguagesViewModel
@@ -29,7 +31,8 @@ class HomeViewModel @Inject constructor(
     private val racesViewModel: RacesViewModel,
     private val eventsViewModel: EventsViewModel,
     private val languagesViewModel: LanguagesViewModel,
-    private val othersViewModel: OthersViewModel
+    private val othersViewModel: OthersViewModel,
+    private val booksViewModel: BooksViewModel
 ) : ViewModel() {
 
     // Resultados de búsqueda unificados
@@ -53,6 +56,7 @@ class HomeViewModel @Inject constructor(
             is EventData -> calculateScoreForItem(item.name, item.tags, queryParts)
             is LanguageData -> calculateScoreForItem(item.name, item.tags, queryParts)
             is OtherData -> calculateScoreForItem(item.name, item.tags, queryParts)
+            is BookData -> calculateScoreForItem(item.title, item.tags, queryParts)
             else -> 0
         }
     }
@@ -143,6 +147,13 @@ class HomeViewModel @Inject constructor(
                 val score = calculateRelevanceScore(other, normalizedQuery)
                 if (score > 0) {
                     results.add(SearchResult.OtherResult(other) to score)
+                }
+            }
+
+            booksViewModel.books.value.forEach { book ->
+                val score = calculateRelevanceScore(book, normalizedQuery)
+                if (score > 0) {
+                    results.add(SearchResult.BookResult(book) to score)
                 }
             }
 

@@ -33,6 +33,7 @@ import com.cgaraydev.tolkienapp.presentation.quiz.QuizQuestionScreen
 import com.cgaraydev.tolkienapp.presentation.quiz.QuizResultScreen
 import com.cgaraydev.tolkienapp.presentation.races.RaceDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.races.RacesScreen
+import com.cgaraydev.tolkienapp.presentation.role.RoleScreen
 import com.cgaraydev.tolkienapp.presentation.tolkien.TolkienScreen
 
 @Composable
@@ -42,7 +43,7 @@ fun TolkienAppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.Books.route,
+        startDestination = Routes.RoleGame.route,
         enterTransition = {
             slideIntoContainer(
                 AnimatedContentTransitionScope.SlideDirection.Left,
@@ -217,6 +218,10 @@ fun TolkienAppNavigation(
             val bookId =
                 backStackEntry.arguments?.getString("bookId") ?: return@composable
             BookDetailsScreen(bookId = bookId, navController = navController)
+        }
+
+        composable(Routes.RoleGame.route){
+            RoleScreen(navController = navController)
         }
 
 
