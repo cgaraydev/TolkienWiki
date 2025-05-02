@@ -60,8 +60,9 @@ class RoleViewModel @Inject constructor(
                 current.copy(
                     health = (current.health + (effects.health ?: 0)).coerceAtLeast(0),
                     strength = (current.strength + (effects.strength ?: 0)).coerceAtLeast(0),
-                    stealth = (current.stealth + (effects.stealth ?: 0)).coerceAtLeast(0),
-                    morality = (current.morality + (effects.morality ?: 0)).coerceAtLeast(0),
+
+//                    stealth = (current.stealth + (effects.stealth ?: 0)).coerceAtLeast(0),
+//                    morality = (current.morality + (effects.morality ?: 0)).coerceAtLeast(0),
                     items = current.items + (effects.items ?: emptyList()),
                     allies = current.allies + (effects.allies ?: emptyList())
                 )

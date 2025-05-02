@@ -32,3 +32,10 @@ val MatchGreen = Color(0xFF4CAF50)
 
 val GoldenButton = Color(0xFFE1C16E)
 val GlowContainer = Color(0xFF1E1E1E)
+
+val HealthRed = Color(0xFFFF6B6B)
+val StrengthBlue = Color(0xFF6B8CFF)
+val DefensePurple = Color(0xFF9B6BFF)
+val AgilityGold = Color(0xFFFFD700)
+val IntelligenceCyan = Color(0xFF6BFFFF)
+val LuckGreen = Color(0xFF6BFF6B)

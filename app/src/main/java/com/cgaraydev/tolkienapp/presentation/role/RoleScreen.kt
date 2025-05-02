@@ -12,10 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -32,7 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -45,7 +41,13 @@ import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.models.Option
 import com.cgaraydev.tolkienapp.data.models.PlayerState
 import com.cgaraydev.tolkienapp.data.models.Scenario
+import com.cgaraydev.tolkienapp.ui.theme.AgilityGold
+import com.cgaraydev.tolkienapp.ui.theme.DefensePurple
 import com.cgaraydev.tolkienapp.ui.theme.Golden
+import com.cgaraydev.tolkienapp.ui.theme.HealthRed
+import com.cgaraydev.tolkienapp.ui.theme.IntelligenceCyan
+import com.cgaraydev.tolkienapp.ui.theme.LuckGreen
+import com.cgaraydev.tolkienapp.ui.theme.StrengthBlue
 
 @Composable
 fun RoleScreen(
@@ -56,11 +58,6 @@ fun RoleScreen(
     val currentScenario by viewModel.currentScenario.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val errorMessage = remember { mutableStateOf<String?>(null) }
-
-    // Cargar escenario inicial al iniciar
-//    LaunchedEffect(Unit) {
-//        viewModel.loadInitialScenario()
-//    }
 
     LaunchedEffect(Unit) {
         try {
@@ -131,35 +128,64 @@ fun PlayerStatsHeader(playerState: PlayerState) {
         border = BorderStroke(1.dp, Golden.copy(alpha = 0.5f))
     ) {
         Row(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            StatItem(icon = Icons.Default.Favorite, value = playerState.health, color = Golden)
-            StatItem(icon = Icons.Default.Close, value = playerState.strength, color = Golden)
-            StatItem(icon = Icons.Default.Close, value = playerState.stealth, color = Golden)
-            StatItem(icon = Icons.Default.Star, value = playerState.morality, color = Golden)
+            StatItem(
+                icon = R.drawable.ic_health,
+                value = playerState.health,
+                color = HealthRed
+            )
+            StatItem(
+                icon = R.drawable.ic_strength,
+                value = playerState.strength,
+                color = StrengthBlue
+            )
+            StatItem(
+                icon = R.drawable.ic_shield,
+                value = playerState.defense,
+                color = DefensePurple
+            )
+            StatItem(
+                icon = R.drawable.ic_agility,
+                value = playerState.agility,
+                color = AgilityGold
+            )
+            StatItem(
+                icon = R.drawable.ic_intelligence,
+                value = playerState.wisdom,
+                color = IntelligenceCyan
+            )
+            StatItem(
+                icon = R.drawable.ic_luck,
+                value = playerState.luck,
+                color = LuckGreen
+            )
+
         }
     }
 }
 
 @Composable
-fun StatItem(icon: ImageVector, value: Int, color: Color) {
+fun StatItem(icon: Int, value: Int, color: Color) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
     ) {
         Icon(
-            imageVector = icon,
+            painter = painterResource(icon),
             contentDescription = null,
             tint = color,
-            modifier = Modifier.size(20.dp)
+            modifier = Modifier.size(18.dp)
         )
-        Spacer(modifier = Modifier.width(4.dp))
+        Spacer(modifier = Modifier.width(6.dp))
         Text(
             text = value.toString(),
             color = Color.White,
             fontFamily = FontFamily(Font(R.font.cardo)),
-            fontSize = 16.sp
+            fontSize = 18.sp
         )
     }
 }
@@ -228,7 +254,9 @@ fun OptionButton(text: String, onClick: () -> Unit) {
             text = text,
             fontFamily = FontFamily(Font(R.font.cardo)),
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(4.dp)
+            modifier = Modifier.padding(4.dp),
+            color = Color.White,
+            fontSize = 16.sp
         )
     }
 }
