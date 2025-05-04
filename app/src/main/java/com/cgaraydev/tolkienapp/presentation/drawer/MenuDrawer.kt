@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,6 +19,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -49,6 +51,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.cgaraydev.tolkienapp.navigation.Routes
 import com.cgaraydev.tolkienapp.navigation.TolkienAppNavigation
+import com.cgaraydev.tolkienapp.presentation.components.AudioControlsToggle
 import com.cgaraydev.tolkienapp.presentation.components.DualFABsWithToggle
 import com.cgaraydev.tolkienapp.presentation.components.GlowingSnackbar
 import com.cgaraydev.tolkienapp.presentation.home.HomeViewModel
@@ -71,7 +74,8 @@ fun MenuDrawer(
 
     val shouldShowFAB = currentDestination !in listOf(
         Routes.QuizQuestions.route,
-        Routes.MemoryGame.route
+        Routes.MemoryGame.route,
+        Routes.RoleGame.route
     )
 
 
@@ -82,7 +86,8 @@ fun MenuDrawer(
             ModalDrawerSheet(drawerContentColor = Color.White, drawerContainerColor = Color.Black) {
                 Column(
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxHeight()
+                        .width(300.dp)
                         .background(Color.Black)
                 ) {
                     val sections = remember { Items.sections }
@@ -134,6 +139,7 @@ fun MenuDrawer(
                             Icon(imageVector = Icons.Default.Menu, contentDescription = "Menu")
                         }
                     },
+                    actions = { AudioControlsToggle(viewModel) },
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = Color.Black,
                         titleContentColor = Color.White,

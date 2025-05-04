@@ -12,8 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.cgaraydev.tolkienapp.ui.theme.Golden
@@ -39,7 +41,8 @@ fun DrawerItem(
                 text = label,
                 style = MaterialTheme.typography.bodyMedium,
                 color = if (selected) Golden else Color.White,
-                modifier = Modifier.padding(start = 8.dp)
+                modifier = Modifier.padding(start = 8.dp),
+                fontSize = 16.sp
             )
         },
         icon = {
@@ -60,9 +63,10 @@ fun DrawerItem(
             )
         },
         colors = NavigationDrawerItemDefaults.colors(
-            selectedContainerColor = GoldenLight,
+            selectedContainerColor = Color.LightGray.copy(alpha = 0.1f),
             unselectedContainerColor = Color.Black
         ),
+        shape = RectangleShape
     )
 }
 

@@ -79,6 +79,10 @@ dependencies {
 
     implementation("com.google.accompanist:accompanist-navigation-animation:0.33.2-alpha")
 
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.media3.common)
+
 
 
 }

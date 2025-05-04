@@ -32,18 +32,16 @@ class HomeViewModel @Inject constructor(
     private val eventsViewModel: EventsViewModel,
     private val languagesViewModel: LanguagesViewModel,
     private val othersViewModel: OthersViewModel,
-    private val booksViewModel: BooksViewModel
+    private val booksViewModel: BooksViewModel,
 ) : ViewModel() {
 
-    // Resultados de búsqueda unificados
     private val _searchResults = MutableStateFlow<List<SearchResult>>(emptyList())
     val searchResults: StateFlow<List<SearchResult>> = _searchResults.asStateFlow()
 
-    // Estado de carga
     private val _isSearching = MutableStateFlow(false)
     val isSearching: StateFlow<Boolean> = _isSearching.asStateFlow()
 
-    // Modelo para resultados unificados
+       // Modelo para resultados unificados
 
     private fun calculateRelevanceScore(item: Any, query: String): Int {
         val queryParts = query.lowercase().split(" ").filter { it.isNotBlank() }
@@ -170,4 +168,6 @@ class HomeViewModel @Inject constructor(
     fun clearSearch() {
         _searchResults.value = emptyList()
     }
+
+
 }

@@ -10,7 +10,6 @@ data class PlayerState(
     val items: List<String> = emptyList(),
     val allies: List<String> = emptyList()
 ) {
-    // Función para aplicar efectos garantizando mínimos
     fun applyEffects(effects: Map<String, Int>): PlayerState {
         var newState = this.copy()
 

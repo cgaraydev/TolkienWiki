@@ -120,6 +120,13 @@ object Items {
                     Routes.MemoryIntro.route
                 ),
                 Item(
+                    "RPG de texto",
+                    false,
+                    R.drawable.ic_strength,
+                    "RPG",
+                    Routes.RoleGame.route
+                ),
+                Item(
                     "Memes",
                     false,
                     R.drawable.ic_meme,

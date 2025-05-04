@@ -1,9 +1,7 @@
 package com.cgaraydev.tolkienapp.di
 
 import android.content.Context
-import com.cgaraydev.tolkienapp.presentation.characters.CharactersViewModel
-import com.cgaraydev.tolkienapp.presentation.events.EventsViewModel
-import com.cgaraydev.tolkienapp.presentation.locations.LocationsViewModel
+import com.cgaraydev.tolkienapp.utils.AudioManager
 import com.cgaraydev.tolkienapp.utils.BestTimesManager
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
@@ -27,6 +25,12 @@ object AppModule {
     @Singleton
     fun provideBestTimesManager(@ApplicationContext context: Context): BestTimesManager {
         return BestTimesManager(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAudioManager(@ApplicationContext context: Context): AudioManager {
+        return AudioManager(context)
     }
 
 }

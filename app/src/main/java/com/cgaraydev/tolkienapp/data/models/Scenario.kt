@@ -4,5 +4,5 @@ data class Scenario(
     val scenarioId: String = "",
     val title: String = "",
     val text: String = "",
-    val options: List<Option> = emptyList()
+    val decision: List<Option> = emptyList()
 )

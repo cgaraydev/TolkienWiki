@@ -43,7 +43,7 @@ fun TolkienAppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.RoleGame.route,
+        startDestination = Routes.Home.route,
         enterTransition = {
             slideIntoContainer(
                 AnimatedContentTransitionScope.SlideDirection.Left,
@@ -221,7 +221,7 @@ fun TolkienAppNavigation(
         }
 
         composable(Routes.RoleGame.route){
-            RoleScreen(navController = navController)
+            RoleScreen(navController)
         }
 
 

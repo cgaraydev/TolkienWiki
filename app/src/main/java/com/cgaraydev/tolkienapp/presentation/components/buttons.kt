@@ -1,6 +1,7 @@
 package com.cgaraydev.tolkienapp.presentation.components
 
 import android.view.MotionEvent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateDpAsState
@@ -9,6 +10,12 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkHorizontally
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -17,11 +24,13 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -32,11 +41,16 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -49,12 +63,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInteropFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.navigation.Routes
 import com.cgaraydev.tolkienapp.presentation.home.HomeViewModel
+import com.cgaraydev.tolkienapp.presentation.music.MusicViewModel
 import com.cgaraydev.tolkienapp.ui.theme.Aniron
 import com.cgaraydev.tolkienapp.ui.theme.GlowContainer
 import com.cgaraydev.tolkienapp.ui.theme.Golden
@@ -228,10 +245,7 @@ fun AnimatedButtonCompact(
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = containerColor,
-//            contentColor = if (enabled) glowColor else Color.Black,
-//            disabledContentColor = Color.Black,
-//            disabledContainerColor = Color.Black
+            containerColor = containerColor
         ),
         border = BorderStroke(
             width = borderWidth,
@@ -381,7 +395,6 @@ fun DualFABsWithToggle(
                     borderColor = Color.Black.copy(alpha = 0.8f),
                     shape = RoundedCornerShape(14.dp)
                 )
-
                 CustomFAB(
                     onClick = {
                         showFABs = false
@@ -404,5 +417,134 @@ fun DualFABsWithToggle(
             viewModel = viewModel,
             navController = navController
         )
+    }
+}
+
+@Composable
+fun AudioControls(
+    viewModel: MusicViewModel,
+    onInteraction: () -> Unit
+) {
+    val isMuted by viewModel.isMuted.collectAsState()
+    val isPlaying by viewModel.isPlaying.collectAsState()
+    val currentVolume by viewModel.currentVolume.collectAsState()
+    var showVolumeSlider by remember { mutableStateOf(false) }
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        IconButton(
+            onClick = {
+                showVolumeSlider = !showVolumeSlider
+                onInteraction()
+            }
+        ) {
+            Icon(
+                painter = painterResource(
+                    if (isMuted) R.drawable.ic_mute
+                    else if (currentVolume > 0.66f) R.drawable.ic_unmute
+                    else if (currentVolume > 0.33f) R.drawable.ic_volume_mid
+                    else R.drawable.ic_mute
+                ),
+                contentDescription = "Ajustar volumen",
+                tint = Color.White,
+                modifier = Modifier.size(20.dp)
+            )
+        }
+        AnimatedVisibility(
+            visible = showVolumeSlider,
+            enter = fadeIn() + expandHorizontally(),
+            exit = fadeOut() + shrinkHorizontally()
+        ) {
+            Slider(
+                value = currentVolume,
+                onValueChange = {
+                    viewModel.setVolume(it)
+                    onInteraction()
+                },
+                modifier = Modifier
+                    .width(100.dp)
+                    .padding(start = 4.dp),
+                valueRange = 0f..1f,
+                colors = SliderDefaults.colors(
+                    thumbColor = Color.White,
+                    activeTrackColor = Color.White,
+                    inactiveTrackColor = Color.Gray
+                )
+            )
+        }
+        IconButton(
+            onClick = {
+                viewModel.togglePlayPause()
+                onInteraction()
+            }
+        ) {
+            Icon(
+                painter = painterResource(if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play),
+                contentDescription = if (isPlaying) "Pausar" else "Reproducir",
+                tint = Color.White
+            )
+        }
+        IconButton(
+            onClick = {
+                viewModel.nextTrack()
+                onInteraction()
+            }
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.ic_forward),
+                contentDescription = "Siguiente pista",
+                tint = Color.White
+            )
+        }
+    }
+}
+
+@Composable
+fun AudioControlsToggle(viewModel: MusicViewModel) {
+    var expanded by remember { mutableStateOf(false) }
+    var lastInteractionTime by remember { mutableLongStateOf(System.currentTimeMillis()) }
+
+    fun updateInteractionTime() {
+        lastInteractionTime = System.currentTimeMillis()
+    }
+
+    LaunchedEffect(expanded, lastInteractionTime) {
+        if (expanded) {
+            delay(5000)
+            val elapsed = System.currentTimeMillis() - lastInteractionTime
+            if (elapsed >= 5000) {
+                expanded = false
+            }
+        }
+    }
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        AnimatedVisibility(
+            visible = expanded,
+            enter = slideInHorizontally(initialOffsetX = { it }) + fadeIn(),
+            exit = slideOutHorizontally(targetOffsetX = { it }) + fadeOut()
+        ) {
+            AudioControls(viewModel, ::updateInteractionTime)
+        }
+
+        IconButton(
+            onClick = {
+                expanded = !expanded
+                updateInteractionTime()
+            }
+        ) {
+            Icon(
+                painter = painterResource(
+                    if (expanded) R.drawable.ic_right else R.drawable.ic_music
+                ),
+                contentDescription = if (expanded) "Ocultar controles" else "Mostrar controles de música",
+                tint = Color.White,
+                modifier = Modifier.size(20.dp)
+            )
+        }
     }
 }
