@@ -1,5 +1,6 @@
 package com.cgaraydev.tolkienapp.presentation.drawer
 
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
@@ -39,12 +40,14 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -55,13 +58,15 @@ import com.cgaraydev.tolkienapp.presentation.components.AudioControlsToggle
 import com.cgaraydev.tolkienapp.presentation.components.DualFABsWithToggle
 import com.cgaraydev.tolkienapp.presentation.components.GlowingSnackbar
 import com.cgaraydev.tolkienapp.presentation.home.HomeViewModel
+import com.cgaraydev.tolkienapp.presentation.music.MusicViewModel
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuDrawer(
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    musicViewModel: MusicViewModel = hiltViewModel()
 ) {
     val navController = rememberNavController()
     val scope = rememberCoroutineScope()
@@ -77,7 +82,6 @@ fun MenuDrawer(
         Routes.MemoryGame.route,
         Routes.RoleGame.route
     )
-
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -134,12 +138,14 @@ fun MenuDrawer(
                             text = ""
                         )
                     },
+                    actions = {
+                        AudioControlsToggle(musicViewModel)
+                    },
                     navigationIcon = {
                         IconButton(onClick = { coroutineScope.launch { drawerState.open() } }) {
                             Icon(imageVector = Icons.Default.Menu, contentDescription = "Menu")
                         }
                     },
-                    actions = { AudioControlsToggle(viewModel) },
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = Color.Black,
                         titleContentColor = Color.White,
@@ -194,7 +200,6 @@ fun MenuDrawer(
                     snackbarHostState = snackbarHostState
                 )
             }
-
         }
     }
 }
