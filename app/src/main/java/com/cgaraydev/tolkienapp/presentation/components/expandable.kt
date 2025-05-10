@@ -38,7 +38,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
@@ -121,13 +120,13 @@ fun <T> ExpandableSubCategory(
     items: List<T>,
     itemCount: Int = items.size,
     titleTextStyle: TextStyle = TextStyle(
-        fontSize = 18.sp,
+        fontSize = 24.sp,
         fontFamily = FontFamily(Font(R.font.cardo)),
         color = Color.White
     ),
     countTextStyle: TextStyle = TextStyle(
-        fontSize = 14.sp,
-        color = Color.White,
+        fontSize = 16.sp,
+        color = Color.White.copy(alpha = 0.7f),
         fontFamily = FontFamily(Font(R.font.cardo))
     ),
     containerColor: Color = Color.Black,
@@ -267,18 +266,15 @@ fun <T> ExpandableHorizontalSection(
 
 
 @Composable
-fun <T> ListItem(
-    item: T,
+fun ListItem(
     text: String,
     onClick: () -> Unit,
     textStyle: TextStyle = TextStyle(
-        fontSize = 20.sp,
+        fontSize = 16.sp,
         fontFamily = FontFamily(Font(R.font.cardo)),
         color = Color.White
     ),
     containerColor: Color = Color.Black,
-//    icon: Painter = painterResource(R.drawable.ic_forward),
-//    iconTint: Color = Color.White,
     showDivider: Boolean = true,
     dividerColor: Color = Golden.copy(alpha = 0.5f),
     dividerPadding: PaddingValues = PaddingValues(horizontal = 16.dp)
@@ -303,7 +299,7 @@ fun <T> ListItem(
                     modifier = Modifier.weight(1f)
                 )
                 Icon(
-                    painter = painterResource(R.drawable.ic_forward),
+                    painter = painterResource(R.drawable.ic_right),
                     contentDescription = null,
                     tint = Color.White
                 )

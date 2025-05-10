@@ -39,3 +39,12 @@ val DefensePurple = Color(0xFF9B6BFF)
 val AgilityGold = Color(0xFFFFD700)
 val IntelligenceCyan = Color(0xFF6BFFFF)
 val LuckGreen = Color(0xFF6BFF6B)
+
+val ClassicOrange = Color(0xE6FFA500) // naranja clásico
+val DeepOrange = Color(0xE6FF8C00) // naranja profundo
+val Amber = Color(0xE6FFC107) // ámbar, más claro y brillante
+val BurntOrange = Color(0xE6CC5500) // naranja quemado, más terroso
+val SunsetOrange = Color(0xE6FD5E53) // naranja rojizo suave
+val Tangerine = Color(0xE6F28500) // naranja vibrante, más saturado
+val Coral = Color(0xE6FF7F50) // coral, entre naranja y rosa
+val Pumpkin = Color(0xE6FF7518) // naranja calabaza

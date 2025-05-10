@@ -23,4 +23,9 @@
     <string name="link_down">No se pudo abrir el enlace</string>
     <string name="good">Bien</string>
     <string name="bad">Mal</string>
+    <string name="events">Eventos</string>
+    <string name="others">Otros</string>
+    <string name="languages">Lenguas</string>
+    <string name="locations">Ubicaciones</string>
+    <string name="maps">Mapas</string>
 </resources>

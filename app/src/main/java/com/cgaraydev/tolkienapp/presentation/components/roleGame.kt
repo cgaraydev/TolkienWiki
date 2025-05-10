@@ -1,6 +1,9 @@
 package com.cgaraydev.tolkienapp.presentation.components
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
@@ -15,6 +18,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -41,16 +45,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cgaraydev.tolkienapp.R
@@ -171,6 +179,7 @@ fun ScrollableScenarioText(
         }
     }
 }
+
 @Composable
 fun StatItem(icon: Int, value: Int, color: Color) {
     Row(
@@ -351,46 +360,4 @@ fun PlayerStatsHeader(playerState: PlayerState) {
     }
 }
 
-@Composable
-fun LoadingIndicator() {
-    val infiniteTransition = rememberInfiniteTransition()
-    val rotation by infiniteTransition.animateFloat(
-        initialValue = 0f,
-        targetValue = 360f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(1500, easing = LinearEasing)
-        )
-    )
 
-    Box(contentAlignment = Alignment.Center) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Canvas(modifier = Modifier.size(80.dp)) {
-                drawArc(
-                    color = Golden.copy(alpha = 0.3f),
-                    startAngle = 0f,
-                    sweepAngle = 360f,
-                    useCenter = false,
-                    size = Size(size.width, size.height),
-                    style = Stroke(width = 8.dp.toPx())
-                )
-                drawArc(
-                    color = Golden,
-                    startAngle = rotation - 30,
-                    sweepAngle = 90f,
-                    useCenter = false,
-                    size = Size(size.width, size.height),
-                    style = Stroke(width = 8.dp.toPx(), cap = StrokeCap.Round)
-                )
-            }
-            Text(
-                text = "Cargando Escenario",
-                color = Golden,
-                modifier = Modifier.padding(top = 50.dp),
-                fontFamily = FontFamily(Font(R.font.cardo))
-            )
-        }
-    }
-}

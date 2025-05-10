@@ -1,6 +1,8 @@
 package com.cgaraydev.tolkienapp.presentation.races
 
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import com.cgaraydev.tolkienapp.data.local.datalocal.EventData
 import com.cgaraydev.tolkienapp.data.local.datalocal.RaceData
@@ -18,8 +20,8 @@ class RacesViewModel @Inject constructor(
     private val firestore: FirebaseFirestore
 ) : ViewModel() {
 
-    val racesLocal = mutableStateOf(racesList)
-
+    private val _racesLocal = mutableStateOf(racesList)
+    val racesLocal: State<List<RaceData>> = _racesLocal
 
     private val _raceDetails = MutableStateFlow<Race?>(null)
     val raceDetails: StateFlow<Race?> = _raceDetails.asStateFlow()
