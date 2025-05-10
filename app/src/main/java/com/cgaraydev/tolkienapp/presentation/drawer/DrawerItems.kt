@@ -85,7 +85,7 @@ object Items {
                     false,
                     R.drawable.ic_movies,
                     "Adaptaciones",
-                    Routes.Movies.route
+                    Routes.Adaptations.route
                 ),
                 Item(
                     "Libros",
@@ -131,7 +131,7 @@ object Items {
                     false,
                     R.drawable.ic_meme,
                     "Memes",
-                    Routes.Movies.route
+                    Routes.Adaptations.route
                 )
             )
         )

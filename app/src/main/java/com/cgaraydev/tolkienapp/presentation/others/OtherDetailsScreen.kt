@@ -15,7 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.data.models.Other
 import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DetailHeader
 import com.cgaraydev.tolkienapp.presentation.components.DetailImage
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow
@@ -64,7 +64,7 @@ fun OtherDetailsContent(
                 .padding(horizontal = 16.dp)
         ) {
             item {
-                CustomSpacer(16)
+                CustomHeightSpacer(16)
                 DetailImage(
                     imageUrl = other.poster,
                     modifier = Modifier
@@ -72,7 +72,7 @@ fun OtherDetailsContent(
                         .height(350.dp)
                 )
 
-                CustomSpacer(16)
+                CustomHeightSpacer(16)
 
                 DetailRow("Otros nombres", other.otherNames, navController)
                 DetailRow("Categoría", other.category, navController)
@@ -86,7 +86,7 @@ fun OtherDetailsContent(
                 DetailRow("Líder", other.leader, navController)
                 DetailRow("Artefactos", other.heirlooms, navController)
                 DetailRow("Etimología", other.etymology, navController)
-                CustomSpacer(16)
+                CustomHeightSpacer(16)
 
                 other.history?.let {
                     CustomExpandable("Historia") {
@@ -108,7 +108,7 @@ fun OtherDetailsContent(
                         )
                     }
                 }
-                CustomSpacer(40)
+                CustomHeightSpacer(40)
             }
         }
     }

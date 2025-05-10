@@ -30,7 +30,7 @@ sealed class Routes(val route: String) {
     }
 
     data object Languages : Routes("languages")
-    data object LanguageDetails : Routes("languageDetails/{languageId}"){
+    data object LanguageDetails : Routes("languageDetails/{languageId}") {
         fun createRoute(languageId: String) = "languageDetails/$languageId"
     }
 
@@ -45,7 +45,8 @@ sealed class Routes(val route: String) {
     data object QuizQuestions : Routes("quizQuestions/{difficulty}") {
         fun createRoute(difficulty: String) = "quizQuestions/$difficulty"
     }
-    data object QuizResult : Routes("quizResult/{correct}/{total}"){
+
+    data object QuizResult : Routes("quizResult/{correct}/{total}") {
         fun createRoute(correct: Int, total: Int) = "quizResult/$correct/$total"
     }
 
@@ -61,12 +62,13 @@ sealed class Routes(val route: String) {
 
     data object RoleGame : Routes("roleGame")
 
+    data object Adaptations : Routes("adaptations")
+    data object AdaptationDetails : Routes("adaptationDetails/{adaptationId}") {
+        fun createRoute(adaptationId: String) = "adaptationDetails/$adaptationId"
+    }
 
-
-
-
-
-
-    data object Movies : Routes("movies")
     data object Games : Routes("games")
+    data object GameDetails : Routes("gameDetails/{gameId}") {
+        fun createRoute(gameId: String) = "gameDetails/$gameId"
+    }
 }

@@ -47,7 +47,7 @@ import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.models.QuizQuestion
 import com.cgaraydev.tolkienapp.navigation.Routes
 import com.cgaraydev.tolkienapp.presentation.components.AnimatedGlowButtonCompact
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.ui.theme.Gray
 import com.cgaraydev.tolkienapp.ui.theme.QuizRed
@@ -217,7 +217,7 @@ fun QuestionCard(
                 )
             }
             if (showFeedback) {
-                CustomSpacer(16)
+                CustomHeightSpacer(16)
                 FeedbackMessage(
                     explanation = question.explanation,
                     isCorrect = selectedOption == question.answer // Pasar si fue correcta

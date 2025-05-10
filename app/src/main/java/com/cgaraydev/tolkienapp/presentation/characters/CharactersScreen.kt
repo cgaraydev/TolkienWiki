@@ -23,7 +23,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.navigation.Routes
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.ExpandableCategory
 import com.cgaraydev.tolkienapp.presentation.components.ExpandableSubCategory
 import com.cgaraydev.tolkienapp.presentation.components.ListItem
@@ -43,7 +43,7 @@ fun CharactersScreen(
             .background(Color.Black)
     ) {
         ScreenHeader(imageRes = R.drawable.characters, label = stringResource(R.string.characters))
-        CustomSpacer(40)
+        CustomHeightSpacer(40)
 
         if (characters.isEmpty()) {
             Box(
@@ -101,6 +101,6 @@ fun CharactersScreen(
             }
         }
 
-        CustomSpacer(40)
+        CustomHeightSpacer(40)
     }
 }

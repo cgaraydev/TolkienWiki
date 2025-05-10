@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.YouTubeMediaSection
 
 @Composable
@@ -22,9 +22,9 @@ fun TolkienScreen() {
         item {
             Column(modifier = Modifier.padding(16.dp)) {
                 TolkienHeader()
-                CustomSpacer(20)
+                CustomHeightSpacer(20)
                 BioDataSection()
-                CustomSpacer(20)
+                CustomHeightSpacer(20)
                 TolkienBiography()
             }
         }
@@ -40,7 +40,7 @@ fun TolkienScreen() {
 //        }
         item {
             YouTubeMediaSection()
-            CustomSpacer(20)
+            CustomHeightSpacer(20)
         }
     }
 }

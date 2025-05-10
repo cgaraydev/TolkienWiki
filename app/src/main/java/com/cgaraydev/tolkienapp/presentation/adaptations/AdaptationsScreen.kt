@@ -1,4 +1,4 @@
-package com.cgaraydev.tolkienapp.presentation.books
+package com.cgaraydev.tolkienapp.presentation.adaptations
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
-import com.cgaraydev.tolkienapp.data.local.datalocal.BookData
+import com.cgaraydev.tolkienapp.data.local.datalocal.AdaptationData
 import com.cgaraydev.tolkienapp.navigation.Routes
 import com.cgaraydev.tolkienapp.presentation.components.CustomCard
 import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
@@ -29,11 +29,11 @@ import com.cgaraydev.tolkienapp.presentation.components.LoadingIndicator
 import com.cgaraydev.tolkienapp.presentation.components.ScreenHeader
 
 @Composable
-fun BooksScreen(
+fun AdaptationsScreen(
     navController: NavController,
-    viewModel: BooksViewModel = hiltViewModel()
+    viewModel: AdaptationsViewModel = hiltViewModel()
 ) {
-    val books by viewModel.books.collectAsState()
+    val adaptations by viewModel.adaptations.collectAsState()
 
     Column(
         modifier = Modifier
@@ -41,12 +41,12 @@ fun BooksScreen(
             .background(Color.Black)
     ) {
         ScreenHeader(
-            imageRes = R.drawable.books,
-            label = stringResource(R.string.books)
+            imageRes = R.drawable.adaptations,
+            label = stringResource(R.string.adaptations)
         )
         CustomHeightSpacer()
 
-        if (books.isEmpty()) {
+        if (adaptations.isEmpty()) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
@@ -60,24 +60,25 @@ fun BooksScreen(
                     .padding(horizontal = 12.dp)
             ) {
                 val mainCategories = listOf(
-                    "Obras de Tolkien", "Obras Postumas", "Legendarium",
-                    "Fantasia", "Editado por Christopher Tolkien", "Trabajos Academicos",
+                    "El Señor de los Anillos", "El Hobbit",
+                    "Animadas", "Fan Films", "Series de TV",
                     "Todos"
                 )
 
                 items(mainCategories) { category ->
-                    val booksByCategory = viewModel.getBooksByTags(category)
-                    if (booksByCategory.isNotEmpty()) {
+                    val adaptationsByCategory = viewModel.getAdaptationsByTags(category)
+                    if (adaptationsByCategory.isNotEmpty()) {
                         ExpandableHorizontalSection(
                             title = category,
-                            items = booksByCategory,
-                            itemCount = booksByCategory.size
-                        ) { book ->
-                            BookCard(book = book) {
+                            items = adaptationsByCategory,
+                            itemCount = adaptationsByCategory.size
+                        ) { adaptation ->
+                            AdaptationCard(adaptation = adaptation) {
                                 navController.navigate(
-                                    Routes.BookDetails.createRoute(book.id)
+                                    Routes.AdaptationDetails.createRoute(adaptation.id)
                                 )
                             }
+
                         }
                     }
                 }
@@ -87,9 +88,9 @@ fun BooksScreen(
 }
 
 @Composable
-fun BookCard(
+fun AdaptationCard(
     modifier: Modifier = Modifier,
-    book: BookData,
+    adaptation: AdaptationData,
     onClick: () -> Unit,
 ) {
     CustomCard(
@@ -97,9 +98,9 @@ fun BookCard(
             .width(160.dp)
             .height(240.dp)
             .padding(8.dp),
-        imageRes = book.imageRes,
-        title = book.title,
+        imageRes = adaptation.imageRes,
+        title = adaptation.name,
         onClick = onClick,
-        contentDescription = "Portada de ${book.title}"
+        contentDescription = "Portada de ${adaptation.name}"
     )
 }

@@ -60,7 +60,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cgaraydev.tolkienapp.R
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.CustomTitle
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.ui.theme.LightGray
@@ -241,7 +241,7 @@ fun TolkienBiography() {
             Modifier.align(Alignment.CenterHorizontally),
             textDecoration = TextDecoration.Underline
         )
-        CustomSpacer(20)
+        CustomHeightSpacer(20)
         TolkienIntroduction()
         TolkienBiographyData()
         ExpandableTimelineSection()

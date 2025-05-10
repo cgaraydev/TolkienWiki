@@ -12,10 +12,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.data.models.Book
 import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DetailHeader
 import com.cgaraydev.tolkienapp.presentation.components.DetailImage
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow
@@ -27,7 +27,7 @@ import com.cgaraydev.tolkienapp.utils.HtmlText
 @Composable
 fun BookDetailsScreen(
     bookId: String,
-    navController: NavHostController,
+    navController: NavController,
     viewModel: BooksViewModel = hiltViewModel()
 ) {
     val book by viewModel.bookDetails.collectAsState()
@@ -52,7 +52,7 @@ fun BookDetailsScreen(
 @Composable
 fun BookDetailsContent(
     book: Book,
-    navController: NavHostController
+    navController: NavController
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         DetailHeader(title = book.title)
@@ -63,14 +63,14 @@ fun BookDetailsContent(
                 .padding(horizontal = 16.dp)
         ) {
             item {
-                CustomSpacer(16)
+                CustomHeightSpacer(16)
                 DetailImage(
                     imageUrl = book.poster,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(350.dp)
                 )
-                CustomSpacer(16)
+                CustomHeightSpacer(16)
                 DetailRow("Título original", book.original, navController)
                 DetailRow("Año de publicación", book.year, navController)
                 DetailRow("Autor", book.author, navController)
@@ -103,7 +103,7 @@ fun BookDetailsContent(
                     }
                 }
                 WikiLinksExpandable(wikiUrls = book.wikiUrl)
-                CustomSpacer(40)
+                CustomHeightSpacer(40)
             }
         }
     }

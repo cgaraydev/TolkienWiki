@@ -28,4 +28,7 @@
     <string name="languages">Lenguas</string>
     <string name="locations">Ubicaciones</string>
     <string name="maps">Mapas</string>
+    <string name="books">Libros</string>
+    <string name="adaptations">Adaptaciones</string>
+    <string name="games">Juegos</string>
 </resources>

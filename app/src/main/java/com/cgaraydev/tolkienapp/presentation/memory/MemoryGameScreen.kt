@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.GameBoard
 import com.cgaraydev.tolkienapp.presentation.components.GameHeader
 import com.cgaraydev.tolkienapp.presentation.components.GameResultDialog
@@ -60,7 +60,7 @@ fun MemoryGameScreen(
             onTogglePause = { viewModel.togglePause() }
         )
         GameStats(moveCount, elapsedTime, isGamePaused)
-        CustomSpacer(20)
+        CustomHeightSpacer(20)
         GameBoard(
             cards = cards,
             matchEffect = matchEffect,

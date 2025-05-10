@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -20,12 +19,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.navigation.Routes
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.ExpandableSubCategory
 import com.cgaraydev.tolkienapp.presentation.components.ListItem
 import com.cgaraydev.tolkienapp.presentation.components.LoadingIndicator
 import com.cgaraydev.tolkienapp.presentation.components.ScreenHeader
-import com.cgaraydev.tolkienapp.ui.theme.Golden
 
 @Composable
 fun OthersScreen(
@@ -40,7 +38,7 @@ fun OthersScreen(
             .background(Color.Black)
     ) {
         ScreenHeader(imageRes = R.drawable.others, label = stringResource(R.string.others))
-        CustomSpacer(40)
+        CustomHeightSpacer(40)
 
         if (others.isEmpty()) {
             Box(

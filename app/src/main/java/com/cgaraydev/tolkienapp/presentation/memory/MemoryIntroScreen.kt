@@ -31,7 +31,7 @@ import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.navigation.Routes
 import com.cgaraydev.tolkienapp.presentation.components.AnimatedGlowButton
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DifficultySelector
 import com.cgaraydev.tolkienapp.presentation.components.RecordsDialog
 import com.cgaraydev.tolkienapp.ui.theme.Golden
@@ -71,12 +71,12 @@ fun MemoryIntroScreen(
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
-            CustomSpacer(20)
+            CustomHeightSpacer(20)
             DifficultySelector(
                 selectedDifficulty = selectedDifficulty,
                 onDifficultySelected = viewModel::setDifficulty
             )
-            CustomSpacer(32)
+            CustomHeightSpacer(32)
             AnimatedGlowButton(
                 text = "iniciar",
                 onClick = {

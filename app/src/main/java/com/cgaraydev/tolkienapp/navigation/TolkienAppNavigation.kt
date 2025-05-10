@@ -9,6 +9,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.cgaraydev.tolkienapp.presentation.adaptations.AdaptationDetailsScreen
+import com.cgaraydev.tolkienapp.presentation.adaptations.AdaptationsScreen
 import com.cgaraydev.tolkienapp.presentation.books.BookDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.books.BooksScreen
 import com.cgaraydev.tolkienapp.presentation.characters.CharacterDetailsScreen
@@ -25,7 +27,6 @@ import com.cgaraydev.tolkienapp.presentation.maps.MapDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.maps.MapsScreen
 import com.cgaraydev.tolkienapp.presentation.memory.MemoryGameScreen
 import com.cgaraydev.tolkienapp.presentation.memory.MemoryIntroScreen
-import com.cgaraydev.tolkienapp.presentation.movies.MoviesScreen
 import com.cgaraydev.tolkienapp.presentation.others.OtherDetailsScreen
 import com.cgaraydev.tolkienapp.presentation.others.OthersScreen
 import com.cgaraydev.tolkienapp.presentation.quiz.QuizIntroScreen
@@ -43,7 +44,7 @@ fun TolkienAppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.Maps.route,
+        startDestination = Routes.Adaptations.route,
         enterTransition = {
             slideIntoContainer(
                 AnimatedContentTransitionScope.SlideDirection.Left,
@@ -220,25 +221,28 @@ fun TolkienAppNavigation(
             BookDetailsScreen(bookId = bookId, navController = navController)
         }
 
+        //ROLEGAME
         composable(Routes.RoleGame.route){
             RoleScreen(navController)
         }
 
 
-
-
+        //ADAPTATIONS
+        composable(Routes.Adaptations.route) {
+            AdaptationsScreen(navController)
+        }
+        composable(
+            route = Routes.AdaptationDetails.route,
+            arguments = listOf(navArgument("adaptationId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val adaptationId =
+                backStackEntry.arguments?.getString("adaptationId") ?: return@composable
+            AdaptationDetailsScreen(adaptationId = adaptationId, navController = navController)
+        }
 
 
         composable(Routes.Games.route) {
-            GamesScreen { navController.popBackStack() }
+            GamesScreen (navController)
         }
-
-
-
-        composable(Routes.Movies.route) {
-            MoviesScreen { navController.popBackStack() }
-        }
-
-
     }
 }

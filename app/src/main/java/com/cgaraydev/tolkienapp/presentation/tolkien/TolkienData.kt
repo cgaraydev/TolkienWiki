@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.presentation.components.CustomDivider
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.CustomTitle
 
 data class YouTubeMediaItem(
@@ -241,7 +241,7 @@ fun TolkienBioData() {
     CustomDivider()
     BioDataRow("Residencia", "Reino Unido")
     CustomDivider()
-    CustomSpacer(12)
+    CustomHeightSpacer(12)
     CustomTitle(
         "Sitio Oficial:",
         14,

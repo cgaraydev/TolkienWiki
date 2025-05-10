@@ -192,18 +192,18 @@ fun <T> ExpandableHorizontalSection(
     items: List<T>,
     itemCount: Int = items.size,
     titleTextStyle: TextStyle = TextStyle(
-        fontSize = 20.sp,
+        fontSize = 24.sp,
         fontFamily = FontFamily(Font(R.font.cardo)),
         color = Color.White
     ),
     countTextStyle: TextStyle = TextStyle(
-        fontSize = 14.sp,
-        color = Color.White,
+        fontSize = 16.sp,
+        color = Color.White.copy(alpha = 0.7f),
         fontFamily = FontFamily(Font(R.font.cardo))
     ),
     containerColor: Color = Color.Black,
     borderColor: Color = Golden.copy(alpha = 0.5f),
-    contentPadding: PaddingValues = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
+    contentPadding: PaddingValues = PaddingValues(horizontal = 8.dp, vertical = 12.dp),
     content: @Composable (T) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -218,7 +218,6 @@ fun <T> ExpandableHorizontalSection(
         border = BorderStroke(1.dp, borderColor)
     ) {
         Column {
-            // Header (igual que en ExpandableSubCategory)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

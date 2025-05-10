@@ -1,5 +1,6 @@
 package com.cgaraydev.tolkienapp.data.local.datalocal
 
+
 data class EventData(
     val id: String,
     val name: String,

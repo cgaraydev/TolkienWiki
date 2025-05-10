@@ -19,7 +19,7 @@ import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.models.Character
 import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DetailHeader
 import com.cgaraydev.tolkienapp.presentation.components.DetailImage
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow
@@ -104,7 +104,7 @@ fun CharacterDetailsContent(
                 DetailRow(stringResource(R.string.family), character.family, navController)
                 DetailRow(stringResource(R.string.love), character.love, navController)
 
-                CustomSpacer(24)
+                CustomHeightSpacer(24)
                 CustomExpandable(title = stringResource(R.string.biography)) {
                     HtmlText(
                         htmlText = character.biography ?: "",
@@ -123,7 +123,7 @@ fun CharacterDetailsContent(
                         )
                     }
                 }
-                CustomSpacer(150)
+                CustomHeightSpacer(150)
             }
         }
     }

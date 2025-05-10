@@ -1,0 +1,28 @@
+package com.cgaraydev.tolkienapp.data.models
+
+data class Adaptation(
+    val id: String = "",
+    val name: String = "",
+    val poster: String = "",
+    val description: String = "",
+    val synopsis: String = "",
+    val category: String = "",
+    val genre: String = "",
+    val director: String = "",
+    val writer: String = "",
+    val producer: Boolean = true,
+    val budget: String = "",
+    val production: String = "",
+    val music: String = "",
+    val website: String = "",
+    val year: String = "",
+    val original: String = "",
+    val runtime: String = "",
+    val extended: String = "",
+    val country: String = "",
+    val language: String = "",
+    val imdb: String = "",
+    val reception: String = "",
+    val wikiUrl: WikiUrl? = null,
+    val tags: List<String> = emptyList(),
+)

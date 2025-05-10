@@ -29,7 +29,7 @@ import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.navigation.Routes
 import com.cgaraydev.tolkienapp.presentation.components.AnimatedGlowButton
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DifficultySelector
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 
@@ -75,21 +75,21 @@ fun QuizIntroScreen(
                 fontWeight = FontWeight.Bold,
                 color = Golden
             )
-            CustomSpacer(20)
+            CustomHeightSpacer(20)
             Text(
                 text = "¡Demuestra tu conocimiento sobre la Tierra Media!",
                 fontSize = 20.sp,
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
-            CustomSpacer(20)
+            CustomHeightSpacer(20)
             DifficultySelector(
                 selectedDifficulty = selectedDifficulty,
                 onDifficultySelected = { difficulty ->
                     viewModel.setDifficulty(difficulty)
                 }
             )
-            CustomSpacer(32)
+            CustomHeightSpacer(32)
             AnimatedGlowButton(
                 text = "iniciar",
                 onClick = {

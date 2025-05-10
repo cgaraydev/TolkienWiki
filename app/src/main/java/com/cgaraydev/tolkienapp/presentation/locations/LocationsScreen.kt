@@ -19,7 +19,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.navigation.Routes
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.ExpandableSubCategory
 import com.cgaraydev.tolkienapp.presentation.components.ListItem
 import com.cgaraydev.tolkienapp.presentation.components.LoadingIndicator
@@ -38,7 +38,7 @@ fun LocationsScreen(
             .background(Color.Black)
     ) {
         ScreenHeader(imageRes = R.drawable.locations, label = stringResource(R.string.locations))
-        CustomSpacer(40)
+        CustomHeightSpacer(40)
 
         if (locations.isEmpty()) {
             Box(

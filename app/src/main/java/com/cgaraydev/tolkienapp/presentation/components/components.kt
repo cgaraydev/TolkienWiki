@@ -48,7 +48,7 @@ import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 
 @Composable
-fun CustomSpacer(size: Int) {
+fun CustomHeightSpacer(size: Int = 40) {
     Spacer(modifier = Modifier.height(size.dp))
 }
 
@@ -83,7 +83,6 @@ fun ScreenHeader(
             .fillMaxWidth()
             .height(140.dp)
     ) {
-
         Image(
             painter = painterResource(imageRes),
             contentDescription = null,
@@ -155,7 +154,7 @@ fun LoadingIndicator(
                 )
             }
 
-            CustomSpacer(24)
+            CustomHeightSpacer(24)
 
             if (text.isNotEmpty()) {
                 Text(

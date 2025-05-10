@@ -19,7 +19,7 @@ import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.models.Language
 import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DetailHeader
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow
 import com.cgaraydev.tolkienapp.presentation.components.DetailScreenTemplate
@@ -66,7 +66,7 @@ fun LanguageDetailsContent(
                 .padding(horizontal = 16.dp)
         ) {
             item {
-                CustomSpacer(16)
+                CustomHeightSpacer(16)
                 Image(
                     painter = painterResource(R.drawable.logo), // Cambia por tu recurso de logo
                     contentDescription = "Logo de idiomas",
@@ -76,9 +76,9 @@ fun LanguageDetailsContent(
                         .padding(vertical = 16.dp),
                     contentScale = ContentScale.Fit
                 )
-                CustomSpacer(16)
+                CustomHeightSpacer(16)
                 DetailRow("Otros nombres", language.otherNames, navController)
-                CustomSpacer(16)
+                CustomHeightSpacer(16)
                 language.history?.let {
                     CustomExpandable("Historia") {
                         HtmlText(
@@ -99,7 +99,7 @@ fun LanguageDetailsContent(
                         )
                     }
                 }
-                CustomSpacer(40)
+                CustomHeightSpacer(40)
             }
         }
     }

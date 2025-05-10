@@ -24,19 +24,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -56,7 +49,7 @@ import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.local.datalocal.Quote
 import com.cgaraydev.tolkienapp.data.local.datalocal.tolkienQuotes
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.ui.theme.Aniron
 import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.ui.theme.Gray
@@ -72,11 +65,11 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
             .verticalScroll(rememberScrollState())
     ) {
         HeaderSection()
-        CustomSpacer(10)
+        CustomHeightSpacer(10)
         QuotesSection(tolkienQuotes)
-        CustomSpacer(80)
+        CustomHeightSpacer(80)
         ExploreText()
-        CustomSpacer(16)
+        CustomHeightSpacer(16)
         GridSection(gridItems, navController)
     }
 }

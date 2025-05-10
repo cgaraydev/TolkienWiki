@@ -29,41 +29,41 @@ import com.cgaraydev.tolkienapp.ui.theme.Golden
 import com.cgaraydev.tolkienapp.ui.theme.RingBearer
 
 // UI STATE
-sealed class UiState<out T> {
-    object Loading : UiState<Nothing>()
-    data class Success<T>(val data: T) : UiState<T>()
-    data class Error(val message: String, val retry: (() -> Unit)? = null) : UiState<Nothing>()
-    object Empty : UiState<Nothing>()
-}
-
-@Composable
-fun <T> StateHandler(
-    state: UiState<T>,
-    onLoading: @Composable () -> Unit = {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator()
-        }
-    },
-    onError: @Composable (String, (() -> Unit)?) -> Unit = { message, retry ->
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = message, color = Color.White)
-                retry?.let {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Button(onClick = it) {
-                        Text("Reintentar")
-                    }
-                }
-            }
-        }
-    },
-    onEmpty: @Composable (() -> Unit)? = null,
-    onSuccess: @Composable (T) -> Unit
-) {
-    when (state) {
-        is UiState.Loading -> onLoading()
-        is UiState.Error -> onError(state.message, state.retry)
-        is UiState.Empty -> onEmpty?.invoke() ?: Text("Sin datos")
-        is UiState.Success -> onSuccess(state.data)
-    }
-}
+//sealed class UiState<out T> {
+//    object Loading : UiState<Nothing>()
+//    data class Success<T>(val data: T) : UiState<T>()
+//    data class Error(val message: String, val retry: (() -> Unit)? = null) : UiState<Nothing>()
+//    object Empty : UiState<Nothing>()
+//}
+//
+//@Composable
+//fun <T> StateHandler(
+//    state: UiState<T>,
+//    onLoading: @Composable () -> Unit = {
+//        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+//            CircularProgressIndicator()
+//        }
+//    },
+//    onError: @Composable (String, (() -> Unit)?) -> Unit = { message, retry ->
+//        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+//            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+//                Text(text = message, color = Color.White)
+//                retry?.let {
+//                    Spacer(modifier = Modifier.height(8.dp))
+//                    Button(onClick = it) {
+//                        Text("Reintentar")
+//                    }
+//                }
+//            }
+//        }
+//    },
+//    onEmpty: @Composable (() -> Unit)? = null,
+//    onSuccess: @Composable (T) -> Unit
+//) {
+//    when (state) {
+//        is UiState.Loading -> onLoading()
+//        is UiState.Error -> onError(state.message, state.retry)
+//        is UiState.Empty -> onEmpty?.invoke() ?: Text("Sin datos")
+//        is UiState.Success -> onSuccess(state.data)
+//    }
+//}

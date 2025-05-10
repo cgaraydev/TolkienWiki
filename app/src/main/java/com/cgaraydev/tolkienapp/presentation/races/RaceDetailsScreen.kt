@@ -15,7 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.data.models.Race
 import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DetailHeader
 import com.cgaraydev.tolkienapp.presentation.components.DetailImage
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow
@@ -63,7 +63,7 @@ fun RaceDetailsContent(
                 .padding(horizontal = 16.dp)
         ) {
             item {
-                CustomSpacer(16)
+                CustomHeightSpacer(16)
 
                 DetailImage(
                     imageUrl = race.poster,
@@ -72,7 +72,7 @@ fun RaceDetailsContent(
                         .height(350.dp)
                 )
 
-                CustomSpacer(16)
+                CustomHeightSpacer(16)
 
                 // Campos de detalles
                 DetailRow("Otros nombres", race.otherNames, navController)
@@ -124,7 +124,7 @@ fun RaceDetailsContent(
                         )
                     }
                 }
-                CustomSpacer(40)
+                CustomHeightSpacer(40)
             }
         }
     }

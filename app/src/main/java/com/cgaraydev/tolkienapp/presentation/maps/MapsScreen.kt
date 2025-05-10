@@ -39,7 +39,7 @@ import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.local.datalocal.MapData
 import com.cgaraydev.tolkienapp.navigation.Routes
 import com.cgaraydev.tolkienapp.presentation.components.AnimatedTextTitle
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.GradientOverlay
 import com.cgaraydev.tolkienapp.presentation.components.ScreenHeader
 
@@ -56,7 +56,7 @@ fun MapsScreen(
             .background(Color.Black)
     ) {
         ScreenHeader(imageRes = R.drawable.maps, label = stringResource(R.string.maps))
-        CustomSpacer(40)
+        CustomHeightSpacer(40)
 
         MapsGrid(
             maps = maps,

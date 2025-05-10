@@ -17,7 +17,7 @@ import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.models.Event
 import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DetailHeader
 import com.cgaraydev.tolkienapp.presentation.components.DetailImage
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow
@@ -66,14 +66,14 @@ fun EventDetailsContent(
                 .padding(horizontal = 16.dp)
         ) {
             item {
-                CustomSpacer(16)
+                CustomHeightSpacer(16)
                 DetailImage(
                     imageUrl = event.poster,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(350.dp)
                 )
-                CustomSpacer(16)
+                CustomHeightSpacer(16)
                 DetailRow("Otros nombres", event.otherNames, navController)
                 DetailRow("Categoria", event.category, navController)
                 DetailRow("Conflicto", event.conflict, navController)
@@ -120,7 +120,7 @@ fun EventDetailsContent(
                         )
                     }
                 }
-                CustomSpacer(40)
+                CustomHeightSpacer(40)
             }
         }
     }

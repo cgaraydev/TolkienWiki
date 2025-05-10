@@ -17,7 +17,7 @@ import androidx.navigation.NavController
 import com.cgaraydev.tolkienapp.R
 import com.cgaraydev.tolkienapp.data.models.Location
 import com.cgaraydev.tolkienapp.presentation.components.CustomExpandable
-import com.cgaraydev.tolkienapp.presentation.components.CustomSpacer
+import com.cgaraydev.tolkienapp.presentation.components.CustomHeightSpacer
 import com.cgaraydev.tolkienapp.presentation.components.DetailHeader
 import com.cgaraydev.tolkienapp.presentation.components.DetailImage
 import com.cgaraydev.tolkienapp.presentation.components.DetailRow
@@ -65,14 +65,14 @@ fun LocationDetailsContent(
                 .padding(horizontal = 16.dp)
         ) {
             item {
-                CustomSpacer(16)
+                CustomHeightSpacer(16)
                 DetailImage(
                     imageUrl = location.poster,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(350.dp)
                 )
-                CustomSpacer(16)
+                CustomHeightSpacer(16)
                 DetailRow("Tipo", location.type, navController)
                 DetailRow("Otros nombres", location.otherNames, navController)
                 DetailRow("Fundada", location.founded, navController)
@@ -82,7 +82,7 @@ fun LocationDetailsContent(
                 DetailRow("Idiomas", location.languages, navController)
                 DetailRow("Etimología", location.etymology, navController)
                 DetailRow("Habitantes", location.inhabitants, navController)
-                CustomSpacer(24)
+                CustomHeightSpacer(24)
                 CustomExpandable(title = stringResource(R.string.biography)) {
                     HtmlText(
                         htmlText = location.history ?: "",
@@ -101,7 +101,7 @@ fun LocationDetailsContent(
                         )
                     }
                 }
-                CustomSpacer(40)
+                CustomHeightSpacer(40)
             }
         }
     }
